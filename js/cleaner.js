@@ -69,14 +69,14 @@ if (navigator.canShare) {
 }
 
 // Web Share Target API support
-if (window.location.href.includes('title') || window.location.href.includes('url') || window.location.href.includes('text')) {
-    const parsedUrl = new URL(window.location)
-    // Android sometimes puts URLs in the text or title fields
-    if (parsedUrl.searchParams.get('url')) {
-        cleanLink(parsedUrl.searchParams.get('url'))
-    } else if (parsedUrl.searchParams.get('text')) {
-        cleanLink(parsedUrl.searchParams.get('text'))
-    } else if (parsedUrl.searchParams.get('title')) {
-        cleanLink(parsedUrl.searchParams.get('title'))
-    }
+const parsedUrl = new URL(window.location)
+if (parsedUrl.searchParams.get('url')) {
+    // This is where the URL SHOULD BE
+    cleanLink(parsedUrl.searchParams.get('url'))
+} else if (parsedUrl.searchParams.get('text')) {
+    // Android usually puts URLs here
+    cleanLink(parsedUrl.searchParams.get('text'))
+} else if (parsedUrl.searchParams.get('title')) {
+    // Android sometimes puts URLs here
+    cleanLink(parsedUrl.searchParams.get('title'))
 }
