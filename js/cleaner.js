@@ -1,9 +1,3 @@
-// Google Analytics
-window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date
-ga('create', 'UA-59452245-10', 'auto')
-ga('require', 'displayfeatures')
-ga('send', 'pageview', '/')
-
 // Function for cleaning link
 function cleanLink(link) {
     var oldLink = new URL(link)
@@ -31,11 +25,6 @@ document.getElementById('link-input').addEventListener('paste', function () {
 
 // Copy link button
 document.getElementById('link-copy-btn').addEventListener('click', function () {
-    ga('send', {
-        hitType: 'event',
-        eventCategory: 'Button click',
-        eventAction: 'Copy to clipboard',
-    })
     var btn = document.getElementById('link-copy-btn')
     // Copy text
     var copyText = document.getElementById('link-output')
@@ -55,11 +44,6 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
 
 // Start over button
 document.getElementById('link-startover').addEventListener('click', function () {
-    ga('send', {
-        hitType: 'event',
-        eventCategory: 'Button click',
-        eventAction: 'Clean another link',
-    })
     document.getElementById('completed').style.display = 'none'
     document.getElementById('initial').style.display = 'block'
     document.getElementById('link-input').value = ''
@@ -69,11 +53,6 @@ document.getElementById('link-startover').addEventListener('click', function () 
 // Share button
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
-        ga('send', {
-            hitType: 'event',
-            eventCategory: 'Button click',
-            eventAction: 'Share to app',
-        })
         try {
             navigator.share({
                 url: document.getElementById('link-output').value
