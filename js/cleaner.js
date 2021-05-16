@@ -65,7 +65,7 @@ document.getElementById('link-startover').addEventListener('click', function () 
 // Share button
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
-        shareLink(document.getElementById('link-output'))
+        shareLink(document.getElementById('link-output').value)
     })
 } else {
     document.getElementById('link-share-btn').disabled = true
@@ -77,13 +77,10 @@ const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
     // This is where the URL SHOULD BE
     cleanLink(parsedUrl.searchParams.get('url'))
-    shareLink(document.getElementById('link-output'))
 } else if (parsedUrl.searchParams.get('text')) {
     // Android usually puts URLs here
     cleanLink(parsedUrl.searchParams.get('text'))
-    shareLink(document.getElementById('link-output'))
 } else if (parsedUrl.searchParams.get('title')) {
     // Android sometimes puts URLs here
     cleanLink(parsedUrl.searchParams.get('title'))
-    shareLink(document.getElementById('link-output'))
 }
