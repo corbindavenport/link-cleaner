@@ -1,0 +1,13 @@
+body {
+    background-color: #262626;
+	color: #FAFAFA;
+}
+
+.card {
+    background: #3b3b3b;
+}
+
+input {
+    background: #3b3b3b !important;
+    color: #FAFAFA !important;
+}
