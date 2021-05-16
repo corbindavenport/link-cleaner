@@ -24,5 +24,14 @@
     "theme_color": "#FFF",
     "background_color": "#448aff",
     "display": "standalone",
-    "start_url": "/"
+    "start_url": "/",
+    "share_target": {
+        "action": "/",
+        "method": "GET",
+        "params": {
+          "title": "title",
+          "text": "text",
+          "url": "url"
+        }
+      }
 }
