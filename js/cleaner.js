@@ -15,6 +15,18 @@ function cleanLink(link) {
     document.getElementById('link-output').select()
 }
 
+// Function for sharing a link
+function shareLink(link) {
+    try {
+        navigator.share({
+            url: link
+        })
+    }
+    catch (e) {
+        console.error(e)
+    }
+}
+
 // Process URL after a paste action is detected
 document.getElementById('link-input').addEventListener('paste', function () {
     // This is wrapped in a timeout or it executes before the value has changed
@@ -53,15 +65,7 @@ document.getElementById('link-startover').addEventListener('click', function () 
 // Share button
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
-        try {
-            navigator.share({
-                url: document.getElementById('link-input').value
-            })
-        }
-        catch(e) {
-            console.error(e)
-            alert('There was an error, sorry about that.')
-        }
+        shareLink(document.getElementById('link-output'))
     })
 } else {
     document.getElementById('link-share-btn').disabled = true
@@ -73,10 +77,13 @@ const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
     // This is where the URL SHOULD BE
     cleanLink(parsedUrl.searchParams.get('url'))
+    shareLink(document.getElementById('link-output'))
 } else if (parsedUrl.searchParams.get('text')) {
     // Android usually puts URLs here
     cleanLink(parsedUrl.searchParams.get('text'))
+    shareLink(document.getElementById('link-output'))
 } else if (parsedUrl.searchParams.get('title')) {
     // Android sometimes puts URLs here
     cleanLink(parsedUrl.searchParams.get('title'))
+    shareLink(document.getElementById('link-output'))
 }
