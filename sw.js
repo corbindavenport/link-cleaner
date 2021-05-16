@@ -30,7 +30,8 @@ self.addEventListener("fetch", function (event) {
     // Do nothing
   } else if (!blockedResources) {
     console.log('Skipped cache for URL:', event.request.url)
-  } return;
+    return
+  }
 
   event.respondWith(
     fetch(event.request)
