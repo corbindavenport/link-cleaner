@@ -67,6 +67,13 @@ if (navigator.canShare) {
     document.getElementById('link-share-btn').innerText = 'Share not available'
 }
 
+// Button links
+document.querySelectorAll('.link-btn').forEach(function (el) {
+	el.addEventListener('click', function () {
+		window.open(el.getAttribute('data-url'), '_blank')
+	})
+})
+
 // Web Share Target API support
 const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {

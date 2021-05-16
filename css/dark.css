@@ -1,6 +1,9 @@
 body {
     background-color: #262626;
-	color: #FAFAFA;
+}
+
+body, a {
+    color: #FAFAFA;
 }
 
 .card {
@@ -10,4 +13,8 @@ body {
 input {
     background: #3b3b3b !important;
     color: #FAFAFA !important;
+}
+
+a:hover {
+    color: #9adefe;
 }

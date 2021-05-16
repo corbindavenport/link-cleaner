@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Link Cleaner</title>
-    <meta name="description" content="Web app that removes extra garbage from links. Installable to mobile devices.">
+    <meta name="description" content="Link Cleaner is a web app that removes extra garbage from links, complete with share/send support on compatible browsers.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="192x192" href="img/maskable_icon_x192.png">
     <link rel="icon" type="image/png" sizes="24x24" href="img/baseline_link_black_24dp.png">
@@ -23,7 +23,7 @@
             <div id="initial">
                 <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" autofocus placeholder="Paste a link here!">
             </div>
-            <div id="completed" class="card" style="display: none">
+            <div id="completed" class="card" style="display: none;">
                 <div class="card-header">
                     Cleaned link
                 </div>
@@ -40,14 +40,36 @@
                     </div>
                 </div>
             </div>
-          </div>
-          <div class="card">
-              <div class="card-body">
-                  <h5 class="card-title">What does this do?</h5>
-                  <p class="card-text">Link Cleaner is a tool for quickly removing unnecessary bits from web links, such as tracking code and other variables. It can be difficult or tedious to do this manually, especially on mobile devices, so this tool might save you a few seconds of messing around with text selection.</p>
-                  <p>If you install Link Cleaner to your device, it appears in your device's share menu. This way, you can send clean links to apps by first sharing them to Link Cleaner, and then Link Cleaner can re-open the share menu with the clean URL.</p>
-              </div>
-          </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 col-lg-6">
+                <div class="card mt-3 mt-lg-0">
+                    <div class="card-body">
+                        <h5 class="card-title">What does this do?</h5>
+                        <p class="card-text">Link Cleaner is a tool for quickly removing unnecessary bits from web links, such as tracking code and other variables. It can be difficult or tedious to do this manually, especially on mobile devices, so this tool might save you a few seconds of messing around with text selection.</p>
+                        <p>If you install Link Cleaner to your device, it appears in your device's share menu. This way, you can send clean links to apps by first sharing them to Link Cleaner, and then Link Cleaner can re-open the share menu with the clean URL.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="card mt-3 mt-lg-0">
+                    <div class="card-body">
+                        <p class="card-text">Link Cleaner is developed by <a href="https://corbin.io" target="_blank">Corbin Davenport</a>. The code is available <a href="https://github.com/corbindavenport/linkcleaner" target="_blank">on GitHub</a>.</p>
+                        <p class="card-text">If you find Link Cleaner useful, please consider donating to support continued development!</p>
+                        <p>
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-block btn-primary w-100 link-btn" data-url='https://www.patreon.com/corbindavenport'>Donate via Patreon</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-block btn-primary w-100 link-btn" data-url="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Link%20Cleaner%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">Donate via PayPal</button>
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="js/cleaner.js"></script>
