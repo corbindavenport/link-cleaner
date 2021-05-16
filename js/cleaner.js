@@ -15,18 +15,6 @@ function cleanLink(link) {
     document.getElementById('link-output').select()
 }
 
-// Function for sharing a link
-function shareLink(link) {
-    try {
-        navigator.share({
-            url: link
-        })
-    }
-    catch (e) {
-        console.error(e)
-    }
-}
-
 // Process URL after a paste action is detected
 document.getElementById('link-input').addEventListener('paste', function () {
     // This is wrapped in a timeout or it executes before the value has changed
@@ -65,7 +53,14 @@ document.getElementById('link-startover').addEventListener('click', function () 
 // Share button
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
-        shareLink(document.getElementById('link-output').value)
+        try {
+            navigator.share({
+                url: document.getElementById('link-output').value
+            })
+        }
+        catch (e) {
+            alert('There was an error:\n\n' + e.message)
+        }
     })
 } else {
     document.getElementById('link-share-btn').disabled = true
