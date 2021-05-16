@@ -1,0 +1,28 @@
+{
+    "name": "Link Cleaner",
+    "short_name": "Link Cleaner",
+    "icons": [
+        {
+            "src": "img/maskable_icon_x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/maskable_icon_x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/maskable_icon_x1024.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "theme_color": "#FFF",
+    "background_color": "#448aff",
+    "display": "standalone",
+    "start_url": "/"
+}
