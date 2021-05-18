@@ -1,5 +1,17 @@
+
+// Google Analytics
+window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date
+ga('create', 'UA-59452245-10', 'auto')
+ga('require', 'displayfeatures')
+ga('send', 'pageview', '/')
+
 // Function for cleaning link
 function cleanLink(link) {
+    ga('send', {
+        hitType: 'event',
+        eventCategory: 'Clean link',
+        eventAction: 'Clean link',
+    })
     var oldLink = new URL(link)
     // Retain 'q' parameter (for Google, DuckDuckGo, etc.) because it's usually not malicious or overly long
     if (oldLink.searchParams.get('q')) {
