@@ -35,14 +35,26 @@
                 </div>
                 <div class="card-body">
                     <input type="text" class="form-control form-control-lg" id="link-output" readonly autocomplete="off" value="lolo">
-                    <div class="mt-3">
-                        <button type="button" class="btn btn-primary w-100" id="link-share-btn">Share</button>
-                    </div>
-                    <div class="mt-3">
-                        <button type="button" class="btn btn-primary w-100" id="link-copy-btn">Copy to clipboard</button>
-                    </div>
-                    <div class="mt-3">
-                        <button type="button" class="btn btn-secondary w-100" id="link-startover">Clean another link</button>
+                    <!-- Share buttons -->
+                    <div class="row">
+                        <div class="col-12 col-lg-4">
+                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-share-btn">
+                                <i class="bi bi-share-fill"></i>
+                                Share
+                            </button>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-copy-btn">
+                                <i class="bi bi-clipboard"></i>
+                                Copy to clipboard
+                            </button>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <button type="button" class="btn btn-secondary btn-lg w-100 mt-3" id="link-startover">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                                Clean another link
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

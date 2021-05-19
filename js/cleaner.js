@@ -13,7 +13,7 @@ function cleanLink(link) {
         eventAction: 'Clean link',
     })
     var oldLink = new URL(link)
-    console.log('old link:', oldLink)
+    console.log('Old link:', oldLink)
     var newLink = new URL(oldLink.origin + oldLink.pathname)
     // Retain 'q' parameter
     if (oldLink.searchParams.has('q')) {
@@ -46,21 +46,16 @@ document.getElementById('link-submit').addEventListener('click', function() {
 
 // Copy link button
 document.getElementById('link-copy-btn').addEventListener('click', function () {
-    var btn = document.getElementById('link-copy-btn')
-    // Copy text
-    var copyText = document.getElementById('link-output')
-    copyText.select()
-    document.execCommand('copy')
-    // Change button design
-    btn.classList.remove('btn-primary')
-    btn.classList.add('btn-success')
-    btn.innerText = 'Done!'
-    // Revert after three seconds
-    setTimeout(function () {
-        btn.classList.remove('btn-success')
-        btn.classList.add('btn-primary')
-        btn.innerText = 'Copy to clipboard'
-    }, 2000)
+    if (navigator.clipboard) {
+        // Use Clipboard API if available
+        var copyText = document.getElementById('link-output').value
+        navigator.clipboard.writeText(copyText)
+    } else {
+        // Fallback to older API
+        var copyText = document.getElementById('link-output')
+        copyText.select()
+        document.execCommand('copy')
+    }
 })
 
 // Start over button
@@ -85,7 +80,6 @@ if (navigator.canShare) {
     })
 } else {
     document.getElementById('link-share-btn').disabled = true
-    document.getElementById('link-share-btn').innerText = 'Share not available'
 }
 
 // Button links
