@@ -13,6 +13,8 @@
     <link rel="shortcut icon" href="favicon.ico">
     <meta name="theme-color" content="#FFF">
     <meta name="color-scheme" content="dark light">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="css/dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
@@ -24,9 +26,13 @@
             <!-- Initial text input -->
             <div id="initial">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" autofocus placeholder="Paste a link here!">
-                    <button class="btn btn-outline-primary" type="button" id="link-submit"><i class="bi-chevron-right"></i></button>
+                    <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" placeholder="Type or paste a link here">
+                    <button class="btn btn-outline-primary" type="button" id="link-submit" aria-label="Submit link"><i class="bi-chevron-right"></i></button>
                 </div>
+                <button class="btn btn-outline-primary w-100 mt-2" type="button" id="link-paste-btn" aria-label="Paste from clipboard">
+                    <i class="bi-clipboard"></i>
+                    Paste from Clipboard
+                </button>
             </div>
             <!-- Completed UI -->
             <div id="completed" class="card" style="display: none;">
@@ -38,19 +44,19 @@
                     <!-- Share buttons -->
                     <div class="row">
                         <div class="col-12 col-lg-4">
-                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-share-btn">
+                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-share-btn" aria-label="Share">
                                 <i class="bi bi-share-fill"></i>
                                 Share
                             </button>
                         </div>
                         <div class="col-12 col-lg-4">
-                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-copy-btn">
+                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
                                 <i class="bi bi-clipboard"></i>
-                                Copy to clipboard
+                                Copy to Clipboard
                             </button>
                         </div>
                         <div class="col-12 col-lg-4">
-                            <button type="button" class="btn btn-secondary btn-lg w-100 mt-3" id="link-startover">
+                            <button type="button" class="btn btn-secondary btn-lg w-100 mt-3" id="link-startover" aria-label="Clean another link">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                                 Clean another link
                             </button>
@@ -59,7 +65,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
+        <div class="row">
             <div class="col-12 col-lg-6">
                 <div class="card mt-3 mt-lg-0">
                     <div class="card-body">

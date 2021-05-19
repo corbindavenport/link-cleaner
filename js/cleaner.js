@@ -39,6 +39,17 @@ document.getElementById('link-input').addEventListener('paste', function () {
     }, 50)
 })
 
+// Paste button
+if (typeof navigator.clipboard.readText !== "undefined") {
+    document.getElementById('link-paste-btn').addEventListener('click', function() {
+        navigator.clipboard.readText().then(function (data) {
+            cleanLink(data)
+        })
+    })
+} else {
+    document.getElementById('link-paste-btn').disabled = true
+}
+
 // Process URL after clicking arrow button
 document.getElementById('link-submit').addEventListener('click', function() {
     cleanLink(document.getElementById('link-input').value)
