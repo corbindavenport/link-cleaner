@@ -13,11 +13,15 @@ function cleanLink(link) {
         eventAction: 'Clean link',
     })
     var oldLink = new URL(link)
-    // Retain 'q' parameter (for Google, DuckDuckGo, etc.) because it's usually not malicious or overly long
-    if (oldLink.searchParams.get('q')) {
-        var newLink = new URL(oldLink.origin + oldLink.pathname + '?q=' + oldLink.searchParams.get('q'))
-    } else {
-        var newLink = new URL(oldLink.origin + oldLink.pathname)
+    console.log('old link:', oldLink)
+    var newLink = new URL(oldLink.origin + oldLink.pathname)
+    // Retain 'q' parameter
+    if (oldLink.searchParams.has('q')) {
+        newLink.searchParams.append('q', oldLink.searchParams.get('q'))
+    }
+    // Fix for YouTube links
+    if ((oldLink.host === 'www.youtube.com') && oldLink.searchParams.has('v')) {
+        newLink.searchParams.append('v', oldLink.searchParams.get('v'))
     }
     // Switch to output
     document.getElementById('link-output').value = newLink.toString()
@@ -33,6 +37,11 @@ document.getElementById('link-input').addEventListener('paste', function () {
     setTimeout(function () {
         cleanLink(document.getElementById('link-input').value)
     }, 50)
+})
+
+// Process URL after clicking arrow button
+document.getElementById('link-submit').addEventListener('click', function() {
+    cleanLink(document.getElementById('link-input').value)
 })
 
 // Copy link button
