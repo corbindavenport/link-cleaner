@@ -113,14 +113,12 @@ document.querySelectorAll('.link-btn').forEach(function (el) {
     })
 })
 
-// Show Siri Shortcut prompt on iOS
+// Show Shortcut prompt on iOS
 if (ifiOS()) {
-    var alert = document.getElementById('siri-shortcut-alert')
-    alert.addEventListener('click', function() {
-        window.open('https://www.icloud.com/shortcuts/97048b0d949a4940bd5a4b545c2fcf70', '_blank')
-    })
-    alert.style.display = 'block'
+    document.getElementById('apple-shortcut-alert').style.display = 'block'
 }
+
+// Shortcut install button
 
 // Web Share Target API and Siri Shortcut support
 const parsedUrl = new URL(window.location)

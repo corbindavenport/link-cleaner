@@ -66,8 +66,8 @@
                 </div>
             </div>
         </div>
-        <div class="alert alert-primary" id="siri-shortcut-alert" style="display: none;">
-            Press here to install Link Cleaner as a Siri Shortcut
+        <div class="alert alert-primary" id="apple-shortcut-alert" data-bs-toggle="modal" data-bs-target="#apple-shortcut-modal" style="display: none;">
+            <b>Press here to install Link Cleaner as an iOS Shortcut!</b> Link Cleaner will appear as an option when sharing links from any app.
         </div>
         <div class="row">
             <div class="col-12 col-lg-6">
@@ -100,7 +100,27 @@
         </div>
     </div>
 
+    <!-- Shortcut install modal -->
+    <div class="modal fade" id="apple-shortcut-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p><b>You might see a warning about untrusted shortcuts.</b></p>
+                    <p>To allow untrusted shortcuts, open the Settings app, tap the Shortcuts app, and switch on "Allow Untrusted Shortcuts".</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="https://www.icloud.com/shortcuts/97048b0d949a4940bd5a4b545c2fcf70" target="_blank">
+                        <button type="button" class="btn btn-primary" id="shortcut-install-btn">Install Shortcut</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="js/cleaner.js"></script>
     <script src="js/register-sw.js"></script>
 </body>
