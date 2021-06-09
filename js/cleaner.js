@@ -115,7 +115,7 @@ document.querySelectorAll('.link-btn').forEach(function (el) {
 
 // Show Shortcut prompt on iOS
 if (ifiOS()) {
-    document.getElementById('apple-shortcut-alert').style.display = 'block'
+    document.getElementById('apple-shortcut-btn').style.display = 'block'
 }
 
 // Shortcut install button
