@@ -5,6 +5,19 @@ ga('create', 'UA-59452245-10', 'auto')
 ga('require', 'displayfeatures')
 ga('send', 'pageview', '/')
 
+// Detect iOS
+// Credit: https://stackoverflow.com/a/9039885
+function ifiOS() {
+    if (['iPad Simulator','iPhone Simulator','iPod Simulator','iPad','iPhone','iPod'].includes(navigator.platform)) {
+        return true
+    } else if (navigator.userAgent.includes('Mac') && 'ontouchend' in document) {
+        // iPadOS detection
+        return true
+    } else {
+        return false
+    }
+}
+
 // Function for cleaning link
 function cleanLink(link) {
     ga('send', {
@@ -20,7 +33,7 @@ function cleanLink(link) {
         newLink.searchParams.append('q', oldLink.searchParams.get('q'))
     }
     // Fix for YouTube links
-    if ((oldLink.host === 'www.youtube.com') && oldLink.searchParams.has('v')) {
+    if (oldLink.host.includes('youtube.com') && oldLink.searchParams.has('v')) {
         newLink.searchParams.append('v', oldLink.searchParams.get('v'))
     }
     // Switch to output
@@ -41,7 +54,7 @@ document.getElementById('link-input').addEventListener('paste', function () {
 
 // Paste button
 if (typeof navigator.clipboard.readText !== "undefined") {
-    document.getElementById('link-paste-btn').addEventListener('click', function() {
+    document.getElementById('link-paste-btn').addEventListener('click', function () {
         navigator.clipboard.readText().then(function (data) {
             cleanLink(data)
         })
@@ -51,7 +64,7 @@ if (typeof navigator.clipboard.readText !== "undefined") {
 }
 
 // Process URL after clicking arrow button
-document.getElementById('link-submit').addEventListener('click', function() {
+document.getElementById('link-submit').addEventListener('click', function () {
     cleanLink(document.getElementById('link-input').value)
 })
 
@@ -95,12 +108,21 @@ if (navigator.canShare) {
 
 // Button links
 document.querySelectorAll('.link-btn').forEach(function (el) {
-	el.addEventListener('click', function () {
-		window.open(el.getAttribute('data-url'), '_blank')
-	})
+    el.addEventListener('click', function () {
+        window.open(el.getAttribute('data-url'), '_blank')
+    })
 })
 
-// Web Share Target API support
+// Show Siri Shortcut prompt on iOS
+if (ifiOS()) {
+    var alert = document.getElementById('siri-shortcut-alert')
+    alert.addEventListener('click', function() {
+        window.open('https://www.icloud.com/shortcuts/97048b0d949a4940bd5a4b545c2fcf70', '_blank')
+    })
+    alert.style.display = 'block'
+}
+
+// Web Share Target API and Siri Shortcut support
 const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
     // This is where the URL SHOULD BE
