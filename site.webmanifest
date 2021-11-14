@@ -31,8 +31,7 @@
         "params": {
           "title": "title",
           "text": "text",
-          "url": "url",
-          "source": "Web&20Share"
+          "url": "url"
         }
       }
 }

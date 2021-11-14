@@ -20,6 +20,12 @@ function cleanLink(link) {
     plausible('Clean Link')
     var oldLink = new URL(link)
     console.log('Old link:', oldLink)
+    // Fix for Facebook shared links
+    if ((oldLink.host === 'l.facebook.com') && oldLink.searchParams.has('u')) {
+        var facebookLink = decodeURI(oldLink.searchParams.get('u'))
+        oldLink = new URL(facebookLink)
+    }
+    // Generate new link
     var newLink = new URL(oldLink.origin + oldLink.pathname)
     // Retain 'q' parameter
     if (oldLink.searchParams.has('q')) {
@@ -63,6 +69,7 @@ document.getElementById('link-submit').addEventListener('click', function () {
 
 // Copy link button
 document.getElementById('link-copy-btn').addEventListener('click', function () {
+    var btn = document.getElementById('link-copy-btn')
     if (navigator.clipboard) {
         // Use Clipboard API if available
         var copyText = document.getElementById('link-output').value
@@ -73,6 +80,16 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
         copyText.select()
         document.execCommand('copy')
     }
+    // Change button design
+    btn.classList.remove('btn-primary')
+    btn.classList.add('btn-success')
+    btn.innerHTML = '<i class="bi bi-check"></i> Copied'
+    // Revert after three seconds
+    setTimeout(function () {
+        btn.classList.remove('btn-success')
+        btn.classList.add('btn-primary')
+        btn.innerHTML = '<i class="bi bi-clipboard"></i> Copy to Clipboard'
+    }, 2000)
 })
 
 // Start over button
