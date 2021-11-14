@@ -22,7 +22,7 @@
         }
     ],
     "theme_color": "#FFF",
-    "background_color": "#448aff",
+    "background_color": "#FFF",
     "display": "standalone",
     "start_url": "/",
     "share_target": {
@@ -31,7 +31,8 @@
         "params": {
           "title": "title",
           "text": "text",
-          "url": "url"
+          "url": "url",
+          "source": "Web&20Share"
         }
       }
 }

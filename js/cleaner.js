@@ -1,9 +1,6 @@
 
-// Google Analytics
-window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date
-ga('create', 'UA-59452245-10', 'auto')
-ga('require', 'displayfeatures')
-ga('send', 'pageview', '/')
+// Plausible Analytics
+window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
 // Detect iOS
 // Credit: https://stackoverflow.com/a/9039885
@@ -20,11 +17,7 @@ function ifiOS() {
 
 // Function for cleaning link
 function cleanLink(link) {
-    ga('send', {
-        hitType: 'event',
-        eventCategory: 'Clean link',
-        eventAction: 'Clean link',
-    })
+    plausible('Clean Link')
     var oldLink = new URL(link)
     console.log('Old link:', oldLink)
     var newLink = new URL(oldLink.origin + oldLink.pathname)
