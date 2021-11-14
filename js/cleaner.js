@@ -20,10 +20,15 @@ function cleanLink(link) {
     plausible('Clean Link')
     var oldLink = new URL(link)
     console.log('Old link:', oldLink)
-    // Fix for Facebook shared links
+    // Fixes for various link shorteners/filters
     if ((oldLink.host === 'l.facebook.com') && oldLink.searchParams.has('u')) {
+        // Fix for Facebook shared links
         var facebookLink = decodeURI(oldLink.searchParams.get('u'))
         oldLink = new URL(facebookLink)
+    } else if ((oldLink.host === 'href.li')) {
+        // Fix for href.li links
+        var hrefLink =  oldLink.href.split('?')[1]
+        var oldLink = new URL(hrefLink)
     }
     // Generate new link
     var newLink = new URL(oldLink.origin + oldLink.pathname)
