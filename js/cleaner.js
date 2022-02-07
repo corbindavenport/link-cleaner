@@ -46,6 +46,9 @@ function cleanLink(link) {
     document.getElementById('completed').style.display = 'block'
     // Highlight the output for easy copy
     document.getElementById('link-output').select()
+    // Set image source on QR code
+    var qrImg = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' + encodeURIComponent(newLink)
+    document.getElementById('qr-img').src = qrImg
 }
 
 // Process URL after a paste action is detected

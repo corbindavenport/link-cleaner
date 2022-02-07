@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link href="css/dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
     <script defer data-domain="linkcleaner.app" src="https://plausible.io/js/plausible.js"></script>
 </head>
@@ -57,7 +57,14 @@
                             </button>
                         </div>
                         <div class="col-12 col-lg-4">
-                            <button type="button" class="btn btn-secondary btn-lg w-100 mt-3" id="link-startover" aria-label="Clean another link">
+                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
+                                <i class="bi bi-qr-code"></i>
+                                Open QR code
+                                <span class="badge rounded-pill bg-success">New</span>
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-startover" aria-label="Clean another link">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                                 Clean another link
                             </button>
@@ -87,14 +94,29 @@
                         <p>
                         <div class="row">
                             <div class="col-6">
-                                <button type="button" class="btn btn-block btn-primary w-100 link-btn" data-url='https://www.patreon.com/corbindavenport'>Donate via Patreon</button>
+                                <button type="button" class="btn btn-block btn-success w-100 link-btn" data-url='https://www.patreon.com/corbindavenport'>Donate via Patreon</button>
                             </div>
                             <div class="col-6">
-                                <button type="button" class="btn btn-block btn-primary w-100 link-btn" data-url="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Link%20Cleaner%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">Donate via PayPal</button>
+                                <button type="button" class="btn btn-block btn-success w-100 link-btn" data-url="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Link%20Cleaner%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">Donate via PayPal</button>
                             </div>
                         </div>
                         </p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR code modal -->
+    <div class="modal fade" id="qr-modal" tabindex="-1" aria-hidden="true" aria-labelledby="qr-modal-label">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qr-modal-label">QR Code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                <div class="modal-body" style="padding: 0">
+                    <img id="qr-img" src="" class="w-100">
                 </div>
             </div>
         </div>
