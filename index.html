@@ -15,7 +15,7 @@
     <meta name="color-scheme" content="dark light">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="search" type="application/opensearchdescription+xml" href="opensearch.xml" title="Link Cleaner">
+    <link rel="search" type="application/opensearchdescription+xml" href="opensearch.xml" title="LinkCleaner">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link href="css/dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
@@ -37,49 +37,41 @@
                 </button>
             </div>
             <!-- Completed UI -->
-            <div id="completed" class="card" style="display: none;">
-                <div class="card-header">
-                    Cleaned link
-                </div>
-                <div class="card-body">
-                    <input type="text" class="form-control form-control-lg" id="link-output" readonly autocomplete="off" value="lolo">
-                    <!-- Share buttons -->
-                    <div class="row">
-                        <div class="col-12 col-lg-4">
-                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-share-btn" aria-label="Share">
-                                <i class="bi bi-share-fill"></i>
-                                Share
-                            </button>
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
-                                <i class="bi bi-clipboard"></i>
-                                Copy to Clipboard
-                            </button>
-                        </div>
-                        <div class="col-12 col-lg-4">
-                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
-                                <i class="bi bi-qr-code"></i>
-                                Open QR code
-                                <span class="badge rounded-pill bg-success">New</span>
-                            </button>
-                        </div>
-                        <div class="col-12">
-                            <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-startover" aria-label="Clean another link">
-                                <i class="bi bi-arrow-counterclockwise"></i>
-                                Clean another link
-                            </button>
-                        </div>
+            <div id="completed" style="display: none;">
+                <input type="text" class="form-control form-control-lg" id="link-output" readonly autocomplete="off" value="lolo">
+                <!-- Share buttons -->
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-share-btn" aria-label="Share">
+                            <i class="bi bi-share-fill"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
+                            <i class="bi bi-clipboard"></i>
+                            Copy to Clipboard
+                        </button>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
+                            <i class="bi bi-qr-code"></i>
+                            Open QR code
+                            <span class="badge rounded-pill bg-success">New</span>
+                        </button>
+                    </div>
+                    <div class="col-12">
+                        <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-startover" aria-label="Clean another link">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Clean another link
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <button class="btn btn-outline-primary w-100 mb-3 mt-3" type="button" id="apple-shortcut-btn" data-bs-toggle="modal" data-bs-target="#apple-shortcut-modal" style="display: none;">Install Link Cleaner as Apple Shortcut</button>
-            </div>
             <div class="col-12 col-lg-6">
-                <div class="card mt-3 mt-lg-0">
+                <div class="card mt-3">
                     <div class="card-body">
                         <h5 class="card-title">What does this do?</h5>
                         <p class="card-text">Link Cleaner is a tool for quickly removing unnecessary bits from web links, such as tracking code and other variables. It can be difficult or tedious to do this manually, especially on mobile devices, so this tool might save you a few seconds of messing around with text selection.</p>
@@ -88,7 +80,16 @@
                 </div>
             </div>
             <div class="col-12 col-lg-6 mb-3">
-                <div class="card mt-3 mt-lg-0">
+                <!-- Apple Shortcut button -->
+                <button class="btn btn-outline-primary w-100 mt-3" type="button" id="apple-shortcut-btn" data-bs-toggle="modal" data-bs-target="#apple-shortcut-modal" style="display: none;">Install Link Cleaner as Apple Shortcut</button>
+                <!-- Chrome search engine -->
+                <div id="chrome-search-info" class="card mt-3" style="display: none;">
+                    <div class="card-body">
+                        <b>Tip:</b> Go to chrome://settings/searchEngines and find Link Cleaner under "Inactive shortcuts". Clicking "Activate" will allow you to shorten URLs from the address bar by typing "LinkCleaner" and pressing the Tab key.
+                    </div>
+                </div>
+                <!-- Donate card -->
+                <div class="card mt-3">
                     <div class="card-body">
                         <p class="card-text">Link Cleaner is developed by <a href="https://corbin.io" target="_blank">Corbin Davenport</a>, and all the code is available <a href="https://github.com/corbindavenport/link-cleaner" target="_blank">as open-source</a>. If you want to report a bug or suggest features, please <a href="https://github.com/corbindavenport/link-cleaner/issues/new" target="_blank">create an issue on GitHub</a> or <a href="https://discord.gg/59wfy5cNHw" target="_blank">join the Discord group</a>.</p>
                         <p class="card-text">If you find Link Cleaner useful, please consider donating to support continued development!</p>
@@ -115,7 +116,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="qr-modal-label">QR Code</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
+                </div>
                 <div class="modal-body" style="padding: 0">
                     <img id="qr-img" src="" class="w-100">
                 </div>

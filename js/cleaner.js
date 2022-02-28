@@ -5,7 +5,7 @@ window.plausible = window.plausible || function() { (window.plausible.q = window
 // Detect iOS
 // Credit: https://stackoverflow.com/a/9039885
 function ifiOS() {
-    if (['iPad Simulator','iPhone Simulator','iPod Simulator','iPad','iPhone','iPod'].includes(navigator.platform)) {
+    if (['iPad Simulator','iPhone Simulator','iPod Simulator','iPad','iPhone','iPod'].includes(navigator.userAgent)) {
         return true
     } else if (navigator.userAgent.includes('Mac') && 'ontouchend' in document) {
         // iPadOS detection
@@ -134,6 +134,11 @@ document.querySelectorAll('.link-btn').forEach(function (el) {
 // Show Shortcut prompt on iOS
 if (ifiOS()) {
     document.getElementById('apple-shortcut-btn').style.display = 'block'
+}
+
+// Show search engine prompt on desktop Chrome
+if (navigator.userAgent.includes('Chrome') && (!(navigator.userAgent.includes('Mobile')))) {
+    document.getElementById('chrome-search-info').style.display = 'block'
 }
 
 // Support for Web Share Target API, Siri Shortcut, and OpenSearch
