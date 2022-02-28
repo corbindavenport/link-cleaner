@@ -136,9 +136,7 @@ if (ifiOS()) {
     document.getElementById('apple-shortcut-btn').style.display = 'block'
 }
 
-// Shortcut install button
-
-// Web Share Target API and Siri Shortcut support
+// Support for Web Share Target API, Siri Shortcut, and OpenSearch
 const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
     // This is where the URL SHOULD BE
