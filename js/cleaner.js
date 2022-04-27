@@ -53,9 +53,6 @@ function cleanLink(link) {
     document.getElementById('completed').style.display = 'block'
     // Highlight the output for easy copy
     document.getElementById('link-output').select()
-    // Set image source on QR code
-    var qrImg = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' + encodeURIComponent(newLink)
-    document.getElementById('qr-img').src = qrImg
 }
 
 // Process URL after a paste action is detected
@@ -130,6 +127,19 @@ if (navigator.canShare) {
 } else {
     document.getElementById('link-share-btn').disabled = true
 }
+
+// QR Code button
+// This loads the QR code image only when the button is pressed
+var qrModal = document.getElementById('qr-modal')
+qrModal.addEventListener('show.bs.modal', function (event) {
+    var currentLink = document.getElementById('link-output').value
+    var qrElement =  document.getElementById('qr-img')
+    var qrSrc = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' + encodeURIComponent(currentLink)
+    if (qrElement.src != qrSrc) {
+        qrElement.setAttribute('src', qrSrc)
+        qrElement.setAttribute('title', currentLink)
+    }
+})
 
 // Button links
 document.querySelectorAll('.link-btn').forEach(function (el) {
