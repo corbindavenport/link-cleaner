@@ -6,8 +6,12 @@ body, a {
     color: #FAFAFA;
 }
 
-.card {
+.card, .modal-content {
     background: #3b3b3b;
+}
+
+.btn-close {
+    background-color: #FAFAFA;
 }
 
 input {

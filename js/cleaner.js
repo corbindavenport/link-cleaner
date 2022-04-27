@@ -136,11 +136,6 @@ if (ifiOS()) {
     document.getElementById('apple-shortcut-btn').style.display = 'block'
 }
 
-// Show search engine prompt on desktop Chrome
-if (navigator.userAgent.includes('Chrome') && (!(navigator.userAgent.includes('Mobile')))) {
-    document.getElementById('chrome-search-info').style.display = 'block'
-}
-
 // Support for Web Share Target API, Siri Shortcut, and OpenSearch
 const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
