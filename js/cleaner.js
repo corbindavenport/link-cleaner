@@ -1,11 +1,11 @@
 
 // Plausible Analytics
-window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
 // Detect iOS
 // Credit: https://stackoverflow.com/a/9039885
 function ifiOS() {
-    if (['iPad Simulator','iPhone Simulator','iPod Simulator','iPad','iPhone','iPod'].includes(navigator.userAgent)) {
+    if (['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.userAgent)) {
         return true
     } else if (navigator.userAgent.includes('Mac') && 'ontouchend' in document) {
         // iPadOS detection
@@ -18,7 +18,14 @@ function ifiOS() {
 // Function for cleaning link
 function cleanLink(link) {
     plausible('Clean Link')
-    var oldLink = new URL(link)
+    try {
+        var oldLink = new URL(link)
+    } catch (e) {
+        // TypeError rasied if not identified as URL, try stripping "Page Title"
+        if (e instanceof TypeError) {
+            var oldLink = new URL(link.split(/"(?:[^\\"]|\\.)*"/)[1].trim())
+        }
+    }
     console.log('Old link:', oldLink)
     // Fixes for various link shorteners/filters
     if ((oldLink.host === 'l.facebook.com') && oldLink.searchParams.has('u')) {
@@ -27,7 +34,7 @@ function cleanLink(link) {
         oldLink = new URL(facebookLink)
     } else if ((oldLink.host === 'href.li')) {
         // Fix for href.li links
-        var hrefLink =  oldLink.href.split('?')[1]
+        var hrefLink = oldLink.href.split('?')[1]
         var oldLink = new URL(hrefLink)
     }
     // Generate new link
