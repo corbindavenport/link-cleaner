@@ -14,11 +14,15 @@ body, a {
     background-color: #FAFAFA;
 }
 
-input {
+input[type="text"] {
     background: #3b3b3b !important;
     color: #FAFAFA !important;
 }
 
 a:hover {
     color: #9adefe;
+}
+
+.form-text {
+    color: #d3d3d3;
 }
