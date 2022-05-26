@@ -47,7 +47,12 @@ function cleanLink(link) {
     if (oldLink.host.includes('youtube.com') && oldLink.searchParams.has('v')) {
         newLink.searchParams.append('v', oldLink.searchParams.get('v'))
     }
+    // Use vxTwitter if enabled
+    if (oldLink.host.includes('twitter.com') && document.getElementById('vxTwitter-check').checked) {
+        newLink.host = 'vxtwitter.com'
+    }
     // Switch to output
+    console.log('New link:', newLink)
     document.getElementById('link-output').value = newLink.toString()
     document.getElementById('initial').style.display = 'none'
     document.getElementById('completed').style.display = 'block'
@@ -73,6 +78,20 @@ if (typeof navigator.clipboard.readText !== "undefined") {
 } else {
     document.getElementById('link-paste-btn').disabled = true
 }
+
+// Save settings automatically to localStorage
+document.querySelectorAll('input[type="checkbox"]').forEach(function(el) {
+    el.addEventListener('change', function() {
+        localStorage.setItem(el.id, el.checked)
+        console.log('Saved setting:', el.id, el.checked)
+    })
+})
+
+// Load settings from localStorage
+Object.entries(localStorage).forEach(function(key) {
+    console.log('Loaded setting:', key)
+    document.getElementById(key[0]).checked = JSON.parse(key[1])
+})
 
 // Process URL after clicking arrow button
 document.getElementById('link-submit').addEventListener('click', function () {
