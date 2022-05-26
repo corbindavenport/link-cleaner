@@ -43,9 +43,16 @@ function cleanLink(link) {
     if (oldLink.searchParams.has('q')) {
         newLink.searchParams.append('q', oldLink.searchParams.get('q'))
     }
-    // Fix for YouTube links
+    // Don't remove 'v' (video id) and 't' (time position) for YouTube links
     if (oldLink.host.includes('youtube.com') && oldLink.searchParams.has('v')) {
         newLink.searchParams.append('v', oldLink.searchParams.get('v'))
+        newLink.searchParams.append('t', oldLink.searchParams.get('t'))
+    }
+    // Shorten YouTube links if enabled
+    if (oldLink.host.includes('youtube.com') && document.getElementById('youtube-shorten-check').checked) {
+        newLink.host = 'youtu.be'
+        newLink.pathname = '/' + oldLink.searchParams.get('v')
+        newLink.searchParams.delete('v')
     }
     // Use vxTwitter if enabled
     if (oldLink.host.includes('twitter.com') && document.getElementById('vxTwitter-check').checked) {
