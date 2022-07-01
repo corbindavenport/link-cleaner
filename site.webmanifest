@@ -38,7 +38,21 @@
         {
           "name": "Bulk Clean",
           "url": "/bulk",
-          "description": "Clean multiple links at once."
+          "description": "Clean multiple links at once",
+          "icons": [
+            {
+                "src": "/img/bulk_icon_x192.png",
+                "sizes": "192x192"
+            },
+            {
+                "src": "/img/bulk_icon_x96.png",
+                "sizes": "96x96"
+            },
+            {
+                "src": "/img/bulk_icon_x48.png",
+                "sizes": "48x48"
+            }
+        ]
         }
       ]
 }
