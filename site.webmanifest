@@ -29,9 +29,16 @@
         "action": "/",
         "method": "GET",
         "params": {
-          "title": "title",
-          "text": "text",
-          "url": "url"
+            "title": "title",
+            "text": "text",
+            "url": "url"
         }
-      }
+    },
+    "shortcuts" : [
+        {
+          "name": "Bulk Clean",
+          "url": "/bulk",
+          "description": "Clean multiple links at once."
+        }
+      ]
 }
