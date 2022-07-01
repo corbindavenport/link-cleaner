@@ -16,51 +16,13 @@ function ifiOS() {
 }
 
 // Function for cleaning link
-function cleanLink(link) {
+function processLink(link) {
     plausible('Clean Link')
-    try {
-        var oldLink = new URL(link)
-    } catch (e) {
-        // TypeError rasied if not identified as URL, try stripping "Page Title"
-        if (e instanceof TypeError) {
-            var oldLink = new URL(link.split(/"(?:[^\\"]|\\.)*"/)[1].trim())
-        }
-    }
-    console.log('Old link:', oldLink)
-    // Fixes for various link shorteners/filters
-    if ((oldLink.host === 'l.facebook.com') && oldLink.searchParams.has('u')) {
-        // Fix for Facebook shared links
-        var facebookLink = decodeURI(oldLink.searchParams.get('u'))
-        oldLink = new URL(facebookLink)
-    } else if ((oldLink.host === 'href.li')) {
-        // Fix for href.li links
-        var hrefLink = oldLink.href.split('?')[1]
-        var oldLink = new URL(hrefLink)
-    }
-    // Generate new link
-    var newLink = new URL(oldLink.origin + oldLink.pathname)
-    // Retain 'q' parameter
-    if (oldLink.searchParams.has('q')) {
-        newLink.searchParams.append('q', oldLink.searchParams.get('q'))
-    }
-    // Don't remove 'v' (video id) and 't' (time position) for YouTube links
-    if (oldLink.host.includes('youtube.com') && oldLink.searchParams.has('v')) {
-        newLink.searchParams.append('v', oldLink.searchParams.get('v'))
-        newLink.searchParams.append('t', oldLink.searchParams.get('t'))
-    }
-    // Shorten YouTube links if enabled
-    if (oldLink.host.includes('youtube.com') && document.getElementById('youtube-shorten-check').checked) {
-        newLink.host = 'youtu.be'
-        newLink.pathname = '/' + oldLink.searchParams.get('v')
-        newLink.searchParams.delete('v')
-    }
-    // Use vxTwitter if enabled
-    if (oldLink.host.includes('twitter.com') && document.getElementById('vxTwitter-check').checked) {
-        newLink.host = 'vxtwitter.com'
-    }
+    var youtubeShortenEnabled = document.getElementById('youtube-shorten-check').checked
+    var vxTwitterEnabled = document.getElementById('vxTwitter-check').checked
+    var newLink = cleanLink(link, youtubeShortenEnabled, vxTwitterEnabled)
     // Switch to output
-    console.log('New link:', newLink)
-    document.getElementById('link-output').value = newLink.toString()
+    document.getElementById('link-output').value = newLink
     document.getElementById('initial').style.display = 'none'
     document.getElementById('completed').style.display = 'block'
     // Highlight the output for easy copy
@@ -71,7 +33,7 @@ function cleanLink(link) {
 document.getElementById('link-input').addEventListener('paste', function () {
     // This is wrapped in a timeout or it executes before the value has changed
     setTimeout(function () {
-        cleanLink(document.getElementById('link-input').value)
+        processLink(document.getElementById('link-input').value)
     }, 50)
 })
 
@@ -79,7 +41,7 @@ document.getElementById('link-input').addEventListener('paste', function () {
 if (typeof navigator.clipboard.readText !== "undefined") {
     document.getElementById('link-paste-btn').addEventListener('click', function () {
         navigator.clipboard.readText().then(function (data) {
-            cleanLink(data)
+            processLink(data)
         })
     })
 } else {
@@ -102,7 +64,7 @@ Object.entries(localStorage).forEach(function(key) {
 
 // Process URL after clicking arrow button
 document.getElementById('link-submit').addEventListener('click', function () {
-    cleanLink(document.getElementById('link-input').value)
+    processLink(document.getElementById('link-input').value)
 })
 
 // Copy link button
@@ -183,11 +145,11 @@ if (ifiOS()) {
 const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
     // This is where the URL SHOULD BE
-    cleanLink(parsedUrl.searchParams.get('url'))
+    processLink(parsedUrl.searchParams.get('url'))
 } else if (parsedUrl.searchParams.get('text')) {
     // Android usually puts URLs here
-    cleanLink(parsedUrl.searchParams.get('text'))
+    processLink(parsedUrl.searchParams.get('text'))
 } else if (parsedUrl.searchParams.get('title')) {
     // Android sometimes puts URLs here
-    cleanLink(parsedUrl.searchParams.get('title'))
+    processLink(parsedUrl.searchParams.get('title'))
 }

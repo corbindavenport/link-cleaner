@@ -14,7 +14,7 @@ body, a {
     background-color: #FAFAFA;
 }
 
-input[type="text"] {
+input[type="text"], textarea {
     background: #3b3b3b !important;
     color: #FAFAFA !important;
 }
