@@ -2,12 +2,20 @@ body {
     background-color: #262626;
 }
 
-body, a {
+body, a, .navbar, .nav-link, .navbar-brand {
     color: #FAFAFA;
 }
 
-.card, .modal-content {
-    background: #3b3b3b;
+.navbar-toggler {
+    border-color: #0d6efd;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: #d2d2d2 !important;
+}
+
+.card, .modal-content, .navbar {
+    background-color: #3b3b3b !important;
 }
 
 .btn-close {
