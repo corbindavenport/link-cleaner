@@ -34,3 +34,7 @@ a:hover {
 .form-text {
     color: #d3d3d3;
 }
+
+.border-top {
+    border-color: #000 !important;
+}
