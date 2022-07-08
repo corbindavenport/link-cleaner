@@ -32,6 +32,11 @@ function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false
         newLink.searchParams.append('v', oldLink.searchParams.get('v'))
         newLink.searchParams.append('t', oldLink.searchParams.get('t'))
     }
+    // Don't remove required variables for Facebook links
+    if (oldLink.host.includes('facebook.com') && oldLink.pathname.includes('story.php')) {
+        newLink.searchParams.append('story_fbid', oldLink.searchParams.get('story_fbid'))
+        newLink.searchParams.append('id', oldLink.searchParams.get('id'))
+    }
     // Shorten YouTube links if enabled
     if (oldLink.host.includes('youtube.com') && youtubeShortenEnabled) {
         newLink.host = 'youtu.be'
