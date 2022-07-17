@@ -34,17 +34,26 @@
             "url": "url"
         }
     },
-    "shortcuts" : [
+    "shortcuts": [
         {
-          "name": "Bulk Clean",
-          "url": "/bulk/?utm_source=Installed%20App&utm_medium=Shortcut",
-          "description": "Clean multiple links at once",
-          "icons": [
-            {
-                "src": "/img/bulk_icon_x192.png",
-                "sizes": "192x192"
-            }
-        ]
+            "name": "Bulk Clean",
+            "url": "/bulk/?utm_source=Installed%20App&utm_medium=Shortcut",
+            "icons": [
+                {
+                    "src": "/img/bulk_icon_x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "History",
+            "url": "/history/?utm_source=Installed%20App&utm_medium=Shortcut",
+            "icons": [
+                {
+                    "src": "/img/history_icon_x192.png",
+                    "sizes": "192x192"
+                }
+            ]
         }
-      ]
+    ]
 }
