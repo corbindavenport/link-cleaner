@@ -34,7 +34,7 @@
     <script defer data-domain="linkcleaner.app" src="https://plausible.io/js/plausible.js"></script>
 </head>
 
-<body>
+<body class="mb-5">
 
     <!-- Nav bar -->
     <nav class="navbar fixed-bottom navbar-expand-sm bg-light border-top" style="padding-bottom: calc(env(safe-area-inset-bottom) + 8px)">
@@ -55,6 +55,12 @@
                         <a class="nav-link active" aria-current="page" href="#">
                             <i class="bi bi-stack"></i>
                             Bulk Mode
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history/">
+                            <i class="bi bi-clock-history"></i>
+                            History
                             <span class="badge bg-secondary">New</span>
                         </a>
                     </li>
@@ -64,8 +70,8 @@
     </nav>
 
     <!-- Main container -->
-    <div class="container mt-3">
-        <div class="mt-3 mb-3 mt-sm-5 mb-sm-5">
+    <div class="container">
+        <div class="mt-1 mb-1 mt-sm-5 mb-sm-5">
             <!-- Controls -->
             <div class="row">
                 <div class="col-12 col-md-6 mt-2">
@@ -140,39 +146,6 @@
                     <div class="list-group small">
                         <a href="https://techtalesshow.com/?utm_source=linkcleaner.app&amp;utm_medium=redirect&amp;utm_campaign=none" target="_blank" class="list-group-item list-group-item-action" style="border: 0">Click here to check out the <b>Tech Tales Podcast</b>, which explores the history of the technology industry. Hosted by Corbin Davenport, the developer of Link Cleaner.</a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- QR code modal -->
-    <div class="modal fade" id="qr-modal" tabindex="-1" aria-hidden="true" aria-labelledby="qr-modal-label">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="qr-modal-label">QR Code</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" style="padding: 0">
-                    <img id="qr-img" src="" class="w-100">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Shortcut install modal -->
-    <div class="modal fade" id="apple-shortcut-modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <p>This Shortcut adds Link Cleaner to your device's share menu when you're sharing an app. This way, you can send links first to Link Cleaner, then use Link Cleaner's Share button to send the new link to the intended destination.</p>
-                    <p><b>You might see a warning about untrusted shortcuts.</b> To allow untrusted shortcuts, open the Settings app, tap the Shortcuts app, and switch on "Allow Untrusted Shortcuts".</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="https://www.icloud.com/shortcuts/97048b0d949a4940bd5a4b545c2fcf70" target="_blank">
-                        <button type="button" class="btn btn-primary" id="shortcut-install-btn">Install Shortcut</button>
-                    </a>
                 </div>
             </div>
         </div>

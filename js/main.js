@@ -48,20 +48,6 @@ if (typeof navigator.clipboard.readText !== "undefined") {
     document.getElementById('link-paste-btn').disabled = true
 }
 
-// Save settings automatically to localStorage
-document.querySelectorAll('input[type="checkbox"]').forEach(function(el) {
-    el.addEventListener('change', function() {
-        localStorage.setItem(el.id, el.checked)
-        console.log('Saved setting:', el.id, el.checked)
-    })
-})
-
-// Load settings from localStorage
-Object.entries(localStorage).forEach(function(key) {
-    console.log('Loaded setting:', key)
-    document.getElementById(key[0]).checked = JSON.parse(key[1])
-})
-
 // Process URL after clicking arrow button
 document.getElementById('link-submit').addEventListener('click', function () {
     processLink(document.getElementById('link-input').value)

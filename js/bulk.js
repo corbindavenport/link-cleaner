@@ -54,17 +54,3 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
         btn.innerHTML = '<i class="bi bi-clipboard"></i> Copy to Clipboard'
     }, 2000)
 })
-
-// Save settings automatically to localStorage
-document.querySelectorAll('input[type="checkbox"]').forEach(function(el) {
-    el.addEventListener('change', function() {
-        localStorage.setItem(el.id, el.checked)
-        console.log('Saved setting:', el.id, el.checked)
-    })
-})
-
-// Load settings from localStorage
-Object.entries(localStorage).forEach(function(key) {
-    console.log('Loaded setting:', key)
-    document.getElementById(key[0]).checked = JSON.parse(key[1])
-})
