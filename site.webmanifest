@@ -24,7 +24,7 @@
     "theme_color": "#448aff",
     "background_color": "#448aff",
     "display": "standalone",
-    "start_url": "/",
+    "start_url": "/?utm_source=Home%20Screen&utm_medium=Shortcut",
     "share_target": {
         "action": "/",
         "method": "GET",
@@ -37,20 +37,12 @@
     "shortcuts" : [
         {
           "name": "Bulk Clean",
-          "url": "/bulk",
+          "url": "/bulk/?utm_source=Home%20Screen&utm_medium=Shortcut",
           "description": "Clean multiple links at once",
           "icons": [
             {
                 "src": "/img/bulk_icon_x192.png",
                 "sizes": "192x192"
-            },
-            {
-                "src": "/img/bulk_icon_x96.png",
-                "sizes": "96x96"
-            },
-            {
-                "src": "/img/bulk_icon_x48.png",
-                "sizes": "48x48"
             }
         ]
         }
