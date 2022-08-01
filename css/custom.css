@@ -1,0 +1,4 @@
+.navbar.fixed-bottom {
+    /* Fix bottom nav bar on devices with bottom nav buttons */
+    padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
+}
