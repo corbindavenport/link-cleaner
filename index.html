@@ -93,7 +93,7 @@
             <div id="initial">
                 <div class="input-group">
                     <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" placeholder="Type or paste a link here">
-                    <button class="btn btn-outline-primary" type="button" id="link-submit" aria-label="Submit link"><i class="bi-chevron-right"></i></button>
+                    <button class="btn btn-outline-secondary" type="button" id="link-submit" aria-label="Submit link"><i class="bi-chevron-right"></i></button>
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -133,7 +133,10 @@
             </div>
             <!-- Completed UI -->
             <div id="completed" style="display: none;">
-                <input type="text" class="form-control form-control-lg" id="link-output" readonly autocomplete="off">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-lg" id="link-output" readonly autocomplete="off">
+                    <button class="btn btn-outline-secondary" type="button" id="link-startover" aria-label="Clean another link"><i class="bi bi-arrow-counterclockwise"></i></button>
+                </div>
                 <!-- Share buttons -->
                 <div class="row">
                     <div class="col-12 col-lg-4">
@@ -154,10 +157,16 @@
                             Show QR code
                         </button>
                     </div>
-                    <div class="col-12">
-                        <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="link-startover" aria-label="Clean another link">
-                            <i class="bi bi-arrow-counterclockwise"></i>&nbsp;
-                            Clean another link
+                    <div class="col-12 col-lg-4">
+                        <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="email-btn" aria-label="Send in Email">
+                            <i class="bi bi-envelope"></i>&nbsp;
+                            Send in Email
+                        </button>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <button type="button" class="btn btn-primary btn-lg w-100 mt-3" id="sms-btn" aria-label="Send in SMS">
+                            <i class="bi bi-chat-left-text"></i>&nbsp;
+                            Send in SMS
                         </button>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ body {
     background-color: #262626;
 }
 
-body, a, .navbar, .nav-link, .navbar-brand {
+body, a, .navbar, .nav-link, .navbar-brand, .list-group-item {
     color: #FAFAFA;
 }
 
@@ -10,11 +10,11 @@ body, a, .navbar, .nav-link, .navbar-brand {
     border-color: #0d6efd;
 }
 
-.nav-link.active, .nav-link:hover {
+.nav-link.active, .nav-link:hover, .list-group-item:hover, .navbar-brand:hover {
     color: #d2d2d2 !important;
 }
 
-.card, .modal-content, .navbar {
+.card, .modal-content, .navbar, .list-group-item {
     background-color: #3b3b3b !important;
 }
 
@@ -25,6 +25,7 @@ body, a, .navbar, .nav-link, .navbar-brand {
 input[type="text"], textarea {
     background: #3b3b3b !important;
     color: #FAFAFA !important;
+    border-color: #6c757d !important;
 }
 
 a:hover {
