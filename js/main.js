@@ -123,12 +123,6 @@ document.getElementById('email-btn').addEventListener('click', function () {
     window.open('mailto:?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody), '_blank')
 })
 
-// SMS button
-document.getElementById('email-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-output').value
-    window.open('sms://?body=' + encodeURIComponent(currentLink), '_blank')
-})
-
 // Button links
 document.querySelectorAll('.link-btn').forEach(function (el) {
     el.addEventListener('click', function () {
