@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "app.linkcleaner.android",
+                     "sha256_cert_fingerprints": ["28:69:36:69:26:0B:5A:6C:ED:BA:D1:FB:D5:AA:5E:B7:CB:6F:C5:31:70:B2:C5:6B:75:CB:A3:D1:1E:BB:3C:D0"] }
+      }
+]
