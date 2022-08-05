@@ -1,0 +1,2 @@
+# Allow Android to access TWA signature
+include: [.well-known]
