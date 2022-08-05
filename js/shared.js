@@ -101,10 +101,7 @@ Object.entries(localStorage).forEach(function(key) {
 })
 
 // Hide donation links on Android APK
-if ((localStorage['android-app'] === 'true') || document.referrer.includes('android-app://')) {
+if (document.referrer.includes('android-app://')) {
     console.log('Android app detected')
     document.querySelector('.donate-card').classList.add('d-none')
-    if (!(localStorage['android-app'] === 'true')) {
-        localStorage['android-app'] = 'true'
-    }
 }
