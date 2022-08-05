@@ -91,11 +91,20 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(el) {
 
 // Load settings from localStorage
 Object.entries(localStorage).forEach(function(key) {
-    // Ignore link history
-    if (key[0] === 'history') {
+    // Ignore link history and android app
+    if (key[0] === 'history' || key[0] === 'android-app') {
         return true
     }
     // Load setting
     console.log('Loaded setting:', key)
     document.getElementById(key[0]).checked = JSON.parse(key[1])
 })
+
+// Hide donation links on Android APK
+if ((localStorage['android-app'] === 'true') || document.referrer.includes('android-app://')) {
+    console.log('Android app detected')
+    document.querySelector('.donate-card').classList.add('d-none')
+    if (!(localStorage['android-app'] === 'true')) {
+        localStorage['android-app'] = 'true'
+    }
+}
