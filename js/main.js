@@ -38,13 +38,17 @@ document.getElementById('link-input').addEventListener('paste', function () {
 })
 
 // Paste button
-if (typeof navigator.clipboard.readText !== "undefined") {
-    document.getElementById('link-paste-btn').addEventListener('click', function () {
-        navigator.clipboard.readText().then(function (data) {
-            processLink(data)
+try {
+    if (typeof navigator.clipboard.readText !== "undefined") {
+        document.getElementById('link-paste-btn').addEventListener('click', function () {
+            navigator.clipboard.readText().then(function (data) {
+                processLink(data)
+            })
         })
-    })
-} else {
+    } else {
+        document.getElementById('link-paste-btn').disabled = true
+    }
+} catch {
     document.getElementById('link-paste-btn').disabled = true
 }
 
@@ -107,20 +111,12 @@ if (navigator.canShare) {
 var qrModal = document.getElementById('qr-modal')
 qrModal.addEventListener('show.bs.modal', function (event) {
     var currentLink = document.getElementById('link-output').value
-    var qrElement =  document.getElementById('qr-img')
+    var qrElement = document.getElementById('qr-img')
     var qrSrc = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' + encodeURIComponent(currentLink)
     if (qrElement.src != qrSrc) {
         qrElement.setAttribute('src', qrSrc)
         qrElement.setAttribute('title', currentLink)
     }
-})
-
-// Email button
-document.getElementById('email-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-output').value
-    var emailSubject = 'Link for you'
-    var emailBody = currentLink + '\n\nSent with Link Cleaner: linkcleaner.app'
-    window.open('mailto:?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody), '_blank')
 })
 
 // Button links

@@ -37,6 +37,15 @@ function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false
         newLink.searchParams.append('story_fbid', oldLink.searchParams.get('story_fbid'))
         newLink.searchParams.append('id', oldLink.searchParams.get('id'))
     }
+    // Remove extra information for Amazon shopping links
+    if (oldLink.host.includes('amazon') && oldLink.pathname.includes('/dp/')) {
+        newLink.hostname = newLink.hostname.replace('www.', '') // Amazon doesn't need www.
+        var regex = /(?:\/dp\/)(\w*|\d*)/g
+        var amazonID = regex.exec(oldLink.pathname)[1]
+        if (amazonID) {
+            newLink.pathname = '/dp/' + amazonID
+        }
+    }
     // Shorten YouTube links if enabled
     if (oldLink.host.includes('youtube.com') && youtubeShortenEnabled) {
         newLink.host = 'youtu.be'
