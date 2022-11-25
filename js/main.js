@@ -119,6 +119,31 @@ qrModal.addEventListener('show.bs.modal', function (event) {
     }
 })
 
+// Email button
+document.getElementById('email-btn').addEventListener('click', function () {
+    var currentLink = document.getElementById('link-output').value
+    var emailSubject = 'Link for you'
+    var emailBody = '\n\n\n' + currentLink
+    window.open('mailto:?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody), '_blank')
+})
+
+// SMS button
+document.getElementById('sms-btn').addEventListener('click', function () {
+    var currentLink = document.getElementById('link-output').value
+    window.open('sms:?&body=' + encodeURIComponent(currentLink), '_blank')
+})
+
+// Mastodon button
+document.getElementById('mastodon-btn').addEventListener('click', function () {
+    var currentLink = document.getElementById('link-output').value
+    var defaultServer = localStorage['mastodon-server'] || 'mastodon.social'
+    var server = window.prompt('Which Mastodon server do you want to use?', defaultServer)
+    if (server) {
+        localStorage['mastodon-server'] = server
+        window.open('https://' + server + '/share?text=' + encodeURIComponent('\n\n' + currentLink), '_blank')
+    }
+})
+
 // Button links
 document.querySelectorAll('.link-btn').forEach(function (el) {
     el.addEventListener('click', function () {

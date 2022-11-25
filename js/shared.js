@@ -101,7 +101,7 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(el) {
 // Load settings from localStorage
 Object.entries(localStorage).forEach(function(key) {
     // Ignore link history and android app
-    if (key[0] === 'history' || key[0] === 'android-app') {
+    if (key[0] === 'history' || key[0] === 'android-app' || key[0] === 'mastodon-server') {
         return true
     }
     // Load setting
