@@ -140,7 +140,8 @@ document.getElementById('mastodon-btn').addEventListener('click', function () {
     var server = window.prompt('Which Mastodon server do you want to use?', defaultServer)
     if (server) {
         localStorage['mastodon-server'] = server
-        window.open('https://' + server + '/share?text=' + encodeURIComponent('\n\n' + currentLink), '_blank')
+        var link = 'https://' + server + '/share?text=' + encodeURIComponent('Type something here\n\n' + currentLink)
+        popupWindow(link, '_blank', window, 500, 400)
     }
 })
 
