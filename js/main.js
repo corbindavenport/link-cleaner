@@ -145,13 +145,6 @@ document.getElementById('mastodon-btn').addEventListener('click', function () {
     }
 })
 
-// Button links
-document.querySelectorAll('.link-btn').forEach(function (el) {
-    el.addEventListener('click', function () {
-        window.open(el.getAttribute('data-url'), '_blank')
-    })
-})
-
 // Show Shortcut prompt on iOS
 if (ifiOS()) {
     document.getElementById('apple-shortcut-btn').style.display = 'block'

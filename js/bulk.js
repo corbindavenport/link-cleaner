@@ -1,13 +1,6 @@
 // Plausible Analytics
 window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
-// Button links
-document.querySelectorAll('.link-btn').forEach(function (el) {
-    el.addEventListener('click', function () {
-        window.open(el.getAttribute('data-url'), '_blank')
-    })
-})
-
 // Process URL after clicking 'Clean Links' button
 document.getElementById('link-clean-btn').addEventListener('click', function () {
     plausible('Bulk Clean Link')
