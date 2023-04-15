@@ -1,4 +1,24 @@
-.navbar.fixed-bottom {
-    /* Fix bottom nav bar on devices with bottom nav buttons */
-    padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
+/* Fix bottom nav bar on devices with bottom nav buttons */
+
+@media (orientation: portrait) {
+
+    .navbar.fixed-bottom, body {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 40px);
+    }
+}
+
+@media (orientation: landscape) {
+
+    .navbar.fixed-bottom, body {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 15px);
+    }
+}
+
+@media (display-mode: standalone) and (orientation: landscape) {
+    
+        .navbar.fixed-bottom {
+            border-top-left-radius: 0.375rem !important;
+            border-top-right-radius: 0.375rem !important;
+        }
+
 }
