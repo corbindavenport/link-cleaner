@@ -9,5 +9,5 @@ body {
 /* Fix the navbar overlapping body content on small screens */
 
 .container {
-    margin-bottom: 57px;
+    padding-bottom: 57px;
 }
