@@ -19,14 +19,7 @@
     <meta name="color-scheme" content="dark light">
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFF">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#212529">
-    <!-- Twitter card -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:creator" content="@corbindavenport" />
-    <meta name="twitter:title" content="Link Cleaner" />
-    <meta name="twitter:description" content="Remove tracking code and other variables from web links with the press of a button!" />
-    <meta name="twitter:image" content="https://linkcleaner.app/img/maskable_icon_x512.png" />
-    <meta name="twitter:image:alt" content="Link Cleaner app icon" />
-    <!-- Open Graph markup -->
+    <!-- Open Graph card -->
     <meta property="og:url" content="https://linkcleaner.app" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Link Cleaner" />
@@ -35,6 +28,7 @@
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <meta name="og:image:alt" content="Link Cleaner app icon" />
+    <meta name="twitter:card" content="summary" />
     <!-- Schema for Google Search -->
     <script type="application/ld+json">
     {
@@ -90,6 +84,12 @@
                             History
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings/">
+                            <i class="bi bi-gear-fill"></i>
+                            Settings
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -116,31 +116,16 @@
                             Paste from Clipboard
                         </button>
                     </div>
+                    <!-- Temporary redirect message -->
                     <div class="col-12 col-md-6">
-                        <button class="btn btn-outline-primary w-100 mt-2" id="settings-btn" type="button" aria-label="Settings" data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false" aria-controls="settings-collapse">
-                            <i class="bi bi-gear"></i>
-                            Settings
-                        </button>
-                    </div>
-                </div>
-                <div class="collapse mt-2" id="settings-collapse">
-                    <div class="card card-body">
-                        <!-- vxTwitter -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="vxTwitter-check" aria-describedby="vxtwitter-help">
-                            <label class="form-check-label" for="vxTwitter-check">
-                                Replace Twitter links with vxTwitter
-                            </label>
-                            <div id="vxtwitter-help" class="form-text">
-                                Links processed with <a href="https://github.com/dylanpdx/BetterTwitFix" target="_blank">vxTwitter</a> work better when embedded in Discord, especially when the tweets contain embedded videos. Clicking on the link will redirect to the original URL.
-                            </div>
-                        </div>
-                        <!-- Shorten YouTube -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="youtube-shorten-check">
-                            <label class="form-check-label" for="youtube-shorten-check">
-                                Shorten YouTube links
-                            </label>
+                        <div class="text-center w-100 mt-3 text-body-secondary">
+                            Settings has moved to the
+                            <span class="d-sm-none">
+                                <a href="#" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav">navigation bar</a>
+                            </span>
+                            <span class="d-none d-sm-inline">
+                                navigation bar
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -218,11 +203,21 @@
                         <p class="card-text">You can also use <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Link%20Cleaner%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">PayPal</a> and <a href="https://cash.app/$corbdav" target="_blank">Cash App</a>!</p>
                     </div>
                 </div>
-                <!-- Advertisement card -->
-                <div class="card mt-3">
-                    <div class="list-group small">
-                        <a href="https://techtalesshow.com/?utm_source=linkcleaner.app&amp;utm_medium=redirect&amp;utm_campaign=none" target="_blank" class="list-group-item list-group-item-action" style="border: 0">Click here to check out the <b>Tech Tales Podcast</b>, which explores the history of the technology industry. Hosted by Corbin Davenport, the developer of Link Cleaner.</a>
-                    </div>
+            </div>
+        </div>
+        <!-- Social links -->
+        <div class="row">
+            <div class="col-12 mt-3 mb-4 text-center text-body-secondary">
+                Made with &#9829; by Corbin Davenport
+                <div class="fs-3 d-flex justify-content-center">
+                    <!-- Mastodon -->
+                    <a href="https://toot.community/@corbin" class="text-reset px-2" target="_blank">
+                        <i class="bi bi-mastodon" aria-label="Mastodon"></i>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/corbindav/" class="text-reset px-2" target="_blank">
+                        <i class="bi bi-facebook" aria-label="Facebook"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -260,6 +255,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Form elements for settings -->
+    <input class="d-none" type="checkbox" value="" id="vxTwitter-check">
+    <input class="d-none" type="checkbox" value="" id="youtube-shorten-check">
+
 
     <script src="js/shared.js"></script>
     <script src="js/main.js"></script>

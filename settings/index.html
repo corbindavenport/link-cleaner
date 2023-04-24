@@ -63,13 +63,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
+                        <a class="nav-link" href="/history/">
                             <i class="bi bi-clock-history"></i>
                             History
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/settings/">
+                        <a class="nav-link active" aria-current="page" href="#">
                             <i class="bi bi-gear-fill"></i>
                             Settings
                         </a>
@@ -83,25 +83,29 @@
     <div class="container">
 
         <div class="display-5 mt-4 mb-3 mt-sm-5 mb-sm-5">
-            <i class="bi bi-clock-history pe-2"></i>
-            Link History
+            <i class="bi bi-gear-fill pe-2"></i>
+            Settings
         </div>
 
-        <div class="mt-4">These are your most recent cleaned links. Your links are stored locally in your web browser, and never uploaded or shared.</div>
-
-        <!-- Button for clearing links -->
-        <button class="btn btn-outline-primary w-100 mt-3" type="button" id="history-delete-btn">
-            <i class="bi bi-trash"></i>
-            Delete History
-        </button>
-
-        <!-- Warning for no links -->
-        <div class="alert alert-primary mt-3 d-none" id="clean-history-empty-alert" role="alert">
-            You have no saved links, go clean some links first!
+        <!-- vxTwitter -->
+        <div class="form-check mb-4 mt-4">
+            <input class="form-check-input" type="checkbox" value="" id="vxTwitter-check">
+            <label class="form-check-label" for="vxTwitter-check">
+                Replace Twitter links with vxTwitter
+            </label>
+            <div class="text-body-secondary mt-2">
+                Links processed with <a href="https://github.com/dylanpdx/BetterTwitFix" target="_blank">vxTwitter</a> work better when embedded in Discord, especially when the tweets contain embedded videos. Clicking on the link will redirect to the original URL.
+            </div>
         </div>
-
-        <!-- List -->
-        <div class="mt-3 list-group d-none" id="clean-history-list">
+        <!-- Shorten YouTube -->
+        <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" value="" id="youtube-shorten-check">
+            <label class="form-check-label" for="youtube-shorten-check">
+                Shorten YouTube links
+            </label>
+            <div class="text-body-secondary mt-2">
+                This converts YouTube links in the format <code>youtube.com/watch?v=wAUK9hVgmNI</code> to the shorter format <code>youtu.be/wAUK9hVgmNI</code>.
+            </div>
         </div>
 
         <!-- Social links -->
@@ -121,10 +125,10 @@
             </div>
         </div>
 
+
     </div>
 
     <script src="/js/shared.js"></script>
-    <script src="/js/history.js"></script>
     <script src="/js/register-sw.js"></script>
 </body>
 

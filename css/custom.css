@@ -5,3 +5,9 @@ body {
     padding-bottom: calc((var(--bs-navbar-toggler-padding-y) * 2) + constant(safe-area-inset-bottom));
     padding-bottom: calc((var(--bs-navbar-toggler-padding-y) * 2) + env(safe-area-inset-bottom));
 }
+
+/* Fix the navbar overlapping body content on small screens */
+
+.container {
+    margin-bottom: 57px;
+}

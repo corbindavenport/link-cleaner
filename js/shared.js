@@ -93,28 +93,31 @@ function addToHistory(link) {
 // Function for generating popup window
 // Based on: https://stackoverflow.com/a/32261263
 function popupWindow(url, windowName, win, w, h) {
-    const y = win.top.outerHeight / 2 + win.top.screenY - ( h / 2)
-    const x = win.top.outerWidth / 2 + win.top.screenX - ( w / 2)
+    const y = win.top.outerHeight / 2 + win.top.screenY - (h / 2)
+    const x = win.top.outerWidth / 2 + win.top.screenX - (w / 2)
     return win.open(url, windowName, `toolbar=no, location=no, directories=no, status=no, menubar=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${y}, left=${x}`)
 }
 
 // Save settings automatically to localStorage
-document.querySelectorAll('input[type="checkbox"]').forEach(function(el) {
-    el.addEventListener('change', function() {
+document.querySelectorAll('input[type="checkbox"]').forEach(function (el) {
+    el.addEventListener('change', function () {
         localStorage.setItem(el.id, el.checked)
         console.log('Saved setting:', el.id, el.checked)
     })
 })
 
 // Load settings from localStorage
-Object.entries(localStorage).forEach(function(key) {
+Object.entries(localStorage).forEach(function (key) {
     // Ignore link history and android app
     if (key[0] === 'history' || key[0] === 'android-app' || key[0] === 'mastodon-server') {
         return true
     }
     // Load setting
-    console.log('Loaded setting:', key)
-    document.getElementById(key[0]).checked = JSON.parse(key[1])
+    // TODO: settings should be stored in data attributes
+    if (document.getElementById(key[0])) {
+        console.log('Loaded setting:', key)
+        document.getElementById(key[0]).checked = JSON.parse(key[1])
+    }
 })
 
 // Hide donation links on Android APK
