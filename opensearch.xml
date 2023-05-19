@@ -3,7 +3,7 @@
   <ShortName>LinkCleaner</ShortName>
   <Description>Paste a URL to clean with Link Cleaner</Description>
   <Image width="16" height="16" type="image/x-icon">https://linkcleaner.app/favicon.ico</Image>
-  <Url type="text/html" method="get" template="https://linkcleaner.app/?url={searchTerms}" />
-  <Url type="application/x-suggestions+json" template="https://linkcleaner.app/?url={searchTerms}" />
+  <Url type="text/html" method="get" template="https://linkcleaner.app/?utm_source=OpenSearch&url={searchTerms}" />
+  <Url type="application/x-suggestions+json" template="https://linkcleaner.app/?utm_source=OpenSearch&url={searchTerms}" />
   <Url type="application/opensearchdescription+xml" rel="self" template="https://linkcleaner.app/opensearch.xml" />
 </OpenSearchDescription>
