@@ -29,7 +29,7 @@
     "theme_color": "#448aff",
     "background_color": "#448aff",
     "display": "standalone",
-    "start_url": "/?utm_source=Installed%20App",
+    "start_url": "/?utm_source=Installed%20App&utm_medium=App%20Launch",
     "share_target": {
         "action": "/",
         "method": "GET",
