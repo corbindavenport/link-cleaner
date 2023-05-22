@@ -1,4 +1,4 @@
-// Code that is shared across normal LinkCleaner and bulk mode
+// Code that is shared across normal Link Cleaner and bulk mode
 
 // Function for cleaning links
 function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false) {
@@ -23,9 +23,13 @@ function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false
     }
     // Generate new link
     var newLink = new URL(oldLink.origin + oldLink.pathname)
-    // Retain 'q' parameter
+    // Don't remove 'q' parameter
     if (oldLink.searchParams.has('q')) {
         newLink.searchParams.append('q', oldLink.searchParams.get('q'))
+    }
+    // Don't remove ID parameter for Macy's links (#21)
+    if (oldLink.host.includes('macys.com') && oldLink.searchParams.has('ID')) {
+        newLink.searchParams.append('ID', oldLink.searchParams.get('ID'))
     }
     // Don't remove 'v' (video id) and 't' (time position) for YouTube links
     if (oldLink.host.includes('youtube.com') && oldLink.searchParams.has('v')) {
