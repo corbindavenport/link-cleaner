@@ -1,7 +1,7 @@
 // Code that is shared across normal Link Cleaner and bulk mode
 
 // Function for cleaning links
-function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false) {
+function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id']) {
     try {
         var oldLink = new URL(link)
     } catch (e) {
@@ -60,6 +60,10 @@ function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false
     if (oldLink.host.includes('twitter.com') && vxTwitterEnabled) {
         newLink.host = 'vxtwitter.com'
     }
+    // Add Amazon affiliate code if enabled
+    if (oldLink.host.includes('amazon') && amazonTrackingId) {
+        newLink.searchParams.append('tag', amazonTrackingId)
+    }
     // Save to history
     addToHistory(newLink)
     // Switch to output
@@ -109,15 +113,27 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function (el) {
         console.log('Saved setting:', el.id, el.checked)
     })
 })
+document.querySelectorAll('.settings-container input[type="text"]').forEach(function (el) {
+    el.addEventListener('change', function () {
+        localStorage.setItem(el.id, el.value)
+        console.log('Saved setting:', el.id, el.value)
+    })
+})
 
 // Load settings from localStorage
+// TODO: Migrate to localForage
 Object.entries(localStorage).forEach(function (key) {
     // Ignore link history and android app
     if (key[0] === 'history' || key[0] === 'android-app' || key[0] === 'mastodon-server') {
         return true
     }
-    // Load setting
-    // TODO: settings should be stored in data attributes
+    // Amazon ID settings
+    if (key[0] === 'amazon-tracking-id') {
+        console.log('Loaded setting:', key)
+        document.getElementById('amazon-tracking-id').value = key[1]
+        return true
+    }
+    // Other settings
     if (document.getElementById(key[0])) {
         console.log('Loaded setting:', key)
         document.getElementById(key[0]).checked = JSON.parse(key[1])
