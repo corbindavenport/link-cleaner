@@ -1,7 +1,7 @@
 // Code that is shared across normal Link Cleaner and bulk mode
 
 // Function for cleaning links
-function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id']) {
+function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id']) {
     try {
         var oldLink = new URL(link)
     } catch (e) {
@@ -56,9 +56,9 @@ function cleanLink(link, youtubeShortenEnabled = false, vxTwitterEnabled = false
         newLink.pathname = '/' + oldLink.searchParams.get('v')
         newLink.searchParams.delete('v')
     }
-    // Use vxTwitter if enabled
-    if (oldLink.host.includes('twitter.com') && vxTwitterEnabled) {
-        newLink.host = 'vxtwitter.com'
+    // Use FixTwitter if enabled
+    if (oldLink.host.includes('twitter.com') && fixTwitterEnabled) {
+        newLink.host = 'fxtwitter.com'
     }
     // Add Amazon affiliate code if enabled
     if (oldLink.host.includes('amazon') && amazonTrackingId) {

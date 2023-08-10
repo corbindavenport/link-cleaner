@@ -19,8 +19,8 @@ function ifiOS() {
 function processLink(link) {
     plausible('Clean Link')
     var youtubeShortenEnabled = document.getElementById('youtube-shorten-check').checked
-    var vxTwitterEnabled = document.getElementById('vxTwitter-check').checked
-    var newLink = cleanLink(link, youtubeShortenEnabled, vxTwitterEnabled)
+    var fixTwitterEnabled = document.getElementById('vxTwitter-check').checked
+    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled)
     // Switch to output
     document.getElementById('link-output').value = newLink
     document.getElementById('initial').style.display = 'none'
