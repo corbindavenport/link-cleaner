@@ -119,6 +119,12 @@ qrModal.addEventListener('show.bs.modal', function (event) {
     }
 })
 
+// Test link button
+document.getElementById('link-test-btn').addEventListener('click', function () {
+    var currentLink = document.getElementById('link-output').value
+    window.open(currentLink, '_blank')
+})
+
 // Email button
 document.getElementById('email-btn').addEventListener('click', function () {
     var currentLink = document.getElementById('link-output').value
@@ -134,15 +140,27 @@ document.getElementById('sms-btn').addEventListener('click', function () {
 })
 
 // Mastodon button
-document.getElementById('mastodon-btn').addEventListener('click', function () {
+document.getElementById('mastodon-share-btn').addEventListener('click', function () {
     var currentLink = document.getElementById('link-output').value
     var defaultServer = localStorage['mastodon-server'] || 'mastodon.social'
     var server = window.prompt('Which Mastodon server do you want to use?', defaultServer)
     if (server) {
         localStorage['mastodon-server'] = server
         var link = 'https://' + server + '/share?text=' + encodeURIComponent('Type something here\n\n' + currentLink)
-        popupWindow(link, '_blank', window, 500, 400)
+        window.open(link, '_blank')
     }
+})
+
+// Twitter / X button
+document.getElementById('x-share-btn').addEventListener('click', function () {
+    var link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.getElementById('link-output').value)
+    window.open(link, '_blank')
+})
+
+// Telegram button
+document.getElementById('telegram-share-btn').addEventListener('click', function () {
+    var link = 'https://t.me/share/url?url=' + encodeURIComponent(document.getElementById('link-output').value)
+    window.open(link, '_blank')
 })
 
 // Show Shortcut prompt on iOS

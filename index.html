@@ -120,7 +120,7 @@
                     <input type="text" class="form-control form-control-lg" id="link-output" readonly autocomplete="off">
                     <button class="btn btn-outline-secondary" type="button" id="link-startover" aria-label="Clean another link"><i class="bi bi-arrow-counterclockwise"></i></button>
                 </div>
-                <!-- Share buttons -->
+                <!-- Main action buttons -->
                 <div class="row">
                     <div class="col-12 col-lg-4">
                         <button type="button" class="btn btn-primary w-100 mt-3" id="link-share-btn" aria-label="Share">
@@ -130,32 +130,60 @@
                     </div>
                     <div class="col-12 col-lg-4">
                         <button type="button" class="btn btn-primary w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
-                            <i class="bi bi-clipboard"></i>&nbsp;
+                            <i class="bi bi-clipboard me-2"></i>
                             Copy to Clipboard
                         </button>
                     </div>
                     <div class="col-12 col-lg-4">
+                        <button type="button" class="btn btn-primary w-100 mt-3" id="link-test-btn">
+                            <i class="bi bi-box-arrow-up-right me-2"></i>
+                            Test link
+                        </button>
+                    </div>
+                    <div class="col-12 col-lg-4">
                         <button type="button" class="btn btn-primary w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
-                            <i class="bi bi-qr-code"></i>&nbsp;
+                            <i class="bi bi-qr-code me-2"></i>
                             Show QR code
                         </button>
                     </div>
                     <div class="col-12 col-lg-4">
                         <button type="button" class="btn btn-primary w-100 mt-3" id="email-btn" aria-label="Send in Email">
-                            <i class="bi bi-envelope"></i>&nbsp;
+                            <i class="bi bi-envelope me-2"></i>
                             Send in Email
                         </button>
                     </div>
                     <div class="col-12 col-lg-4">
                         <button type="button" class="btn btn-primary w-100 mt-3" id="sms-btn" aria-label="Send in Text">
-                            <i class="bi bi-chat-left-dots-fill"></i>&nbsp;
+                            <i class="bi bi-chat-left-dots-fill me-2"></i>
                             Send in Text
                         </button>
                     </div>
-                    <div class="col-12 col-lg-4">
-                        <button type="button" class="btn btn-primary w-100 mt-3" id="mastodon-btn" aria-label="Share on Mastodon">
-                            <i class="bi bi-mastodon"></i>&nbsp;
-                            Share on Mastodon
+                    
+                </div>
+                <!-- Social media buttons -->
+                <div class="row">
+                    <div class="h5 mt-4">Social media</div>
+                </div>
+                <div class="row">
+                    <!-- Mastodon -->
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <button type="button" class="btn btn-light w-100 mt-3" id="mastodon-share-btn" aria-label="Share">
+                            <i class="bi bi-mastodon me-2"></i>
+                            Mastodon
+                        </button>
+                    </div>
+                    <!-- Twitter / X-->
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <button type="button" class="btn btn-light w-100 mt-3" id="x-share-btn" aria-label="Share">
+                            <span class="me-2" aria-label="X logo">𝕏</span>
+                            Twitter / X
+                        </button>
+                    </div>
+                    <!-- Telegram -->
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <button type="button" class="btn btn-light w-100 mt-3" id="telegram-share-btn" aria-label="Share">
+                            <i class="bi bi-telegram me-2"></i>
+                            Telegram
                         </button>
                     </div>
                 </div>
