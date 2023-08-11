@@ -151,6 +151,18 @@ document.getElementById('mastodon-share-btn').addEventListener('click', function
     }
 })
 
+// Facebook button
+document.getElementById('facebook-share-btn').addEventListener('click', function () {
+    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.getElementById('link-output').value)
+    window.open(link, '_blank')
+})
+
+// LinkedIn button
+document.getElementById('linkedin-share-btn').addEventListener('click', function () {
+    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(document.getElementById('link-output').value)
+    window.open(link, '_blank')
+})
+
 // Twitter / X button
 document.getElementById('x-share-btn').addEventListener('click', function () {
     var link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.getElementById('link-output').value)
@@ -160,6 +172,12 @@ document.getElementById('x-share-btn').addEventListener('click', function () {
 // Telegram button
 document.getElementById('telegram-share-btn').addEventListener('click', function () {
     var link = 'https://t.me/share/url?url=' + encodeURIComponent(document.getElementById('link-output').value)
+    window.open(link, '_blank')
+})
+
+// Substack Notes button
+document.getElementById('substack-share-btn').addEventListener('click', function () {
+    var link = 'https://substack.com/notes?action=compose&message=' + encodeURIComponent(document.getElementById('link-output').value)
     window.open(link, '_blank')
 })
 
