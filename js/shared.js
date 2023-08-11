@@ -42,9 +42,9 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         newLink.searchParams.append('id', oldLink.searchParams.get('id'))
     }
     // Remove extra information for Amazon shopping links
-    if (oldLink.host.includes('amazon') && oldLink.pathname.includes('/dp/')) {
+    if (oldLink.host.includes('amazon') && (oldLink.pathname.includes('/dp/') || oldLink.pathname.includes('/product/'))) {
         newLink.hostname = newLink.hostname.replace('www.', '') // Amazon doesn't need www.
-        var regex = /(?:\/dp\/)(\w*|\d*)/g
+        var regex = /(?:\/dp\/|\/product\/)(\w*|\d*)/g
         var amazonID = regex.exec(oldLink.pathname)[1]
         if (amazonID) {
             newLink.pathname = '/dp/' + amazonID
