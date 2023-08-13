@@ -158,7 +158,7 @@
                             Send in Text
                         </button>
                     </div>
-                    
+
                 </div>
                 <!-- Social media buttons -->
                 <div class="row">
@@ -167,42 +167,42 @@
                 <div class="row">
                     <!-- Mastodon -->
                     <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="mastodon-share-btn" aria-label="Share">
+                        <button type="button" class="btn btn-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
                             <i class="bi bi-mastodon me-2"></i>
                             Mastodon
                         </button>
                     </div>
                     <!-- Facebook -->
                     <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="facebook-share-btn" aria-label="Share">
+                        <button type="button" class="btn btn-light w-100 mt-3" id="facebook-share-btn">
                             <i class="bi bi-facebook me-2"></i>
                             Facebook
                         </button>
                     </div>
                     <!-- LinkedIn -->
                     <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="linkedin-share-btn" aria-label="Share">
+                        <button type="button" class="btn btn-light w-100 mt-3" id="linkedin-share-btn">
                             <i class="bi bi-linkedin me-2"></i>
                             LinkedIn
                         </button>
                     </div>
                     <!-- Twitter / X-->
                     <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="x-share-btn" aria-label="Share">
+                        <button type="button" class="btn btn-light w-100 mt-3" id="x-share-btn">
                             <span class="me-2" aria-label="X logo">𝕏</span>
                             Twitter / X
                         </button>
                     </div>
                     <!-- Telegram -->
                     <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="telegram-share-btn" aria-label="Share">
+                        <button type="button" class="btn btn-light w-100 mt-3" id="telegram-share-btn">
                             <i class="bi bi-telegram me-2"></i>
                             Telegram
                         </button>
                     </div>
                     <!-- Substack Notes -->
                     <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="substack-share-btn" aria-label="Share">
+                        <button type="button" class="btn btn-light w-100 mt-3" id="substack-share-btn">
                             <i class="bi bi-bookmark-fill me-2"></i>
                             Substack Notes
                         </button>
@@ -244,7 +244,7 @@
     </div>
 
     <!-- QR code modal -->
-    <div class="modal fade" id="qr-modal" tabindex="-1" aria-hidden="true" aria-labelledby="qr-modal-label">
+    <div class="modal" id="qr-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -258,8 +258,27 @@
         </div>
     </div>
 
+    <!-- Mastodon share modal -->
+    <div class="modal" tabindex="-1" id="mastodon-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="mastodon-server-hostname" class="form-label">Mastodon server</label>
+                        <input type="text" class="form-control" id="mastodon-server-hostname" placeholder="mastodon.social" autocomplete="off" spellcheck="false">
+                        <div class="form-text">This must be a server running <a href="https://joinmastodon.org/" target="_blank">Mastodon</a>, <a href="https://joinfirefish.org/" target="_blank">Firefish/Calckey</a>, <a href="https://join.misskey.page/en-US/" target="_blank">Misskey</a>, or another compatible social media platform.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="mastodon-share-btn" focus>Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Shortcut install modal -->
-    <div class="modal fade" id="apple-shortcut-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal" id="apple-shortcut-modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">

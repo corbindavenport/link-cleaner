@@ -2,6 +2,9 @@
 // Plausible Analytics
 window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
+// Initialize modals
+const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'))
+
 // Detect iOS
 // Credit: https://stackoverflow.com/a/9039885
 function ifiOS() {
@@ -93,14 +96,9 @@ document.getElementById('link-startover').addEventListener('click', function () 
 // Share button
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
-        try {
-            navigator.share({
-                url: document.getElementById('link-output').value
-            })
-        }
-        catch (e) {
-            alert('There was an error:\n\n' + e.message)
-        }
+        navigator.share({
+            url: document.getElementById('link-output').value
+        })
     })
 } else {
     document.getElementById('link-share-btn').disabled = true
@@ -140,14 +138,15 @@ document.getElementById('sms-btn').addEventListener('click', function () {
 })
 
 // Mastodon button
+document.getElementById('mastodon-server-hostname').value = localStorage['mastodon-server'] || ''
 document.getElementById('mastodon-share-btn').addEventListener('click', function () {
     var currentLink = document.getElementById('link-output').value
-    var defaultServer = localStorage['mastodon-server'] || 'mastodon.social'
-    var server = window.prompt('Which Mastodon server do you want to use?', defaultServer)
-    if (server) {
-        localStorage['mastodon-server'] = server
-        var link = 'https://' + server + '/share?text=' + encodeURIComponent('Type something here\n\n' + currentLink)
+    var currentServer = document.getElementById('mastodon-server-hostname').value
+    if (currentServer) {
+        localStorage['mastodon-server'] = currentServer
+        var link = 'https://' + currentServer + '/share?text=' + encodeURIComponent(currentLink)
         window.open(link, '_blank')
+        mastodonModal.hide()
     }
 })
 
