@@ -5,8 +5,8 @@ window.plausible = window.plausible || function () { (window.plausible.q = windo
 document.getElementById('link-clean-btn').addEventListener('click', function () {
     plausible('Bulk Clean Link')
     // Read settings
-    var youtubeShortenEnabled = document.getElementById('youtube-shorten-check').checked
-    var fixTwitterEnabled = document.getElementById('vxTwitter-check').checked
+    var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
+    var fixTwitterEnabled = JSON.parse(localStorage.getItem('vxTwitter-check').toLowerCase());
     // Split comma-separated or newline-seperated input into array and trim whitespace
     var oldLinks = document.getElementById('link-bulk-input').value.split(/\n|\,/)
     // Filter out blank lines
