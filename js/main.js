@@ -21,8 +21,17 @@ function ifiOS() {
 // Function for cleaning link
 function processLink(link) {
     plausible('Clean Link')
-    var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
-    var fixTwitterEnabled = JSON.parse(localStorage.getItem('vxTwitter-check').toLowerCase());
+    // Read settings
+    if (localStorage.getItem('youtube-shorten-check')) {
+        var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
+    } else {
+        var youtubeShortenEnabled = false;
+    }
+    if (localStorage.getItem('vxTwitter-check')) {
+        var fixTwitterEnabled = JSON.parse(localStorage.getItem('vxTwitter-check').toLowerCase());
+    } else {
+        var fixTwitterEnabled = false;
+    }
     var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled)
     // Switch to output
     document.getElementById('link-output').value = newLink
