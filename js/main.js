@@ -5,19 +5,6 @@ window.plausible = window.plausible || function () { (window.plausible.q = windo
 // Initialize modals
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'))
 
-// Detect iOS
-// Credit: https://stackoverflow.com/a/9039885
-function ifiOS() {
-    if (['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.userAgent)) {
-        return true
-    } else if (navigator.userAgent.includes('Mac') && 'ontouchend' in document) {
-        // iPadOS detection
-        return true
-    } else {
-        return false
-    }
-}
-
 // Function for cleaning link
 function processLink(link) {
     plausible('Clean Link')
@@ -188,11 +175,6 @@ document.getElementById('substack-share-btn').addEventListener('click', function
     var link = 'https://substack.com/notes?action=compose&message=' + encodeURIComponent(document.getElementById('link-output').value)
     window.open(link, '_blank')
 })
-
-// Show Shortcut prompt on iOS
-if (ifiOS()) {
-    document.getElementById('apple-shortcut-btn').style.display = 'block'
-}
 
 // Support for Web Share Target API, Siri Shortcut, and OpenSearch
 const parsedUrl = new URL(window.location)

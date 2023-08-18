@@ -11,3 +11,11 @@ body {
 .container {
     padding-bottom: 57px;
 }
+
+/* Fix Substack embed not supporting dark mode */
+
+@media (prefers-color-scheme: dark) {
+    #spacebar-iframe {
+        filter: invert(.9) !important;
+    }
+}
