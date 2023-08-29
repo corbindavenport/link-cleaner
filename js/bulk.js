@@ -15,6 +15,11 @@ document.getElementById('link-clean-btn').addEventListener('click', function () 
     } else {
         var fixTwitterEnabled = false;
     }
+    if (localStorage.getItem('psky-check')) {
+        var pskyEnabled = JSON.parse(localStorage.getItem('psky-check').toLowerCase());
+    } else {
+        var pskyEnabled = false;
+    }
     // Split comma-separated or newline-seperated input into array and trim whitespace
     var oldLinks = document.getElementById('link-bulk-input').value.split(/\n|\,/)
     // Filter out blank lines
@@ -22,7 +27,7 @@ document.getElementById('link-clean-btn').addEventListener('click', function () 
     // Clean links
     var newLinks = []
     oldLinks.forEach((link) => {
-        var processedLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled)
+        var processedLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, pskyEnabled)
         newLinks.push(processedLink)
     })
     // Output result
