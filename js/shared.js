@@ -57,7 +57,7 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         newLink.searchParams.delete('v')
     }
     // Use FixTwitter if enabled
-    if (oldLink.host.includes('twitter.com') && fixTwitterEnabled) {
+    if ((oldLink.host.includes('twitter.com') || oldLink.host.includes('x.com')) && fixTwitterEnabled) {
         newLink.host = 'fxtwitter.com'
     }
     // Add Amazon affiliate code if enabled
