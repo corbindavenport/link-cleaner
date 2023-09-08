@@ -19,7 +19,10 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     } else if ((oldLink.host === 'href.li')) {
         // Fix for href.li links
         var hrefLink = oldLink.href.split('?')[1]
-        var oldLink = new URL(hrefLink)
+        oldLink = new URL(hrefLink)
+    } else if ((oldLink.host === 'www.google.com') && (oldLink.pathname === '/url') && (oldLink.searchParams.has('url'))) {
+        // Fix for redirect links from Google Search (#29)
+        oldLink = new URL(oldLink.searchParams.get('url'))
     }
     // Generate new link
     var newLink = new URL(oldLink.origin + oldLink.pathname)
