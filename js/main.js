@@ -2,6 +2,9 @@
 // Plausible Analytics
 window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
+// Options used for pop-up windows from social share buttons
+const popupOptions = 'popup,width=600,height=500,noopener,noreferrer';
+
 // Initialize modals
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'))
 
@@ -121,7 +124,7 @@ qrModal.addEventListener('show.bs.modal', function (event) {
 // Test link button
 document.getElementById('link-test-btn').addEventListener('click', function () {
     var currentLink = document.getElementById('link-output').value
-    window.open(currentLink, '_blank')
+    window.open(currentLink, '_blank', popupOptions)
 })
 
 // Email button
@@ -146,7 +149,7 @@ document.getElementById('mastodon-share-btn').addEventListener('click', function
     if (currentServer) {
         localStorage['mastodon-server'] = currentServer
         var link = 'https://' + currentServer + '/share?text=' + encodeURIComponent(currentLink)
-        window.open(link, '_blank')
+        window.open(link, '_blank', popupOptions)
         mastodonModal.hide()
     }
 })
@@ -154,31 +157,31 @@ document.getElementById('mastodon-share-btn').addEventListener('click', function
 // Facebook button
 document.getElementById('facebook-share-btn').addEventListener('click', function () {
     var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank')
+    window.open(link, '_blank', popupOptions)
 })
 
 // LinkedIn button
 document.getElementById('linkedin-share-btn').addEventListener('click', function () {
     var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank')
+    window.open(link, '_blank', popupOptions)
 })
 
 // Twitter / X button
 document.getElementById('x-share-btn').addEventListener('click', function () {
     var link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank')
+    window.open(link, '_blank', popupOptions)
 })
 
 // Telegram button
 document.getElementById('telegram-share-btn').addEventListener('click', function () {
     var link = 'https://t.me/share/url?url=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank')
+    window.open(link, '_blank', popupOptions)
 })
 
 // Substack Notes button
 document.getElementById('substack-share-btn').addEventListener('click', function () {
     var link = 'https://substack.com/notes?action=compose&message=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank')
+    window.open(link, '_blank', popupOptions)
 })
 
 // Support for Web Share Target API, Siri Shortcut, and OpenSearch
