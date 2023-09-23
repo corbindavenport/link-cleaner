@@ -37,7 +37,10 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     // Don't remove 'v' (video id) and 't' (time position) for YouTube links
     if (oldLink.host.includes('youtube.com') && oldLink.searchParams.has('v')) {
         newLink.searchParams.append('v', oldLink.searchParams.get('v'))
-        newLink.searchParams.append('t', oldLink.searchParams.get('t'))
+        var oldLinkTimeParam = oldLink.searchParams.get('t')
+        if (oldLinkTimeParam !== null) {
+            newLink.searchParams.append('t', oldLinkTimeParam)
+        }
     }
     // Don't remove required variables for Facebook links
     if (oldLink.host.includes('facebook.com') && oldLink.pathname.includes('story.php')) {
