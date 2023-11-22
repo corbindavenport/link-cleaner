@@ -166,10 +166,10 @@ document.getElementById('linkedin-share-btn').addEventListener('click', function
     window.open(link, '_blank', popupOptions)
 })
 
-// Twitter / X button
-document.getElementById('x-share-btn').addEventListener('click', function () {
-    var link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank', popupOptions)
+// Reddit button
+document.getElementById('reddit-share-btn').addEventListener('click', function () {
+    var currentLink = document.getElementById('link-output').value
+    window.open('https://reddit.com/submit?url=' + encodeURIComponent(currentLink), '_blank', popupOptions)
 })
 
 // Telegram button
