@@ -22,12 +22,7 @@ function processLink(link) {
     } else {
         var fixTwitterEnabled = false;
     }
-    if (localStorage.getItem('psky-check')) {
-        var pskyEnabled = JSON.parse(localStorage.getItem('psky-check').toLowerCase());
-    } else {
-        var pskyEnabled = false;
-    }
-    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, pskyEnabled)
+    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled)
     // Switch to output
     document.getElementById('link-output').value = newLink
     document.getElementById('initial').style.display = 'none'
