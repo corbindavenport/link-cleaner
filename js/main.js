@@ -104,16 +104,24 @@ if (navigator.canShare) {
 }
 
 // QR Code button
-// This loads the QR code image only when the button is pressed
+// This generates the QR code only when the button is pressed
 var qrModal = document.getElementById('qr-modal')
 qrModal.addEventListener('show.bs.modal', function (event) {
     var currentLink = document.getElementById('link-output').value
-    var qrElement = document.getElementById('qr-img')
-    var qrSrc = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' + encodeURIComponent(currentLink)
-    if (qrElement.src != qrSrc) {
-        qrElement.setAttribute('src', qrSrc)
-        qrElement.setAttribute('title', currentLink)
-    }
+    var qrContainer = document.getElementById('qrcode')
+    const qrSettings = {
+		text: currentLink,
+        width: 425,
+        height: 425,
+        quietZone: 25,
+        tooltip: true
+	}
+    new QRCode(document.getElementById('qrcode'), qrSettings)
+})
+
+// Remove QR code when popup is hidden (so new codes don't show up below new ones)
+qrModal.addEventListener('hide.bs.modal', function (event) {
+    document.getElementById('qrcode').innerHTML = ''
 })
 
 // Test link button

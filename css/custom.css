@@ -11,3 +11,13 @@ body {
 .container {
     padding-bottom: 57px;
 }
+
+/* QR code share option */
+
+#qrcode {
+    text-align: center;
+}
+
+#qrcode canvas {
+    max-width: 100%;
+}
