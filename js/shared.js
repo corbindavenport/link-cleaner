@@ -58,9 +58,10 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     }
     // Shorten YouTube links if enabled
     if (oldLink.host.includes('youtube.com') && youtubeShortenEnabled) {
-        newLink.host = 'youtu.be'
-        newLink.pathname = '/' + oldLink.searchParams.get('v')
-        newLink.searchParams.delete('v')
+        // Use to find the video ID: https://regex101.com/r/0Plpyd/1
+        var regex = /^.*(youtu\.be\/|embed\/|shorts\/|\?v=|\&v=)(?<videoID>[^#\&\?]*).*/;
+        var videoId = regex.exec(oldLink.href)['groups']['videoID'];
+        newLink = new URL('https://youtu.be/' + videoId);
     }
     // Use FixTwitter if enabled
     if ((oldLink.host.includes('twitter.com') || oldLink.host.includes('x.com')) && fixTwitterEnabled) {
