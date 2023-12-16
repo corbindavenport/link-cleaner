@@ -21,3 +21,14 @@ body {
 #qrcode canvas {
     max-width: 100%;
 }
+
+/* Bulk mode text boxes */
+
+@media (min-width: 768px) {
+
+    #link-bulk-input, #link-bulk-output {
+        resize: none;
+        height: calc(100vh - 300px);
+    }
+
+}
