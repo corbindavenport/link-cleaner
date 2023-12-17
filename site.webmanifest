@@ -64,13 +64,54 @@
     "edge_side_panel": {},
     "screenshots": [
         {
-            "src": "img/screenshot_1.png",
-            "sizes": "750x1334",
+            "src": "img/screenshot-mobile-1.png",
+            "sizes": "1179×2556",
+            "form_factor": "narrow",
             "type": "image/png"
         },
         {
-            "src": "img/screenshot_2.png",
-            "sizes": "750x1334",
+            "src": "img/screenshot-mobile-2.png",
+            "sizes": "1179×2556",
+            "form_factor": "narrow",
+            "type": "image/png"
+        },
+        {
+            "src": "img/screenshot-mobile-3.png",
+            "sizes": "1179×2556",
+            "form_factor": "narrow",
+            "type": "image/png"
+        },
+        {
+            "src": "img/screenshot-mobile-4.png",
+            "sizes": "1179×2556",
+            "form_factor": "narrow",
+            "type": "image/png"
+        },
+        {
+            "src": "img/screenshot-desktop-1.png",
+            "sizes": "1025×708",
+            "form_factor": "wide",
+            "type": "image/png"
+        },
+        {
+            "src": "img/screenshot-desktop-macos-1.png",
+            "sizes": "1025×708",
+            "platform": "macos",
+            "form_factor": "wide",
+            "type": "image/png"
+        },
+        {
+            "src": "img/screenshot-desktop-windows-1.png",
+            "sizes": "1025×708",
+            "platform": "windows",
+            "form_factor": "wide",
+            "type": "image/png"
+        },
+        {
+            "src": "img/screenshot-desktop-windows-2.png",
+            "sizes": "1025×708",
+            "platform": "windows",
+            "form_factor": "wide",
             "type": "image/png"
         }
     ]
