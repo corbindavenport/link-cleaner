@@ -5,13 +5,19 @@ window.plausible = window.plausible || function () { (window.plausible.q = windo
 // Options used for pop-up windows from social share buttons
 const popupOptions = 'popup,width=600,height=500,noopener,noreferrer';
 
-// Initialize modals
+// Initialize modals and toasts
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'))
+const clipboardToast = bootstrap.Toast.getOrCreateInstance(document.querySelector('#clipboard-toast'))
 
 // Function for cleaning link
 function processLink(link) {
     plausible('Clean Link')
     // Read settings
+    if (localStorage.getItem('clipboard-check')) {
+        var autoClipboardEnabled = JSON.parse(localStorage.getItem('clipboard-check').toLowerCase());
+    } else {
+        var autoClipboardEnabled = false;
+    }
     if (localStorage.getItem('youtube-shorten-check')) {
         var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
     } else {
@@ -27,6 +33,18 @@ function processLink(link) {
     document.getElementById('link-output').value = newLink
     document.getElementById('initial').style.display = 'none'
     document.getElementById('completed').style.display = 'block'
+    // Write text to clipboard
+    if (navigator.clipboard && autoClipboardEnabled) {
+        try {
+            const type = 'text/plain';
+            const blob = new Blob([newLink], { type });
+            const data = [new ClipboardItem({ [type]: blob })];
+            navigator.clipboard.write(data);
+            clipboardToast.show();
+        } catch (e) {
+            console.error('Error copying to clipboard:', e);
+        }
+    }
     // Highlight the output for easy copy
     document.getElementById('link-output').select()
 }
@@ -110,12 +128,12 @@ qrModal.addEventListener('show.bs.modal', function (event) {
     var currentLink = document.getElementById('link-output').value
     var qrContainer = document.getElementById('qrcode')
     const qrSettings = {
-		text: currentLink,
+        text: currentLink,
         width: 425,
         height: 425,
         quietZone: 25,
         tooltip: true
-	}
+    }
     new QRCode(document.getElementById('qrcode'), qrSettings)
 })
 
