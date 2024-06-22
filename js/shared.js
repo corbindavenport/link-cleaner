@@ -30,6 +30,10 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     if (oldLink.searchParams.has('q')) {
         newLink.searchParams.append('q', oldLink.searchParams.get('q'))
     }
+    // Don't remove ID parameter for Google Play links (#34)
+    if (oldLink.host.includes('play.google.com') && oldLink.searchParams.has('id')) {
+        newLink.searchParams.append('id', oldLink.searchParams.get('id'))
+    }
     // Don't remove ID parameter for Macy's links (#21)
     if (oldLink.host.includes('macys.com') && oldLink.searchParams.has('ID')) {
         newLink.searchParams.append('ID', oldLink.searchParams.get('ID'))
