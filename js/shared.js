@@ -38,13 +38,25 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     if (oldLink.host.includes('macys.com') && oldLink.searchParams.has('ID')) {
         newLink.searchParams.append('ID', oldLink.searchParams.get('ID'))
     }
-    // Don't remove 'v' (video id) and 't' (time position) for YouTube links
+    // YouTube links
     if (oldLink.host.includes('youtube.com') && oldLink.searchParams.has('v')) {
-        newLink.searchParams.append('v', oldLink.searchParams.get('v'))
-        var oldLinkTimeParam = oldLink.searchParams.get('t')
-        if (oldLinkTimeParam !== null) {
-            newLink.searchParams.append('t', oldLinkTimeParam)
+        // Shorten link if setting is enabled
+        if (oldLink.searchParams.has('v') && youtubeShortenEnabled) {
+            // Use to find the video ID: https://regex101.com/r/0Plpyd/1
+            var regex = /^.*(youtu\.be\/|embed\/|shorts\/|\?v=|\&v=)(?<videoID>[^#\&\?]*).*/;
+            var videoId = regex.exec(oldLink.href)['groups']['videoID'];
+            newLink = new URL('https://youtu.be/' + videoId);
+        } else if (oldLink.searchParams.has('v')) {
+            // If the video link won't be in the main path, the 'v' (video ID) parameter needs to be added
+            newLink.searchParams.append('v', oldLink.searchParams.get('v'))
         }
+        // Never remove the 't' (time position) for YouTube video links
+        if (oldLink.searchParams.has('t')) {
+            newLink.searchParams.append('t', oldLink.searchParams.get('t'))
+        }
+    } else if (oldLink.host.includes('youtube.com') && oldLink.pathname.includes('playlist') && oldLink.searchParams.has('list')) {
+        // Don't remove list ID for YouTube playlist links (#37)
+        newLink.searchParams.append('list', oldLink.searchParams.get('list'))
     }
     // Don't remove required variables for Facebook links
     if (oldLink.host.includes('facebook.com') && oldLink.pathname.includes('story.php')) {
@@ -59,13 +71,6 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         if (amazonID) {
             newLink.pathname = '/dp/' + amazonID
         }
-    }
-    // Shorten YouTube links if enabled
-    if (oldLink.host.includes('youtube.com') && youtubeShortenEnabled) {
-        // Use to find the video ID: https://regex101.com/r/0Plpyd/1
-        var regex = /^.*(youtu\.be\/|embed\/|shorts\/|\?v=|\&v=)(?<videoID>[^#\&\?]*).*/;
-        var videoId = regex.exec(oldLink.href)['groups']['videoID'];
-        newLink = new URL('https://youtu.be/' + videoId);
     }
     // Use FixTwitter if enabled
     if ((oldLink.host.includes('twitter.com') || oldLink.host.includes('x.com')) && fixTwitterEnabled) {
