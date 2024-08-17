@@ -1,5 +1,5 @@
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-  <ShortName>LinkCleaner</ShortName>
+  <ShortName>Link Cleaner</ShortName>
   <Description>Clean a URL with Link Cleaner</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Image width="48" height="48" type="image/x-icon">https://linkcleaner.app/favicon.ico</Image>
