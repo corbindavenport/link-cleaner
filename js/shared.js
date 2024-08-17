@@ -80,6 +80,10 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     if (oldLink.host.includes('amazon') && amazonTrackingId) {
         newLink.searchParams.append('tag', amazonTrackingId)
     }
+    // Fix Lenovo store links (#36)
+    if (oldLink.host.includes('lenovo.com') && oldLink.searchParams.has('bundleId')) {
+        newLink.searchParams.append('bundleId', oldLink.searchParams.get('bundleId'))
+    }
     // Save to history
     addToHistory(newLink)
     // Switch to output
