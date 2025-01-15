@@ -89,7 +89,15 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         var regex = /\/(\d+)\.p/;
         var productID = oldLink.pathname.match(regex);
         if (productID) {
-            newLink.pathname = '/site/' + productID[1] + '.p'
+            newLink.pathname = '/site/' + productID[1] + '.p';
+        }
+    }
+    // Shorten Walmart links (#41)
+    if (oldLink.host.includes('walmart.com') && oldLink.pathname.includes('/ip/')) {
+        var regex = /\/ip\/.*\/(\d+)/;
+        var productID = oldLink.pathname.match(regex);
+        if (productID) {
+            newLink.pathname = '/ip/' + productID[1];
         }
     }
     // Save to history
