@@ -84,6 +84,14 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     if (oldLink.host.includes('lenovo.com') && oldLink.searchParams.has('bundleId')) {
         newLink.searchParams.append('bundleId', oldLink.searchParams.get('bundleId'))
     }
+    // Shorten Best Buy product links (#42)
+    if (oldLink.host.includes('bestbuy.com') && oldLink.pathname.includes('.p')) {
+        var regex = /\/(\d+)\.p/;
+        var productID = oldLink.pathname.match(regex);
+        if (productID) {
+            newLink.pathname = '/site/' + productID[1] + '.p'
+        }
+    }
     // Save to history
     addToHistory(newLink)
     // Switch to output
