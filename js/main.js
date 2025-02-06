@@ -203,8 +203,8 @@ document.getElementById('telegram-share-btn').addEventListener('click', function
 })
 
 // Substack Notes button
-document.getElementById('substack-share-btn').addEventListener('click', function () {
-    var link = 'https://substack.com/notes?action=compose&message=' + encodeURIComponent(document.getElementById('link-output').value)
+document.getElementById('bluesky-share-btn').addEventListener('click', function () {
+    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(document.getElementById('link-output').value)
     window.open(link, '_blank', popupOptions)
 })
 
