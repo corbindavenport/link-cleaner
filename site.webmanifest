@@ -49,16 +49,6 @@
                     "sizes": "192x192"
                 }
             ]
-        },
-        {
-            "name": "History",
-            "url": "/history/?utm_source=Installed%20App&utm_medium=Shortcut",
-            "icons": [
-                {
-                    "src": "/img/history_icon_x192.png",
-                    "sizes": "192x192"
-                }
-            ]
         }
     ],
     "edge_side_panel": {},

@@ -2,6 +2,9 @@
 // Plausible Analytics
 window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
+// Delete link history storage if it exists, link history feature has been removed
+localStorage.removeItem('history');
+
 // Options used for pop-up windows from social share buttons
 const popupOptions = 'popup,width=600,height=500,noopener,noreferrer';
 

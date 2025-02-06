@@ -100,36 +100,7 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
             newLink.pathname = '/ip/' + productID[1];
         }
     }
-    // Save to history
-    addToHistory(newLink)
     // Switch to output
     console.log('New link:', newLink)
     return newLink.toString()
-}
-
-// Function for adding result to link clean history
-function addToHistory(link) {
-    var linkArray = []
-    // Get current value if available
-    if (localStorage.getItem('history')) {
-        try {
-            linkArray = JSON.parse(localStorage.getItem('history'))
-        } catch {
-            // Saved storage only has one value so it's not valid JSON
-            linkArray.push(localStorage.getItem('history'))
-        }
-    }
-    linkArray.unshift(link)
-    // Don't exceed 100 links
-    if (linkArray.length > 100) {
-        linkArray.splice(-1)
-    }
-    // Save back to localStorage
-    try {
-        localStorage.setItem('history', JSON.stringify(linkArray))
-    } catch (e) {
-        // localStorage might be full, try deleting some items and try again
-        linkArray.splice(arr1.length - 10, 10)
-        localStorage.setItem('history', JSON.stringify(linkArray))
-    }
 }
