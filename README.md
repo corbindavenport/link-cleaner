@@ -14,7 +14,7 @@ Link Cleaner is primarily developed for mobile devices, as removing parts of lin
 
 ### Privacy Policy
 
-Link Cleaner uses [Plausible Analytics](https://plausible.io) to report anonymous usage data, including how many times the app is open, how long it is used, the current country, and how many times links are cleaned. Links are **not** sent anywhere during or after cleaning.
+Link Cleaner uses [Plausible Analytics](https://plausible.io) to report anonymous usage data, including how many times the app is open, how long it is used, the current country, and how many times links are cleaned. Links are **not** sent anywhere during or after cleaning. See the [PRIVACY.md](Privacy Policy) for more information.
 
 ### Credits
 
