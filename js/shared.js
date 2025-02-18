@@ -5,9 +5,14 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     try {
         var oldLink = new URL(link)
     } catch (e) {
-        // TypeError rasied if not identified as URL, try stripping "Page Title"
+        // TypeError rasied if not identified as URL, try stripping "Page Title" or any other non-link text
         if (e instanceof TypeError) {
-            var oldLink = new URL(link.split(/"(?:[^\\"]|\\.)*"/)[1].trim())
+            var extractedURL = link.match(/https?:\/\/\S+/);
+            if (extractedURL) {
+                var oldLink = new URL(extractedURL[0]);
+            } else {
+                console.log('No valid URL found in the string.');
+            }
         }
     }
     console.log('Old link:', oldLink)
