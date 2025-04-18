@@ -100,6 +100,10 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
             newLink.pathname = '/ip/' + productID[1];
         }
     }
+    // Allow Xiaohongshu links to be viewed without an account (#47)
+    if (oldLink.host.includes('xiaohongshu.com') && oldLink.searchParams.has('xsec_token')) {
+        newLink.searchParams.append('xsec_token', oldLink.searchParams.get('xsec_token'))
+    }
     // Switch to output
     console.log('New link:', newLink)
     return newLink.toString()
