@@ -115,6 +115,10 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         newLink.searchParams.append('party', oldLink.searchParams.get('party'));
         newLink.searchParams.append('ids', oldLink.searchParams.get('ids'));
     }
+    // Fix BusinessWire tracking links (#39)
+    if ((oldLink.host === 'cts.businesswire.com') && oldLink.searchParams.has('url')) {
+        newLink = new URL(oldLink.searchParams.get('url'));
+    }
     // Switch to output
     console.log('New link:', newLink)
     return newLink.toString()
