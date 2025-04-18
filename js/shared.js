@@ -106,8 +106,14 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         }
     }
     // Allow Xiaohongshu links to be viewed without an account (#47)
-    if (oldLink.host.includes('xiaohongshu.com') && oldLink.searchParams.has('xsec_token')) {
+    if ((oldLink.host === ('www.xiaohongshu.com')) && oldLink.searchParams.has('xsec_token')) {
         newLink.searchParams.append('xsec_token', oldLink.searchParams.get('xsec_token'))
+    }
+    // Fix Apple Weather alert links (#46)
+    if (oldLink.host === 'weatherkit.apple.com') {
+        newLink.searchParams.append('lang', oldLink.searchParams.get('lang'));
+        newLink.searchParams.append('party', oldLink.searchParams.get('party'));
+        newLink.searchParams.append('ids', oldLink.searchParams.get('ids'));
     }
     // Switch to output
     console.log('New link:', newLink)
