@@ -1,5 +1,33 @@
-/* Fix bottom nav bar on devices with bottom nav buttons */
+body {
+    padding-top: 56px;
+}
 
+.linkcleaner-card {
+    margin-top: calc(25vh - 56px);
+    margin-bottom: 25vh;
+    transition: all 0.15s ease-out;
+}
+
+.linkcleaner-card #link-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.linkcleaner-card:has(#link-input:focus) {
+    outline: 3px solid #86b7fe;
+}
+
+@media only screen and (hover: none) and (max-width: 991px) {
+
+    .linkcleaner-card:has(#link-input:focus) {
+        transition: all 0.15s ease-in;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+}
+
+/* Fix bottom nav bar on devices with bottom nav buttons */
 .navbar.fixed-bottom,
 body {
     padding-bottom: calc((var(--bs-navbar-toggler-padding-y) * 2) + constant(safe-area-inset-bottom));
@@ -7,13 +35,11 @@ body {
 }
 
 /* Fix the navbar overlapping body content on small screens */
-
 .container {
     padding-bottom: 57px;
 }
 
 /* QR code share option */
-
 #qrcode {
     text-align: center;
 }
@@ -23,12 +49,11 @@ body {
 }
 
 /* Bulk mode text boxes */
-
 @media (min-width: 768px) {
 
-    #link-bulk-input, #link-bulk-output {
+    #link-bulk-input,
+    #link-bulk-output {
         resize: none;
         height: calc(100vh - 300px);
     }
-
 }

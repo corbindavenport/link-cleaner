@@ -75,11 +75,6 @@ try {
     document.getElementById('link-paste-btn').disabled = true
 }
 
-// Process URL after clicking arrow button
-document.getElementById('link-submit').addEventListener('click', function () {
-    processLink(document.getElementById('link-input').value)
-})
-
 // Copy link button
 document.getElementById('link-copy-btn').addEventListener('click', function () {
     var btn = document.getElementById('link-copy-btn')
@@ -206,6 +201,12 @@ document.getElementById('telegram-share-btn').addEventListener('click', function
 document.getElementById('bluesky-share-btn').addEventListener('click', function () {
     var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(document.getElementById('link-output').value)
     window.open(link, '_blank', popupOptions)
+})
+
+// Scroll to top of page when the link field is selected
+// This works with the margin CSS rules to fix the layout when a touch keyboard is selected
+document.getElementById('link-input').addEventListener('focus', function() {
+        window.scrollTo(0,0);
 })
 
 // Support for Web Share Target API, Siri Shortcut, and OpenSearch

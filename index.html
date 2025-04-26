@@ -58,20 +58,15 @@
 <body>
 
     <!-- Nav bar -->
-    <nav class="navbar fixed-bottom navbar-expand-sm bg-body-secondary border-top shadow">
+    <nav class="navbar bg-body fixed-top navbar-expand-md">
         <div class="container-fluid">
-            <a class="navbar-brand d-sm-none" href="#">Link Cleaner</a>
+            <a class="navbar-brand active" href="/">Link Cleaner</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <i class="bi bi-link-45deg"></i>
-                            Normal Mode
-                        </a>
-                    </li>
+                <!-- Navigation links -->
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/bulk/">
                             <i class="bi bi-stack"></i>
@@ -85,28 +80,45 @@
                         </a>
                     </li>
                 </ul>
+                <!-- Install button -->
+                <form class="d-flex flex-column flex-sm-row">
+                    <button class="btn btn-outline-primary w-100 mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        <span class="d-md-none">Install Link Cleaner</span>
+                        <span class="d-none d-md-inline">Install</span>
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
 
+    <!-- Main text field card -->
+    <div class="container con2">
+        <div class="card linkcleaner-card shadow-lg rounded-4">
+            <div class="card-body p-0">
+                <input type="text" class="form-control form-control-lg border-0 rounded-4 p-3" id="link-input" autocomplete="off" inputmode="url" placeholder="Type or paste a link here...">
+                <div class="d-flex flex-column flex-sm-row-reverse mx-2 mx-sm-0 mb-2">
+                    <!-- Clipboard paste button -->
+                    <button class="btn btn-outline-secondary btn-sm rounded-4 me-0 me-sm-2 mt-2 mt-sm-0 px-3" type="button" id="link-paste-btn" aria-label="Paste from clipboard">
+                        <i class="bi-clipboard mx-1"></i>
+                        Paste from Clipboard
+                    </button>
+                </div>
+                <!-- Close button that appears in mobile keyboard view -->
+                <div class="text-end p-3 link-close-container" style="display: none;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main container -->
     <div class="container">
         <!-- Main text field -->
-        <div class="mt-2 mb-3 mt-sm-5 mb-sm-5">
+        <div class="mt-2 mb-3 mt-sm-5 mb-sm-5 d-none">
             <!-- Initial text input -->
             <div id="initial">
-                <div class="input-group">
-                    <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" placeholder="Type or paste a link here">
-                    <button class="btn btn-outline-secondary" type="button" id="link-submit" aria-label="Submit link"><i class="bi-chevron-right"></i></button>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <button class="btn btn-outline-primary w-100 mt-2" type="button" id="link-paste-btn" aria-label="Paste from clipboard">
-                            <i class="bi-clipboard"></i>
-                            Paste from Clipboard
-                        </button>
-                    </div>
-                </div>
+
             </div>
             <!-- Completed UI -->
             <div id="completed" style="display: none;">
@@ -289,7 +301,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/gh/ushelp/EasyQRCodeJS@4.6.0/dist/easy.qrcode.min.js"></script>
     <script src="js/shared.js"></script>
     <script src="js/main.js"></script>
