@@ -55,10 +55,10 @@
     <script defer data-domain="linkcleaner.app" src="https://plausible.io/js/plausible.js"></script>
 </head>
 
-<body class="bg-body-secondary">
+<body>
 
     <!-- Nav bar -->
-    <nav class="navbar bg-body-secondary fixed-top navbar-expand-md border-bottom">
+    <nav class="navbar bg-body-secondary fixed-top navbar-expand-md">
         <div class="container-fluid">
             <a class="navbar-brand active" href="/">Link Cleaner</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,25 +92,34 @@
         </div>
     </nav>
 
-    <!-- Main container -->
-    <div class="container" id="linkcleaner-main-container">
-        <!-- Main URL text field -->
-        <div class="card shadow-lg rounded-4">
-            <div class="card-body p-0">
-                <input type="text" class="form-control form-control-lg border-0 rounded-4 p-3" id="link-input" autocomplete="off" inputmode="url" placeholder="Type or paste a link here...">
-                <div class="px-2 mb-2 text-end">
-                    <!-- Clipboard paste button -->
-                    <button class="btn btn-outline-info btn-sm rounded-4 px-3" type="button" id="link-paste-btn" aria-label="Paste from clipboard">
-                        <i class="bi-clipboard mx-1"></i>
-                        Paste
-                    </button>
-                    <button class="btn btn-outline-danger btn-sm rounded-4 px-3" type="button" id="link-clear-btn" aria-label="Paste from clipboard">
-                        <i class="bi-x-lg mx-1"></i>
-                        Clear
-                    </button>
-                </div>
+    <!-- Banner container -->
+    <div id="linkcleaner-banner" class="container-fluid bg-body-secondary">
+        <div class="container pt-5">
+            <div class="display-6 text-center">
+                Remove tracking code and other variables from web links with the press of a button.
             </div>
         </div>
+    </div>
+
+    <!-- URL input container -->
+    <nav id="linkcleaner-url-container" class="bg-body-secondary pt-1 pb-3 border-bottom shadow-sm" style="position: sticky; top: 56px; z-index: 1000;">
+        <div class="container-fluid container-md">
+            <div class="input-group bg-body rounded-3">
+                <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" inputmode="url" placeholder="Type or paste a link here...">
+                <button class="btn btn-outline-danger btn-sm" type="button" id="link-clear-btn" aria-label="Clear URL">
+                    <i class="bi-x-lg mx-1"></i>
+                    <span class="d-none d-md-inline">Clear</span>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="link-paste-btn" aria-label="Paste from clipboard">
+                    <i class="bi-clipboard mx-1"></i>
+                    <span class="d-none d-md-inline">Paste</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Share and action buttons container -->
+    <div class="container" id="linkcleaner-main-container">
         <!-- Share buttons -->
         <div class="row mt-2" id="linkcleaner-buttons-container">
             <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
@@ -150,33 +159,6 @@
                 </button>
             </div>
             <div class="col-12">
-                <div class="card">
-                    Social media
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main container -->
-    <div class="container">
-        <!-- Main text field -->
-        <div class="mt-2 mb-3 mt-sm-5 mb-sm-5 d-none">
-            <!-- Initial text input -->
-            <div id="initial">
-
-            </div>
-            <!-- Completed UI -->
-            <div id="completed" style="display: none;">
-                <div class="input-group">
-                    <input type="text" class="form-control form-control-lg" id="link-output" readonly autocomplete="off">
-                    <button class="btn btn-outline-secondary" type="button" id="link-startover" aria-label="Clean another link"><i class="bi bi-arrow-counterclockwise"></i></button>
-                </div>
-                <!-- Main action buttons -->
-
-                <!-- Social media buttons -->
-                <div class="row">
-                    <div class="h5 mt-4">Social media</div>
-                </div>
                 <div class="row">
                     <!-- Mastodon -->
                     <div class="col-12 col-sm-6 col-md-4">
@@ -223,6 +205,11 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Main container -->
+    <div class="container">
+        <!-- Main text field -->
         <div class="row">
             <div class="col-12 col-lg-6">
                 <div class="card mt-3">
@@ -236,7 +223,7 @@
                 </div>
             </div>
             <div class="col-12 col-lg-6 mb-3">
-                <!-- The Spacebar ad -->
+                <!--
                 <div class="card mt-3">
                     <div class="card-header">
                         Advertisement
@@ -246,6 +233,7 @@
                         <a href="https://www.spacebar.news/#/portal/signup" target="_blank" class="btn btn-primary btn-sm w-100">Go to The Spacebar</a>
                     </div>
                 </div>
+                -->
                 <!-- Donate card -->
                 <div class="card donate-card mt-3">
                     <div class="card-body">

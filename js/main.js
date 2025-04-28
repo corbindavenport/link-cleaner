@@ -1,4 +1,3 @@
-
 // Plausible Analytics
 window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
@@ -8,12 +7,13 @@ localStorage.removeItem('history');
 // Options used for pop-up windows from social share buttons
 const popupOptions = 'popup,width=600,height=500,noopener,noreferrer';
 
-// Initialize modals and toasts
-const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'))
-const clipboardToast = bootstrap.Toast.getOrCreateInstance(document.querySelector('#clipboard-toast'))
+// Initialize elements, modals, and toasts
+const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'));
+const clipboardToast = bootstrap.Toast.getOrCreateInstance(document.querySelector('#clipboard-toast'));
+const urlInput = document.getElementById('link-input');
 
 // Function for cleaning link
-function processLink(link) {
+function processLink(link, startMode = 'user') {
     plausible('Clean Link')
     // Read settings
     if (localStorage.getItem('clipboard-check')) {
@@ -33,10 +33,20 @@ function processLink(link) {
     }
     var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled)
     // Switch to output
-    window.scrollTo(0,0)
-    document.getElementById('link-input').value = newLink
+    urlInput.value = newLink
     document.getElementById('linkcleaner-buttons-container').style.display = 'flex'
     document.body.dataset.view = 'cleaned';
+    // If medium size device or smaller, scroll past the top message
+    const container = document.getElementById('linkcleaner-url-container');
+    const containerTop = container.getBoundingClientRect().top + window.scrollY;
+    const desiredScrollTop = containerTop - 50;
+    if (window.matchMedia('(max-width: 767.98px)').matches && (startMode === 'user')) {
+        // Smooth scroll if the user entered the URL
+        window.scrollTo({ top: desiredScrollTop, behavior: 'smooth' })
+    } else if (window.matchMedia('(max-width: 767.98px)').matches) {
+        // Instant scroll if Link Cleaner was opened through a shortcut
+        window.scrollTo({ top: desiredScrollTop, behavior: 'instant' })
+    }
     // Write text to clipboard
     if (navigator.clipboard && autoClipboardEnabled) {
         try {
@@ -50,21 +60,21 @@ function processLink(link) {
         }
     }
     // Highlight the output for easy copy
-    document.getElementById('link-input').select()
+    urlInput.select()
 }
 
 // Process URL after a paste action is detected
-document.getElementById('link-input').addEventListener('paste', function () {
+urlInput.addEventListener('paste', function () {
     // This is wrapped in a timeout or it executes before the value has changed
     setTimeout(function () {
-        processLink(document.getElementById('link-input').value)
+        processLink(urlInput.value)
     }, 50)
 })
 
 // Process URL after an Enter key press
-document.getElementById('link-input').addEventListener('keyup', function(event) {
+urlInput.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
-        processLink(document.getElementById('link-input').value);
+        processLink(urlInput.value);
     }
 });
 
@@ -85,8 +95,8 @@ try {
 
 // Clear button
 document.getElementById('link-clear-btn').addEventListener('click', function () {
-    document.getElementById('link-input').value = '';
-    document.getElementById('link-input').focus();
+    urlInput.value = '';
+    urlInput.focus();
 })
 
 // Copy link button
@@ -94,11 +104,11 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
     var btn = document.getElementById('link-copy-btn')
     if (navigator.clipboard) {
         // Use Clipboard API if available
-        var copyText = document.getElementById('link-input').value
+        var copyText = urlInput.value
         navigator.clipboard.writeText(copyText)
     } else {
         // Fallback to older API
-        var copyText = document.getElementById('link-input')
+        var copyText = urlInput
         copyText.select()
         document.execCommand('copy')
     }
@@ -118,7 +128,7 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
         navigator.share({
-            url: document.getElementById('link-input').value
+            url: urlInput.value
         })
     })
 } else {
@@ -129,7 +139,7 @@ if (navigator.canShare) {
 // This generates the QR code only when the button is pressed
 var qrModal = document.getElementById('qr-modal')
 qrModal.addEventListener('show.bs.modal', function (event) {
-    var currentLink = document.getElementById('link-input').value
+    var currentLink = urlInput.value
     var qrContainer = document.getElementById('qrcode')
     const qrSettings = {
         text: currentLink,
@@ -148,13 +158,13 @@ qrModal.addEventListener('hide.bs.modal', function (event) {
 
 // Test link button
 document.getElementById('link-test-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-input').value
+    var currentLink = urlInput.value
     window.open(currentLink, '_blank', popupOptions)
 })
 
 // Email button
 document.getElementById('email-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-input').value
+    var currentLink = urlInput.value
     var emailSubject = 'Link for you'
     var emailBody = '\n\n\n' + currentLink
     window.open('mailto:?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody), '_blank')
@@ -162,14 +172,14 @@ document.getElementById('email-btn').addEventListener('click', function () {
 
 // SMS button
 document.getElementById('sms-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-input').value
+    var currentLink = urlInput.value
     window.open('sms:?&body=' + encodeURIComponent(currentLink), '_blank')
 })
 
 // Mastodon button
 document.getElementById('mastodon-server-hostname').value = localStorage['mastodon-server'] || ''
 document.getElementById('mastodon-share-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-input').value
+    var currentLink = urlInput.value
     var currentServer = document.getElementById('mastodon-server-hostname').value
     if (currentServer) {
         localStorage['mastodon-server'] = currentServer
@@ -181,49 +191,43 @@ document.getElementById('mastodon-share-btn').addEventListener('click', function
 
 // Facebook button
 document.getElementById('facebook-share-btn').addEventListener('click', function () {
-    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.getElementById('link-input').value)
+    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(urlInput.value)
     window.open(link, '_blank', popupOptions)
 })
 
 // LinkedIn button
 document.getElementById('linkedin-share-btn').addEventListener('click', function () {
-    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(document.getElementById('link-input').value)
+    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlInput.value)
     window.open(link, '_blank', popupOptions)
 })
 
 // Reddit button
 document.getElementById('reddit-share-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-input').value
+    var currentLink = urlInput.value
     window.open('https://reddit.com/submit?url=' + encodeURIComponent(currentLink), '_blank', popupOptions)
 })
 
 // Telegram button
 document.getElementById('telegram-share-btn').addEventListener('click', function () {
-    var link = 'https://t.me/share/url?url=' + encodeURIComponent(document.getElementById('link-input').value)
+    var link = 'https://t.me/share/url?url=' + encodeURIComponent(urlInput.value)
     window.open(link, '_blank', popupOptions)
 })
 
 // Substack Notes button
 document.getElementById('bluesky-share-btn').addEventListener('click', function () {
-    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(document.getElementById('link-input').value)
+    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(urlInput.value)
     window.open(link, '_blank', popupOptions)
-})
-
-// Scroll to top of page when the link field is selected
-// This works with the margin CSS rules to fix the layout when a touch keyboard is selected
-document.getElementById('link-input').addEventListener('focus', function() {
-        window.scrollTo(0,0);
 })
 
 // Support for Web Share Target API, Siri Shortcut, and OpenSearch
 const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
     // This is where the URL SHOULD BE
-    processLink(parsedUrl.searchParams.get('url'))
+    processLink(parsedUrl.searchParams.get('url'), 'shortcut');
 } else if (parsedUrl.searchParams.get('text')) {
     // Android usually puts URLs here
-    processLink(parsedUrl.searchParams.get('text'))
+    processLink(parsedUrl.searchParams.get('text'), 'shortcut');
 } else if (parsedUrl.searchParams.get('title')) {
     // Android sometimes puts URLs here
-    processLink(parsedUrl.searchParams.get('title'))
+    processLink(parsedUrl.searchParams.get('title'), 'shortcut');
 }

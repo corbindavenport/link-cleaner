@@ -2,31 +2,6 @@ body {
     padding-top: 56px;
 }
 
-#linkcleaner-main-container {
-    margin-top: calc(30vh - 56px);
-    margin-bottom: 30vh;
-    transition: all 0.15s ease-out;
-}
-
-#linkcleaner-main-container .card #link-input:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-#linkcleaner-main-container .card:has(#link-input:focus) {
-    outline: 3px solid #86b7fe;
-}
-
-@media only screen and (hover: none) and (max-width: 991px) {
-
-    #linkcleaner-main-container:has(#link-input:focus) {
-        transition: all 0.15s ease-in;
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-}
-
 /* Update UI after a link is cleaned */
 
 #linkcleaner-buttons-container,
@@ -34,14 +9,12 @@ body {
     display: none;
 }
 
-body[data-view="cleaned"] #linkcleaner-main-container {
-    transition: all 0.15s ease-in;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-}
+@media only screen and (hover: none) {
 
-body[data-view="cleaned"] #link-clear-btn {
-    display: inline-block;
+    body[data-view="cleaned"] #link-clear-btn {
+        display: inline-block;
+    }
+
 }
 
 /* Fix bottom nav bar on devices with bottom nav buttons */
