@@ -16,11 +16,6 @@ const urlInput = document.getElementById('link-input');
 function processLink(link, startMode = 'user') {
     plausible('Clean Link')
     // Read settings
-    if (localStorage.getItem('clipboard-check')) {
-        var autoClipboardEnabled = JSON.parse(localStorage.getItem('clipboard-check').toLowerCase());
-    } else {
-        var autoClipboardEnabled = false;
-    }
     if (localStorage.getItem('youtube-shorten-check')) {
         var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
     } else {
@@ -46,18 +41,6 @@ function processLink(link, startMode = 'user') {
     } else if (window.matchMedia('(max-width: 767.98px)').matches) {
         // Instant scroll if Link Cleaner was opened through a shortcut
         window.scrollTo({ top: desiredScrollTop, behavior: 'instant' })
-    }
-    // Write text to clipboard
-    if (navigator.clipboard && autoClipboardEnabled) {
-        try {
-            const type = 'text/plain';
-            const blob = new Blob([newLink], { type });
-            const data = [new ClipboardItem({ [type]: blob })];
-            navigator.clipboard.write(data);
-            clipboardToast.show();
-        } catch (e) {
-            console.error('Error copying to clipboard:', e);
-        }
     }
     // Update interface
     if (window.matchMedia('screen and (hover: none)').matches) {
