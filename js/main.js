@@ -59,8 +59,14 @@ function processLink(link, startMode = 'user') {
             console.error('Error copying to clipboard:', e);
         }
     }
-    // Highlight the output for easy copy
-    urlInput.select()
+    // Update interface
+    if (window.matchMedia('screen and (hover: none)').matches) {
+        // If the user is on a touchscreen, unfocus the input element, so nothing is covering the Copy and share buttons
+        urlInput.blur();
+    } else {
+        // If the user is not on a touchscreen, select the text so the user can immediately do Ctrl+C
+        urlInput.select();
+    }
 }
 
 // Process URL after a paste action is detected
@@ -111,6 +117,7 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
         var copyText = urlInput
         copyText.select()
         document.execCommand('copy')
+        urlInput.blur()
     }
     // Change button design
     btn.classList.remove('btn-primary')
