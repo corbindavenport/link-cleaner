@@ -209,7 +209,8 @@ document.getElementById('bluesky-share-btn').addEventListener('click', function 
     window.open(link, '_blank', popupOptions)
 })
 
-// Support for Web Share Target API, Siri Shortcut, and OpenSearch
+// Check for 'url' parameter on Link Cleaner launch
+// This is used for the Web Share Target API, Apple Shortcut, Bookmarklet, OpenSearch, and custom automations
 const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
     // This is where the URL SHOULD BE

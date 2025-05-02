@@ -4,8 +4,7 @@ body {
 
 /* Update UI after a link is cleaned */
 
-#linkcleaner-buttons-container,
-#link-clear-btn {
+#linkcleaner-buttons-container {
     display: none;
 }
 

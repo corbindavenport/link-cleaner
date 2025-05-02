@@ -82,7 +82,7 @@
                 </ul>
                 <!-- Install button -->
                 <form class="d-flex flex-column flex-sm-row">
-                    <button class="btn btn-outline-primary w-100 mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner">
+                    <button class="btn btn-outline-primary w-100 mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner" data-bs-toggle="modal" data-bs-target="#install-modal">
                         <i class="bi bi-plus-circle me-2"></i>
                         <span class="d-md-none">Install Link Cleaner</span>
                         <span class="d-none d-md-inline">Install</span>
@@ -96,7 +96,7 @@
     <div id="linkcleaner-banner" class="container-fluid bg-body-secondary">
         <div class="container pt-5">
             <div class="display-6 text-center">
-                Remove tracking code and other variables from web links with the press of a button.
+                Remove tracking code, search parameters, and other junk from links in one step.
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@
         <div class="container-fluid container-md">
             <div class="input-group bg-body rounded-3">
                 <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" inputmode="url" placeholder="Type or paste a link here...">
-                <button class="btn btn-outline-danger btn-sm" type="button" id="link-clear-btn" aria-label="Clear URL">
+                <button class="btn btn-outline-danger btn-sm" type="button" id="link-clear-btn" aria-label="Clear URL" style="display: none;">
                     <i class="bi-x-lg mx-1"></i>
                     <span class="d-none d-md-inline">Clear</span>
                 </button>
@@ -147,7 +147,7 @@
                 </button>
             </div>
             <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-secondary w-100 mt-3" id="email-btn" aria-label="Send in Email">
+                <button type="button" class="btn btn-primary w-100 mt-3" id="email-btn" aria-label="Send in Email">
                     <i class="bi bi-envelope me-2"></i>
                     Send in Email
                 </button>
@@ -158,51 +158,47 @@
                     Send in Text
                 </button>
             </div>
-            <div class="col-12">
-                <div class="row">
-                    <!-- Mastodon -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
-                            <i class="bi bi-mastodon me-2"></i>
-                            Mastodon
-                        </button>
-                    </div>
-                    <!-- Facebook -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="facebook-share-btn">
-                            <i class="bi bi-facebook me-2"></i>
-                            Facebook
-                        </button>
-                    </div>
-                    <!-- LinkedIn -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="linkedin-share-btn">
-                            <i class="bi bi-linkedin me-2"></i>
-                            LinkedIn
-                        </button>
-                    </div>
-                    <!-- Reddit -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="reddit-share-btn">
-                            <i class="bi bi-reddit me-2"></i>
-                            Reddit
-                        </button>
-                    </div>
-                    <!-- Telegram -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="telegram-share-btn">
-                            <i class="bi bi-telegram me-2"></i>
-                            Telegram
-                        </button>
-                    </div>
-                    <!-- Bluesky -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="bluesky-share-btn">
-                            <i class="bi bi-feather"></i>
-                            Bluesky
-                        </button>
-                    </div>
-                </div>
+            <!-- Mastodon -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
+                    <i class="bi bi-mastodon me-2"></i>
+                    Mastodon
+                </button>
+            </div>
+            <!-- Facebook -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="facebook-share-btn">
+                    <i class="bi bi-facebook me-2"></i>
+                    Facebook
+                </button>
+            </div>
+            <!-- LinkedIn -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="linkedin-share-btn">
+                    <i class="bi bi-linkedin me-2"></i>
+                    LinkedIn
+                </button>
+            </div>
+            <!-- Reddit -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="reddit-share-btn">
+                    <i class="bi bi-reddit me-2"></i>
+                    Reddit
+                </button>
+            </div>
+            <!-- Telegram -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="telegram-share-btn">
+                    <i class="bi bi-telegram me-2"></i>
+                    Telegram
+                </button>
+            </div>
+            <!-- Bluesky -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="bluesky-share-btn">
+                    <i class="bi bi-feather"></i>
+                    Bluesky
+                </button>
             </div>
         </div>
     </div>
@@ -248,6 +244,78 @@
                         <a href="https://cash.app/$corbdav" target="_blank">
                             <button type="button" class="btn btn-success w-100">Donate via Cash App</button>
                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install modal -->
+    <div class="modal fade" id="install-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="install-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="install-modal-label">Install Link Cleaner</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <!-- Install options accordion -->
+                    <div class="accordion accordion-flush" id="install-accordion">
+                        <!-- Bookmarklet -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#install-bookmarklet" aria-expanded="true" aria-controls="install-bookmarklet">
+                                    Add Bookmarklet
+                                </button>
+                            </h2>
+                            <div id="install-bookmarklet" class="accordion-collapse collapse show" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <!-- Bookmarklet code:
+                                    function openLinkCleaner() {
+                                        window.open('https://linkcleaner.app/?url=' + encodeURIComponent(window.location.href) + '&utm_source=Bookmarklet', 'linkWindow', 'popup, width=400, height=500, left=100, top=100, noopener, noreferrer');
+                                    }
+                                    openLinkCleaner(); 
+                                    -->
+                                    <p>The bookmarklet cleans your current page URL in a Link Cleaner popup window. <strong>Drag the below link to your bookmarks bar to install it.</strong></p>
+                                    <p class="text-center">
+                                        <a href="javascript:(function()%7Bfunction%20openLinkCleaner()%20%7B%0A%20%20%20%20window.open('https%3A%2F%2Flinkcleaner.app%2F%3Furl%3D'%20%2B%20encodeURIComponent(window.location.href)%20%2B%20'%26utm_source%3DBookmarklet'%2C%20'linkWindow'%2C%20'popup%2C%20width%3D400%2C%20height%3D500%2C%20left%3D100%2C%20top%3D100%2C%20noopener%2C%20noreferrer')%3B%0A%7D%0AopenLinkCleaner()%3B%7D)()%3B" type="button" class="btn btn-secondary w-100" title="Link Cleaner">Link Cleaner</a>
+                                    </p>
+                                    <p>If your bookmarks bar is not visible, try using the Ctrl+Shift+B (Windows) or Cmd+Shift+B (Mac) keyboard shortcut.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Apple Shortcut -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#install-apple-shortcut" aria-expanded="false" aria-controls="install-apple-shortcut">
+                                    Shortcut for iPhone, iPad, and Mac
+                                </button>
+                            </h2>
+                            <div id="install-apple-shortcut" class="accordion-collapse collapse" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <p>This shortcut adds Link Cleaner to the Share Sheet on iPhone, iPad, and Mac devices.</p>
+                                    <p>
+                                        <a href="https://www.icloud.com/shortcuts/739e8f515b60435299cac0ec6ec045a7" target="_blank" type="button" class="btn btn-primary w-100">Install Apple Shortcut</a>
+                                    </p>
+                                    <p>You can use the Shortcut as a filter while sharing links. Instead of selecting the app or contact directly, select Link Cleaner first, then use the Share button in the Link Cleaner window.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Custom share URL -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#install-custom-url" aria-expanded="false" aria-controls="install-custom-url">
+                                    Custom Share URL
+                                </button>
+                            </h2>
+                            <div id="install-custom-url" class="accordion-collapse collapse" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <p>You can use Link Cleaner in custom worfklows and automations with the share URL. This is an example using the <code>https://example.com</code> page:</p>
+                                    <p><code>https://linkcleaner.app/?url=https%3A%2F%2Fexample.com</code></p>
+                                    <p>The only required parameter is <code>url</code>. The URL should be encoded with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent" target="_blank">encodeURIComponent()</a> or another similar function, or special characters like <b>?</b> or <b>&</b> could break the URL.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

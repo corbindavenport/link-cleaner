@@ -27,7 +27,7 @@
         }
     ],
     "theme_color": "#e9ecef",
-    "background_color": "#e9ecef",
+    "background_color": "#FFFFFF",
     "display": "standalone",
     "start_url": "/?utm_source=Installed%20App&utm_medium=App%20Launch",
     "share_target": {
