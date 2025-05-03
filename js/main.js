@@ -7,10 +7,21 @@ localStorage.removeItem('history');
 // Options used for pop-up windows from social share buttons
 const popupOptions = 'popup,width=600,height=500,noopener,noreferrer';
 
+// Detect various platforms
+const isApplePlatform = ['MacIntel','Macintosh','iPhone','iPod','iPad'].includes(navigator.platform);
+
 // Initialize elements, modals, and toasts
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'));
-const clipboardToast = bootstrap.Toast.getOrCreateInstance(document.querySelector('#clipboard-toast'));
 const urlInput = document.getElementById('link-input');
+
+// Save PWA install prompt
+var installPrompt = null;
+window.addEventListener('beforeinstallprompt', function (e) {
+    // Prevents the default mini-infobar or install dialog from appearing on mobile
+    e.preventDefault();
+    // Save install for later
+    installPrompt = e;
+});
 
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
@@ -203,10 +214,25 @@ document.getElementById('telegram-share-btn').addEventListener('click', function
     window.open(link, '_blank', popupOptions)
 })
 
-// Substack Notes button
+// Bluesky button
 document.getElementById('bluesky-share-btn').addEventListener('click', function () {
     var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(urlInput.value)
     window.open(link, '_blank', popupOptions)
+})
+
+// PWA install button and accordion
+if ('onbeforeinstallprompt' in window) {
+    document.getElementById('accordion-pwa-container').style.display = 'block';
+} else if (isApplePlatform) {
+    document.getElementById('accordion-apple-app-container').style.display = 'block';
+}
+document.getElementById('install-btn').addEventListener('click', function () {
+    if (installPrompt) {
+        // Web browser supports PWA and there is a captured install prompt, activate the prompt
+        installPrompt.prompt();
+    } else if ('onbeforeinstallprompt' in window) {
+        alert('You need to use the browser install button, such as the button in the address bar on desktop browsers, or the "Add to Home Screen" button on Android devices.');
+    }
 })
 
 // Check for 'url' parameter on Link Cleaner launch
