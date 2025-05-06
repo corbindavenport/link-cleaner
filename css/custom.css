@@ -10,13 +10,13 @@ body {
 }
 
 body[data-view="cleaned"] #linkcleaner-buttons-container {
-    display: flex;
+    display: flex !important;
 }
 
 @media only screen and (hover: none) {
 
     body[data-view="cleaned"] #link-clear-btn {
-        display: inline-block;
+        display: inline-block !important;
     }
 
 }
