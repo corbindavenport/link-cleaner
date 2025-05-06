@@ -4,8 +4,13 @@ body {
 
 /* Update UI after a link is cleaned */
 
+#link-clear-btn,
 #linkcleaner-buttons-container {
     display: none;
+}
+
+body[data-view="cleaned"] #linkcleaner-buttons-container {
+    display: flex;
 }
 
 @media only screen and (hover: none) {

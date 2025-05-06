@@ -35,7 +35,7 @@ function openWindow(url) {
 
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
-    plausible('Clean Link')
+    plausible('Clean Link');
     // Read settings
     if (localStorage.getItem('youtube-shorten-check')) {
         var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
@@ -47,10 +47,9 @@ function processLink(link, startMode = 'user') {
     } else {
         var fixTwitterEnabled = false;
     }
-    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled)
-    // Switch to output
-    urlInput.value = newLink
-    document.getElementById('linkcleaner-buttons-container').style.display = 'flex'
+    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled);
+    // Insert cleaned link and update page layout
+    urlInput.value = newLink;
     document.body.dataset.view = 'cleaned';
     // If medium size device or smaller, scroll past the top message
     const container = document.getElementById('linkcleaner-url-container');
@@ -63,12 +62,11 @@ function processLink(link, startMode = 'user') {
         // Instant scroll if Link Cleaner was opened through a shortcut
         window.scrollTo({ top: desiredScrollTop, behavior: 'instant' })
     }
-    // Update interface
+    // If the user is on a touchscreen, unfocus the input element, so nothing is covering the Copy and share buttons
+    // If the user is not on a touchscreen, select the text so the user can immediately do Ctrl+C
     if (window.matchMedia('screen and (hover: none)').matches) {
-        // If the user is on a touchscreen, unfocus the input element, so nothing is covering the Copy and share buttons
         urlInput.blur();
     } else {
-        // If the user is not on a touchscreen, select the text so the user can immediately do Ctrl+C
         urlInput.select();
     }
 }
@@ -131,7 +129,7 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
     setTimeout(function () {
         btn.classList.remove('btn-success')
         btn.classList.add('btn-primary')
-        btn.innerHTML = '<i class="bi bi-clipboard"></i> Copy'
+        btn.innerHTML = '<i class="bi bi-clipboard me-2"></i> Copy'
     }, 2000)
 })
 
