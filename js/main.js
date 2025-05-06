@@ -4,9 +4,6 @@ window.plausible = window.plausible || function () { (window.plausible.q = windo
 // Delete link history storage if it exists, link history feature has been removed
 localStorage.removeItem('history');
 
-// Options used for pop-up windows from social share buttons
-const popupOptions = 'popup,width=600,height=500,noopener,noreferrer';
-
 // Detect various platforms
 const isApplePlatform = ['MacIntel','Macintosh','iPhone','iPod','iPad'].includes(navigator.platform);
 
@@ -22,6 +19,19 @@ window.addEventListener('beforeinstallprompt', function (e) {
     // Save install for later
     installPrompt = e;
 });
+
+// Function for opening pop-up window in center of screen
+function openWindow(url) {
+    // Set window dimensions
+    let windowWidth = 600;
+    let windowHeight = 500;
+    // Calculate center position for X and Y axis
+    let leftStart = Math.floor(window.screen.availWidth / 2) - Math.floor(windowWidth / 2);
+    let topStart = Math.floor(window.screen.availHeight / 2) - Math.floor(windowHeight / 2);
+    // Open popup window
+    let windowOptions = `width=${windowWidth},height=${windowHeight},popup,noopener,noreferrer,left=${leftStart},top=${topStart}`;
+    window.open(url, '_blank', windowOptions);
+}
 
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
@@ -160,7 +170,7 @@ qrModal.addEventListener('hide.bs.modal', function (event) {
 // Test link button
 document.getElementById('link-test-btn').addEventListener('click', function () {
     var currentLink = urlInput.value
-    window.open(currentLink, '_blank', popupOptions)
+    openWindow(currentLink);
 })
 
 // Email button
@@ -185,39 +195,39 @@ document.getElementById('mastodon-share-btn').addEventListener('click', function
     if (currentServer) {
         localStorage['mastodon-server'] = currentServer
         var link = 'https://' + currentServer + '/share?text=' + encodeURIComponent(currentLink)
-        window.open(link, '_blank', popupOptions)
+        openWindow(link);
         mastodonModal.hide()
     }
 })
 
 // Facebook button
 document.getElementById('facebook-share-btn').addEventListener('click', function () {
-    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(urlInput.value)
-    window.open(link, '_blank', popupOptions)
+    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(urlInput.value);
+    openWindow(link);
 })
 
 // LinkedIn button
 document.getElementById('linkedin-share-btn').addEventListener('click', function () {
-    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlInput.value)
-    window.open(link, '_blank', popupOptions)
+    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlInput.value);
+    openWindow(link);
 })
 
 // Reddit button
 document.getElementById('reddit-share-btn').addEventListener('click', function () {
-    var currentLink = urlInput.value
-    window.open('https://reddit.com/submit?url=' + encodeURIComponent(currentLink), '_blank', popupOptions)
+    var link = 'https://reddit.com/submit?url=' + encodeURIComponent(urlInput.value);
+    openWindow(link);
 })
 
 // Telegram button
 document.getElementById('telegram-share-btn').addEventListener('click', function () {
     var link = 'https://t.me/share/url?url=' + encodeURIComponent(urlInput.value)
-    window.open(link, '_blank', popupOptions)
+    openWindow(link);
 })
 
 // Bluesky button
 document.getElementById('bluesky-share-btn').addEventListener('click', function () {
     var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(urlInput.value)
-    window.open(link, '_blank', popupOptions)
+    openWindow(link);
 })
 
 // PWA install button and accordion
