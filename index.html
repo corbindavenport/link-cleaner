@@ -259,7 +259,7 @@
 
     <!-- Install modal -->
     <!-- Only one of the web app install items is displayed for a given user, the rest are always visible -->
-    <div class="modal fade" id="install-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="install-modal-label" aria-hidden="true">
+    <div class="modal fade" id="install-modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="install-modal-label">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -357,7 +357,7 @@
     </div>
 
     <!-- Link history modal -->
-    <div class="modal fade" id="history-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="history-modal-label" aria-hidden="true">
+    <div class="modal fade" id="history-modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="history-modal-label">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -375,15 +375,15 @@
     </div>
 
     <!-- QR code modal -->
-    <div class="modal fade" id="qr-modal">
+    <div class="modal fade" id="qr-modal" data-bs-keyboard="true" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="qr-modal-label">QR Code</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="qrcode"></div>
-                <div class="modal-body py-0">
+                <div class="modal-body pb-0">
+                    <div id="qrcode" class="mb-2"></div>
                     <div class="row">
                         <!-- Save as PNG button -->
                         <div class="col-6">
@@ -398,7 +398,7 @@
                             <button type="button" class="btn btn-primary w-100 mb-3" id="qr-share-btn" aria-label="Share as PNG Image">
                                 <i class="bi bi-share-fill me-2"></i>
                                 <span class="d-sm-none">Share</span>
-                                <span class="d-none d-sm-inline">Share as PNG Image</span>
+                                <span class="d-none d-sm-inline">Share as Image</span>
                             </button>
                         </div>
                     </div>
@@ -408,7 +408,7 @@
     </div>
 
     <!-- Mastodon share modal -->
-    <div class="modal fade" tabindex="-1" id="mastodon-modal">
+    <div class="modal fade" id="mastodon-modal" data-bs-keyboard="true" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
