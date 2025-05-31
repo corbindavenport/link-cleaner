@@ -82,7 +82,7 @@
                 </ul>
                 <!-- Install button -->
                 <form class="d-flex flex-column flex-sm-row">
-                    <button class="btn btn-outline-primary w-100 mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner" data-bs-toggle="modal" data-bs-target="#install-modal">
+                    <button class="btn btn-primary w-100 mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner" data-bs-toggle="modal" data-bs-target="#install-modal">
                         <i class="bi bi-plus-circle me-2"></i>
                         <span class="d-md-none">Install Link Cleaner</span>
                         <span class="d-none d-md-inline">Install</span>
@@ -93,16 +93,16 @@
     </nav>
 
     <!-- Banner container -->
-    <div id="linkcleaner-banner" class="container-fluid bg-body-secondary">
+    <div id="linkcleaner-banner" class="container-fluid bg-body-secondary d-none d-sm-block">
         <div class="container pt-5">
             <div class="display-6 text-center">
-                Remove tracking code, search parameters, and other junk from links in one step.
+                Remove tracking code, search parameters, and other junk from links.
             </div>
         </div>
     </div>
 
     <!-- URL input container -->
-    <nav id="linkcleaner-url-container" class="bg-body-secondary pt-1 pb-3 border-bottom shadow-sm" style="position: sticky; top: 56px; z-index: 1000;">
+    <nav id="linkcleaner-url-container" class="bg-body-secondary pt-1 pb-2 pb-md-3 border-bottom shadow-sm" style="position: sticky; top: 56px; z-index: 1000;">
         <div class="container-fluid container-md">
             <div class="input-group bg-body rounded-3">
                 <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" inputmode="url" placeholder="Type or paste a link here...">
@@ -203,23 +203,23 @@
         </div>
     </div>
 
-    <!-- Main container -->
+    <!-- Main information and donate container -->
     <div class="container">
-        <!-- Main text field -->
         <div class="row">
             <div class="col-12 col-lg-6">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">What does this do?</h5>
-                        <p class="card-text">Link Cleaner is a web app that removes unnecessary junk from web links in one click. The result can then be copied to the device clipboard, shared to another app or service, or displayed as a QR code for easy scanning.</p>
-                        <p>Link Cleaner also has a <a href="https://www.icloud.com/shortcuts/739e8f515b60435299cac0ec6ec045a7" target="_blank">Shortcut</a> for easy access on iPhones and iPads, and it appears as a search engine suggestion in desktop web browsers. If you want to use Link Cleaner in other workflows, you can open a URL with <code>https://linkcleaner.app/?url=X</code>. The url parameter should be a link that has been <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent" target="_blank">properly encoded</a>.</p>
-                        <p>Link Cleaner is built to be private and secure. Check the <a href="https://github.com/corbindavenport/link-cleaner/blob/main/PRIVACY.md" target="_blank">Privacy Policy</a> for more information.</p>
+                        <h5 class="card-title">About Link Cleaner</h5>
+                        <p class="card-text">Link Cleaner is a web app that removes tracking code, search parameters, and other data from URL links. It's a great way to shorten links for text chats, sharing in social media posts, or embedding in documents and articles.</p>
+                        <p>Link Cleaner can be <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">installed or activated</a> with many other methods. If you install Link Cleaner to your device with certain browsers, like Google Chrome for Android or Microsoft Edge on Windows, it can show up in your system share menu. This allows you to share links directly to Link Cleaner. You can also use the an Apple Shortcut, bookmarklet, or other methods to quickly open and clean URLs.</p>
+                        <p>Link Cleaner is built to be private and secure. Links are processed entirely on your device without sending the URL to an external server. More information is available in the <a href="https://github.com/corbindavenport/link-cleaner/blob/main/PRIVACY.md" target="_blank">Privacy Policy</a>.</p>
+                        <hr />
+                        <p>Link Cleaner has been featured by <a href="https://www.iphoneblog.de/2022/08/10/weblink-hygiene-mit-link-cleaner-via-shortcuts/" target="_blank">iPhoneBlog.de</a>, <a href="https://richontech.tv/p/richs-go-to-apps-and-bookmarks" target="_blank">Rich on Tech</a>, <a href="https://advisorator.com/members/2023/08/29/8-29-2023-a-new-tech-advice-hub-2/" target="_blank">Advisorator</a>, and other outlets.</p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-lg-6 mb-3">
-                <!--
-                <div class="card mt-3">
+                <div class="card mb-3">
                     <div class="card-header">
                         Advertisement
                     </div>
@@ -228,12 +228,11 @@
                         <a href="https://www.spacebar.news/#/portal/signup" target="_blank" class="btn btn-primary btn-sm w-100">Go to The Spacebar</a>
                     </div>
                 </div>
-                -->
                 <!-- Donate card -->
-                <div class="card donate-card mt-3">
+                <div class="card donate-card mb-3">
                     <div class="card-body">
                         <p class="card-text">Link Cleaner is developed by <a href="https://corbin.io" target="_blank">Corbin Davenport</a>, and all the code is available <a href="https://github.com/corbindavenport/link-cleaner" target="_blank">as open-source</a>. If you want to report a bug or suggest features, please <a href="https://github.com/corbindavenport/link-cleaner/issues/new" target="_blank">create an issue on GitHub</a> or <a href="https://discord.gg/59wfy5cNHw" target="_blank">join the Discord group</a>.</p>
-                        <p class="card-text">If you find Link Cleaner useful, please donate to support continued development. It would mean a lot!</p>
+                        <p class="card-text">If you find Link Cleaner useful, please donate to support continued development.</p>
                         <a href="https://www.patreon.com/corbindavenport" target="_blank">
                             <button type="button" class="btn btn-success w-100 mb-2">Support via Patreon</button>
                         </a>
