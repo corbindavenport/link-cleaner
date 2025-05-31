@@ -69,6 +69,22 @@ function processLink(link, startMode = 'user') {
     } else {
         urlInput.select();
     }
+    // Hide placeholder in link history list before adding new item
+    document.getElementById('link-history-list-placeholder').style.display = 'none';
+    // Create new item in link history list
+    var listEl = document.createElement('a');
+    listEl.classList.add('list-group-item', 'list-group-item-action', 'text-break');
+    listEl.setAttribute('href', newLink);
+    listEl.setAttribute('rel', 'noreferrer');
+    listEl.setAttribute('target', '_blank');
+    listEl.innerText = newLink;
+    // Create domain badge for new item
+    var badgeEl = document.createElement('span');
+    badgeEl.classList.add('badge', 'text-bg-primary', 'rounded-pill', 'me-2');
+    badgeEl.innerText = new URL(newLink).hostname.replaceAll('www.', '');
+    listEl.prepend(badgeEl);
+    // Add item to list
+    document.getElementById('link-history-list').appendChild(listEl);
 }
 
 // Process URL after a paste action is detected
@@ -161,7 +177,7 @@ qrModal.addEventListener('show.bs.modal', function (event) {
 })
 
 // Remove QR code when popup is hidden (so new codes don't show up below new ones)
-qrModal.addEventListener('hide.bs.modal', function (event) {
+qrModal.addEventListener('hidden.bs.modal', function (event) {
     document.getElementById('qrcode').innerHTML = ''
 })
 

@@ -82,9 +82,16 @@
                         </a>
                     </li>
                 </ul>
-                <!-- Install button -->
-                <form class="d-flex flex-column flex-sm-row">
-                    <button class="btn btn-primary w-100 mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner" data-bs-toggle="modal" data-bs-target="#install-modal">
+                <!-- Buttons -->
+                <form class="d-flex flex-column flex-md-row">
+                    <!-- History button -->
+                    <button class="btn btn-primary me-0 me-md-2 mt-2 mt-md-0" type="button" aria-label="History" data-bs-toggle="modal" data-bs-target="#history-modal">
+                        <i class="bi bi-clock-history me-2"></i>
+                        <span class="d-md-none">Link History</span>
+                        <span class="d-none d-md-inline">History</span>
+                    </button>
+                    <!-- Install button -->
+                    <button class="btn btn-primary mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner" data-bs-toggle="modal" data-bs-target="#install-modal">
                         <i class="bi bi-plus-circle me-2"></i>
                         <span class="d-md-none">Install Link Cleaner</span>
                         <span class="d-none d-md-inline">Install</span>
@@ -349,8 +356,26 @@
         </div>
     </div>
 
+    <!-- Link history modal -->
+    <div class="modal fade" id="history-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="history-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="history-modal-label">Clean History</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body border-bottom">
+                    These are your most recent cleaned links. Your links are not transmitted or permanently stored.
+                </div>
+                <div class="list-group list-group-flush rounded-3" id="link-history-list">
+                    <button type="button" class="list-group-item list-group-item-action" id="link-history-list-placeholder" disabled>No links yet!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- QR code modal -->
-    <div class="modal" id="qr-modal">
+    <div class="modal fade" id="qr-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -365,7 +390,7 @@
     </div>
 
     <!-- Mastodon share modal -->
-    <div class="modal" tabindex="-1" id="mastodon-modal">
+    <div class="modal fade" tabindex="-1" id="mastodon-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
