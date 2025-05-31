@@ -5,7 +5,7 @@ window.plausible = window.plausible || function () { (window.plausible.q = windo
 localStorage.removeItem('history');
 
 // Detect various platforms
-const isApplePlatform = ['MacIntel','Macintosh','iPhone','iPod','iPad'].includes(navigator.platform);
+const isApplePlatform = ['MacIntel', 'Macintosh', 'iPhone', 'iPod', 'iPad'].includes(navigator.platform);
 
 // Initialize elements, modals, and toasts
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'));
@@ -78,12 +78,12 @@ function processLink(link, startMode = 'user') {
     listEl.setAttribute('rel', 'noreferrer');
     listEl.setAttribute('target', '_blank');
     listEl.innerText = newLink;
-    // Create domain badge for new item
+    // Create domain badge for link history item
     var badgeEl = document.createElement('span');
     badgeEl.classList.add('badge', 'text-bg-primary', 'rounded-pill', 'me-2');
     badgeEl.innerText = new URL(newLink).hostname.replaceAll('www.', '');
     listEl.prepend(badgeEl);
-    // Add item to list
+    // Add link history item to list
     document.getElementById('link-history-list').appendChild(listEl);
 }
 
@@ -162,10 +162,10 @@ if (navigator.canShare) {
 
 // QR Code button
 // This generates the QR code only when the button is pressed
-var qrModal = document.getElementById('qr-modal')
-qrModal.addEventListener('show.bs.modal', function (event) {
-    var currentLink = urlInput.value
-    var qrContainer = document.getElementById('qrcode')
+var qrModal = document.getElementById('qr-modal');
+qrModal.addEventListener('show.bs.modal', function () {
+    var currentLink = urlInput.value;
+    var qrContainer = document.getElementById('qrcode');
     const qrSettings = {
         text: currentLink,
         width: 425,
@@ -173,12 +173,45 @@ qrModal.addEventListener('show.bs.modal', function (event) {
         quietZone: 25,
         tooltip: true
     }
-    new QRCode(document.getElementById('qrcode'), qrSettings)
+    new QRCode(document.getElementById('qrcode'), qrSettings);
 })
+
+// Save QR as PNG button
+document.getElementById('qr-download-btn').addEventListener('click', function () {
+    const qrContainer = document.getElementById('qrcode');
+    const canvas = qrContainer.querySelector('canvas');
+    if (canvas) {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'qrcode.png';
+        link.click();
+    }
+})
+
+// Share QR as PNG button
+const supportsFileShare = (navigator.canShare && navigator.canShare({ files: [] }));
+if (supportsFileShare) {
+    document.getElementById('qr-share-btn').addEventListener('click', function () {
+        const qrContainer = document.getElementById('qrcode');
+        const canvas = qrContainer.querySelector('canvas');
+        if (canvas) {
+            canvas.toBlob(function (blob) {
+                const file = new File([blob], 'qrcode.png', { type: 'image/png' });
+                navigator.share({
+                    files: [file],
+                    title: 'QR Code',
+                    text: 'QR code image'
+                }).catch(() => { });
+            }, 'image/png');
+        }
+    })
+} else {
+    document.getElementById('qr-share-btn').disabled = 'true';
+}
 
 // Remove QR code when popup is hidden (so new codes don't show up below new ones)
 qrModal.addEventListener('hidden.bs.modal', function (event) {
-    document.getElementById('qrcode').innerHTML = ''
+    document.getElementById('qrcode').innerHTML = '';
 })
 
 // Test link button
