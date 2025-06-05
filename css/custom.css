@@ -28,11 +28,6 @@ body {
     padding-bottom: calc((var(--bs-navbar-toggler-padding-y) * 2) + env(safe-area-inset-bottom));
 }
 
-/* Fix the navbar overlapping body content on small screens */
-.container {
-    padding-bottom: 57px;
-}
-
 /* QR code share option */
 #qrcode {
     text-align: center;
@@ -50,4 +45,16 @@ body {
         resize: none;
         height: calc(100vh - 300px);
     }
+}
+
+/* Pride mode */
+body[data-pride-mode="true"] #linkcleaner-header {
+    background: linear-gradient(135deg,  rgba(229,0,0,1) 0%,rgba(229,0,0,1) 17%,rgba(241,67,0,1) 17%,rgba(255,141,0,1) 17%,rgba(255,141,0,1) 33%,rgba(255,233,0,1) 33%,rgba(255,238,0,1) 33%,rgba(255,238,0,1) 50%,rgba(148,192,14,1) 50%,rgba(2,129,33,1) 50%,rgba(2,129,33,1) 67%,rgba(0,81,232,1) 67%,rgba(0,76,255,1) 67%,rgba(0,76,255,1) 83%,rgba(44,48,211,1) 83%,rgba(119,0,136,1) 83%,rgba(119,0,136,1) 100%,rgba(17,0,20,1) 100%) !important;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3) inset !important;
+    color: #FFF !important;
+    text-shadow: 0px 0px 5px #000 !important;
+}
+
+body[data-pride-mode="true"] .navbar .navbar-brand::after {
+    content: ' 🏳️‍🌈';
 }

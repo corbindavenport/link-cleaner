@@ -1,5 +1,8 @@
 // Code that is shared across normal Link Cleaner and bulk mode
 
+// Pride Month mode
+document.body.dataset.prideMode = (new Date()).getMonth() === 5;
+
 // Function for cleaning links
 function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id']) {
     try {
