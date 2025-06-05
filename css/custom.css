@@ -21,13 +21,6 @@ body[data-view="cleaned"] #linkcleaner-buttons-container {
 
 }
 
-/* Fix bottom nav bar on devices with bottom nav buttons */
-.navbar.fixed-bottom,
-body {
-    padding-bottom: calc((var(--bs-navbar-toggler-padding-y) * 2) + constant(safe-area-inset-bottom));
-    padding-bottom: calc((var(--bs-navbar-toggler-padding-y) * 2) + env(safe-area-inset-bottom));
-}
-
 /* QR code share option */
 #qrcode {
     text-align: center;
@@ -38,19 +31,32 @@ body {
 }
 
 /* Bulk mode text boxes */
+
+#link-bulk-input,
+#link-bulk-output {
+    resize: none;
+}
+
 @media (min-width: 768px) {
 
     #link-bulk-input,
     #link-bulk-output {
-        resize: none;
-        height: calc(100vh - 300px);
+        height: calc(100vh - 140px);
+    }
+}
+
+@media (min-width: 1200px) {
+
+    #link-bulk-input,
+    #link-bulk-output {
+        height: calc(100vh - 170px);
     }
 }
 
 /* Pride mode */
 body[data-pride-mode="true"] #linkcleaner-header {
-    background: linear-gradient(135deg,rgba(255, 177, 201, 1) 0%, rgba(255, 177, 201, 1) 9%, rgba(255, 255, 255, 1) 9%, rgba(255, 255, 255, 1) 18%, rgba(117, 216, 239, 1) 18%, rgba(117, 216, 239, 1) 27%, rgba(97, 54, 13, 1) 27%, rgba(97, 54, 13, 1) 36%, rgba(0, 0, 0, 1) 36%, rgba(0, 0, 0, 1) 45%, rgba(229, 0, 0, 1) 45%, rgba(229, 0, 0, 1) 54%, rgba(255, 141, 0, 1) 54%, rgba(255, 141, 0, 1) 64%, rgba(255, 238, 0, 1) 64%, rgba(255, 238, 0, 1) 72%, rgba(0, 129, 33, 1) 72%, rgba(0, 129, 33, 1) 81%, rgba(0, 76, 255, 1) 81%, rgba(0, 76, 255, 1) 90%, rgba(118, 1, 136, 1) 90%, rgba(118, 1, 136, 1) 100%) !important;
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3) inset !important;
+    background: linear-gradient(135deg, rgba(255, 177, 201, 1) 0%, rgba(255, 177, 201, 1) 9%, rgba(255, 255, 255, 1) 9%, rgba(255, 255, 255, 1) 18%, rgba(117, 216, 239, 1) 18%, rgba(117, 216, 239, 1) 27%, rgba(97, 54, 13, 1) 27%, rgba(97, 54, 13, 1) 36%, rgba(0, 0, 0, 1) 36%, rgba(0, 0, 0, 1) 45%, rgba(229, 0, 0, 1) 45%, rgba(229, 0, 0, 1) 54%, rgba(255, 141, 0, 1) 54%, rgba(255, 141, 0, 1) 64%, rgba(255, 238, 0, 1) 64%, rgba(255, 238, 0, 1) 72%, rgba(0, 129, 33, 1) 72%, rgba(0, 129, 33, 1) 81%, rgba(0, 76, 255, 1) 81%, rgba(0, 76, 255, 1) 90%, rgba(118, 1, 136, 1) 90%, rgba(118, 1, 136, 1) 100%) !important;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3) inset !important;
     color: #FFF !important;
     text-shadow: 0px 0px 5px #000 !important;
 }

@@ -45,13 +45,13 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
         document.execCommand('copy')
     }
     // Change button design
-    btn.classList.remove('btn-outline-primary')
-    btn.classList.add('btn-outline-success')
+    btn.classList.remove('btn-primary')
+    btn.classList.add('btn-success')
     btn.innerHTML = '<i class="bi bi-check"></i> Copied'
     // Revert after three seconds
     setTimeout(function () {
-        btn.classList.remove('btn-outline-success')
-        btn.classList.add('btn-outline-primary')
+        btn.classList.remove('btn-success')
+        btn.classList.add('btn-primary')
         btn.innerHTML = '<i class="bi bi-clipboard"></i> Copy to Clipboard'
     }, 2000)
 })
