@@ -5,34 +5,53 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Link Cleaner</title>
-    <meta name="robots" content="noindex">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <link rel="apple-touch-icon" sizes="192x192" href="../img/maskable_icon_x192.png">
-    <link rel="icon" type="image/png" sizes="24x24" href="../img/baseline_link_black_24dp.png">
-    <link rel="manifest" href="../site.webmanifest">
-    <link rel="shortcut icon" href="../favicon.ico">
+    <meta name="description" content="Link Cleaner is a web app that removes unnecessary junk from links in one click.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="192x192" href="/img/maskable_icon_x192.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/img/icon48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/icon32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/icon16.png">
+    <link rel="shortcut icon" href="favicon.ico">
     <!-- Search engine -->
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="LinkCleaner">
     <!-- Theme colors -->
     <meta name="color-scheme" content="dark light">
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFF">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#212529">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#424548">
+    <meta name="theme-color" content="#e9ecef">
     <!-- Open Graph card -->
     <meta property="og:url" content="https://linkcleaner.app" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Link Cleaner" />
-    <meta property="og:description" content="Remove tracking code and other variables from web links with the press of a button!" />
+    <meta property="og:description" content="Link Cleaner is a web app for removing tracking code, search parameters, and other junk from URL links." />
     <meta property="og:image" content="https://linkcleaner.app/img/maskable_icon_x512.png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <meta name="og:image:alt" content="Link Cleaner app icon" />
     <meta name="twitter:card" content="summary" />
+    <!-- Schema for Google Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://linkcleaner.app",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://linkcleaner.app/?utm_source=Sitelinks%20Searchbox&url={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
     <!-- Bootstrap and custom styles -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
     <link href="/css/custom.css" rel="stylesheet">
     <script src="/js/dark.js"></script>
     <!-- Analytics -->
@@ -42,20 +61,15 @@
 <body>
 
     <!-- Nav bar -->
-    <nav class="navbar fixed-bottom navbar-expand-sm bg-body-secondary border-top shadow">
+    <nav class="navbar bg-body-secondary fixed-top navbar-expand-md border-bottom shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand d-sm-none" href="#">Link Cleaner</a>
+            <a class="navbar-brand" href="/">Link Cleaner</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            <i class="bi bi-link-45deg"></i>
-                            Normal Mode
-                        </a>
-                    </li>
+                <!-- Navigation links -->
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/bulk/">
                             <i class="bi bi-stack"></i>
@@ -63,7 +77,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
+                        <a class="nav-link active" href="/settings/">
                             <i class="bi bi-gear-fill"></i>
                             Settings
                         </a>
@@ -74,17 +88,11 @@
     </nav>
 
     <!-- Main container -->
-    <div class="container settings-container">
-
-        <div class="display-5 mt-4 mb-3 mt-sm-5 mb-sm-5">
-            <i class="bi bi-gear-fill pe-2"></i>
-            Settings
-        </div>
-
+    <div class="container mt-3 mt-xl-4 settings-container">
         <!-- FixTwitter -->
-        <div class="form-check mb-4 mt-4">
+        <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="vxTwitter-check">
-            <label class="form-check-label" for="vxTwitter-check">
+            <label class="form-check-label fw-bold" for="vxTwitter-check">
                 Replace X/Twitter links with FixTweet
             </label>
             <div class="text-body-secondary mt-2">
@@ -94,7 +102,7 @@
         <!-- Shorten YouTube -->
         <div class="form-check mb-4">
             <input class="form-check-input" type="checkbox" value="" id="youtube-shorten-check">
-            <label class="form-check-label" for="youtube-shorten-check">
+            <label class="form-check-label fw-bold" for="youtube-shorten-check">
                 Shorten YouTube links
             </label>
             <div class="text-body-secondary mt-2">
@@ -103,20 +111,10 @@
         </div>
         <!-- Custom Amazon tracking -->
         <div class="form-check mb-4">
-            <label for="amazon-tracking-id" class="form-label">Amazon tracking ID</label>
+            <label for="amazon-tracking-id" class="form-label fw-bold">Amazon tracking ID</label>
             <input type="text" class="form-control" id="amazon-tracking-id">
             <div class="text-body-secondary mt-2">
-                This adds an <a href="https://affiliate-program.amazon.com/help/node/topic/GK5TZZ4AWML2QSLA" target="_blank" rel="nofollow">Amazon affiliate tracking ID</a> to the end of any Amazon store links.
-            </div>
-        </div>
-        <!-- Automatic copy -->
-        <div class="form-check mb-4 mt-4">
-            <input class="form-check-input" type="checkbox" value="" id="clipboard-check">
-            <label class="form-check-label" for="clipboard-check">
-                Automatic copy to clipboard (Experimental)
-            </label>
-            <div class="text-body-secondary mt-2">
-                Links will be copied to the clipboard after cleaning, except in Bulk Mode. Not supported in some web browsers.
+                This adds an <a href="https://affiliate-program.amazon.com/help/node/topic/GK5TZZ4AWML2QSLA" target="_blank" rel="nofollow">Amazon affiliate tracking ID</a> to the end of any cleaned Amazon store links.
             </div>
         </div>
 

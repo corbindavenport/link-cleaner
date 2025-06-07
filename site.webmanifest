@@ -1,7 +1,7 @@
 {
     "name": "Link Cleaner",
     "short_name": "Link Cleaner",
-    "description": "Remove tracking code and other variables from web links with the press of a button! Installing Link Cleaner adds it to your device's share menu for links.",
+    "description": "Remove tracking code, search parameters, and other junk from URL links. Installing Link Cleaner adds it to your device's share menu for links.",
     "icons": [
         {
             "src": "img/icon_x192.png",
@@ -26,8 +26,8 @@
             "purpose": "maskable"
         }
     ],
-    "theme_color": "#448aff",
-    "background_color": "#448aff",
+    "theme_color": "#e9ecef",
+    "background_color": "#FFFFFF",
     "display": "standalone",
     "start_url": "/?utm_source=Installed%20App&utm_medium=App%20Launch",
     "share_target": {

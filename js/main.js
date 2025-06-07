@@ -1,26 +1,42 @@
-
 // Plausible Analytics
 window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
 // Delete link history storage if it exists, link history feature has been removed
 localStorage.removeItem('history');
 
-// Options used for pop-up windows from social share buttons
-const popupOptions = 'popup,width=600,height=500,noopener,noreferrer';
+// Detect various platforms
+const isApplePlatform = ['MacIntel', 'Macintosh', 'iPhone', 'iPod', 'iPad'].includes(navigator.platform);
 
-// Initialize modals and toasts
-const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'))
-const clipboardToast = bootstrap.Toast.getOrCreateInstance(document.querySelector('#clipboard-toast'))
+// Initialize elements, modals, and toasts
+const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'));
+const urlInput = document.getElementById('link-input');
+
+// Save PWA install prompt
+var installPrompt = null;
+window.addEventListener('beforeinstallprompt', function (e) {
+    // Prevents the default mini-infobar or install dialog from appearing on mobile
+    e.preventDefault();
+    // Save install for later
+    installPrompt = e;
+});
+
+// Function for opening pop-up window in center of screen
+function openWindow(url) {
+    // Set window dimensions
+    let windowWidth = 600;
+    let windowHeight = 500;
+    // Calculate center position for X and Y axis
+    let leftStart = Math.floor(window.screen.availWidth / 2) - Math.floor(windowWidth / 2);
+    let topStart = Math.floor(window.screen.availHeight / 2) - Math.floor(windowHeight / 2);
+    // Open popup window
+    let windowOptions = `width=${windowWidth},height=${windowHeight},popup,noopener,noreferrer,left=${leftStart},top=${topStart}`;
+    window.open(url, '_blank', windowOptions);
+}
 
 // Function for cleaning link
-function processLink(link) {
-    plausible('Clean Link')
+function processLink(link, startMode = 'user') {
+    plausible('Clean Link');
     // Read settings
-    if (localStorage.getItem('clipboard-check')) {
-        var autoClipboardEnabled = JSON.parse(localStorage.getItem('clipboard-check').toLowerCase());
-    } else {
-        var autoClipboardEnabled = false;
-    }
     if (localStorage.getItem('youtube-shorten-check')) {
         var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
     } else {
@@ -31,34 +47,60 @@ function processLink(link) {
     } else {
         var fixTwitterEnabled = false;
     }
-    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled)
-    // Switch to output
-    document.getElementById('link-output').value = newLink
-    document.getElementById('initial').style.display = 'none'
-    document.getElementById('completed').style.display = 'block'
-    // Write text to clipboard
-    if (navigator.clipboard && autoClipboardEnabled) {
-        try {
-            const type = 'text/plain';
-            const blob = new Blob([newLink], { type });
-            const data = [new ClipboardItem({ [type]: blob })];
-            navigator.clipboard.write(data);
-            clipboardToast.show();
-        } catch (e) {
-            console.error('Error copying to clipboard:', e);
-        }
+    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled);
+    // Insert cleaned link and update page layout
+    urlInput.value = newLink;
+    document.body.dataset.view = 'cleaned';
+    // If medium size device or smaller, scroll past the top message
+    const container = document.getElementById('linkcleaner-url-container');
+    const containerTop = container.getBoundingClientRect().top + window.scrollY;
+    const desiredScrollTop = containerTop - 50;
+    if (window.matchMedia('(max-width: 767.98px)').matches && (startMode === 'user')) {
+        // Smooth scroll if the user entered the URL
+        window.scrollTo({ top: desiredScrollTop, behavior: 'smooth' })
+    } else if (window.matchMedia('(max-width: 767.98px)').matches) {
+        // Instant scroll if Link Cleaner was opened through a shortcut
+        window.scrollTo({ top: desiredScrollTop, behavior: 'instant' })
     }
-    // Highlight the output for easy copy
-    document.getElementById('link-output').select()
+    // If the user is on a touchscreen, unfocus the input element, so nothing is covering the Copy and share buttons
+    // If the user is not on a touchscreen, select the text so the user can immediately do Ctrl+C
+    if (window.matchMedia('screen and (hover: none)').matches) {
+        urlInput.blur();
+    } else {
+        urlInput.select();
+    }
+    // Hide placeholder in link history list before adding new item
+    document.getElementById('link-history-list-placeholder').style.display = 'none';
+    // Create new item in link history list
+    var listEl = document.createElement('a');
+    listEl.classList.add('list-group-item', 'list-group-item-action', 'text-break');
+    listEl.setAttribute('href', newLink);
+    listEl.setAttribute('rel', 'noreferrer');
+    listEl.setAttribute('target', '_blank');
+    listEl.innerText = newLink;
+    // Create domain badge for link history item
+    var badgeEl = document.createElement('span');
+    badgeEl.classList.add('badge', 'text-bg-primary', 'rounded-pill', 'me-2');
+    badgeEl.innerText = new URL(newLink).hostname.replaceAll('www.', '');
+    listEl.prepend(badgeEl);
+    // Add link history item to list
+    document.getElementById('link-history-list').appendChild(listEl);
 }
 
 // Process URL after a paste action is detected
-document.getElementById('link-input').addEventListener('paste', function () {
+urlInput.addEventListener('paste', function () {
     // This is wrapped in a timeout or it executes before the value has changed
     setTimeout(function () {
-        processLink(document.getElementById('link-input').value)
+        processLink(urlInput.value)
     }, 50)
 })
+
+// Process URL after an Enter key press
+urlInput.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+        processLink(urlInput.value);
+    }
+});
 
 // Paste button
 try {
@@ -75,9 +117,10 @@ try {
     document.getElementById('link-paste-btn').disabled = true
 }
 
-// Process URL after clicking arrow button
-document.getElementById('link-submit').addEventListener('click', function () {
-    processLink(document.getElementById('link-input').value)
+// Clear button
+document.getElementById('link-clear-btn').addEventListener('click', function () {
+    urlInput.value = '';
+    urlInput.focus();
 })
 
 // Copy link button
@@ -85,13 +128,14 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
     var btn = document.getElementById('link-copy-btn')
     if (navigator.clipboard) {
         // Use Clipboard API if available
-        var copyText = document.getElementById('link-output').value
+        var copyText = urlInput.value
         navigator.clipboard.writeText(copyText)
     } else {
         // Fallback to older API
-        var copyText = document.getElementById('link-output')
+        var copyText = urlInput
         copyText.select()
         document.execCommand('copy')
+        urlInput.blur()
     }
     // Change button design
     btn.classList.remove('btn-primary')
@@ -101,23 +145,15 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
     setTimeout(function () {
         btn.classList.remove('btn-success')
         btn.classList.add('btn-primary')
-        btn.innerHTML = '<i class="bi bi-clipboard"></i> Copy to Clipboard'
+        btn.innerHTML = '<i class="bi bi-clipboard me-2"></i> Copy'
     }, 2000)
-})
-
-// Start over button
-document.getElementById('link-startover').addEventListener('click', function () {
-    document.getElementById('completed').style.display = 'none'
-    document.getElementById('initial').style.display = 'block'
-    document.getElementById('link-input').value = ''
-    document.getElementById('link-input').select()
 })
 
 // Share button
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
         navigator.share({
-            url: document.getElementById('link-output').value
+            url: urlInput.value
         })
     })
 } else {
@@ -126,10 +162,10 @@ if (navigator.canShare) {
 
 // QR Code button
 // This generates the QR code only when the button is pressed
-var qrModal = document.getElementById('qr-modal')
-qrModal.addEventListener('show.bs.modal', function (event) {
-    var currentLink = document.getElementById('link-output').value
-    var qrContainer = document.getElementById('qrcode')
+var qrModal = document.getElementById('qr-modal');
+qrModal.addEventListener('show.bs.modal', function () {
+    var currentLink = urlInput.value;
+    var qrContainer = document.getElementById('qrcode');
     const qrSettings = {
         text: currentLink,
         width: 425,
@@ -137,23 +173,56 @@ qrModal.addEventListener('show.bs.modal', function (event) {
         quietZone: 25,
         tooltip: true
     }
-    new QRCode(document.getElementById('qrcode'), qrSettings)
+    new QRCode(document.getElementById('qrcode'), qrSettings);
 })
 
+// Save QR as PNG button
+document.getElementById('qr-download-btn').addEventListener('click', function () {
+    const qrContainer = document.getElementById('qrcode');
+    const canvas = qrContainer.querySelector('canvas');
+    if (canvas) {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'qrcode.png';
+        link.click();
+    }
+})
+
+// Share QR as PNG button
+const supportsFileShare = (navigator.canShare && navigator.canShare({ files: [] }));
+if (supportsFileShare) {
+    document.getElementById('qr-share-btn').addEventListener('click', function () {
+        const qrContainer = document.getElementById('qrcode');
+        const canvas = qrContainer.querySelector('canvas');
+        if (canvas) {
+            canvas.toBlob(function (blob) {
+                const file = new File([blob], 'qrcode.png', { type: 'image/png' });
+                navigator.share({
+                    files: [file],
+                    title: 'QR Code',
+                    text: 'QR code image'
+                }).catch(() => { });
+            }, 'image/png');
+        }
+    })
+} else {
+    document.getElementById('qr-share-btn').disabled = 'true';
+}
+
 // Remove QR code when popup is hidden (so new codes don't show up below new ones)
-qrModal.addEventListener('hide.bs.modal', function (event) {
-    document.getElementById('qrcode').innerHTML = ''
+qrModal.addEventListener('hidden.bs.modal', function (event) {
+    document.getElementById('qrcode').innerHTML = '';
 })
 
 // Test link button
 document.getElementById('link-test-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-output').value
-    window.open(currentLink, '_blank', popupOptions)
+    var currentLink = urlInput.value
+    openWindow(currentLink);
 })
 
 // Email button
 document.getElementById('email-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-output').value
+    var currentLink = urlInput.value
     var emailSubject = 'Link for you'
     var emailBody = '\n\n\n' + currentLink
     window.open('mailto:?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody), '_blank')
@@ -161,62 +230,78 @@ document.getElementById('email-btn').addEventListener('click', function () {
 
 // SMS button
 document.getElementById('sms-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-output').value
+    var currentLink = urlInput.value
     window.open('sms:?&body=' + encodeURIComponent(currentLink), '_blank')
 })
 
 // Mastodon button
 document.getElementById('mastodon-server-hostname').value = localStorage['mastodon-server'] || ''
 document.getElementById('mastodon-share-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-output').value
+    var currentLink = urlInput.value
     var currentServer = document.getElementById('mastodon-server-hostname').value
     if (currentServer) {
         localStorage['mastodon-server'] = currentServer
         var link = 'https://' + currentServer + '/share?text=' + encodeURIComponent(currentLink)
-        window.open(link, '_blank', popupOptions)
+        openWindow(link);
         mastodonModal.hide()
     }
 })
 
 // Facebook button
 document.getElementById('facebook-share-btn').addEventListener('click', function () {
-    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank', popupOptions)
+    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(urlInput.value);
+    openWindow(link);
 })
 
 // LinkedIn button
 document.getElementById('linkedin-share-btn').addEventListener('click', function () {
-    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank', popupOptions)
+    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlInput.value);
+    openWindow(link);
 })
 
 // Reddit button
 document.getElementById('reddit-share-btn').addEventListener('click', function () {
-    var currentLink = document.getElementById('link-output').value
-    window.open('https://reddit.com/submit?url=' + encodeURIComponent(currentLink), '_blank', popupOptions)
+    var link = 'https://reddit.com/submit?url=' + encodeURIComponent(urlInput.value);
+    openWindow(link);
 })
 
 // Telegram button
 document.getElementById('telegram-share-btn').addEventListener('click', function () {
-    var link = 'https://t.me/share/url?url=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank', popupOptions)
+    var link = 'https://t.me/share/url?url=' + encodeURIComponent(urlInput.value)
+    openWindow(link);
 })
 
-// Substack Notes button
+// Bluesky button
 document.getElementById('bluesky-share-btn').addEventListener('click', function () {
-    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(document.getElementById('link-output').value)
-    window.open(link, '_blank', popupOptions)
+    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(urlInput.value)
+    openWindow(link);
 })
 
-// Support for Web Share Target API, Siri Shortcut, and OpenSearch
+// PWA install button and accordion
+if ('onbeforeinstallprompt' in window) {
+    document.getElementById('accordion-pwa-container').style.display = 'block';
+} else if (isApplePlatform) {
+    document.getElementById('accordion-apple-app-container').style.display = 'block';
+}
+document.getElementById('install-btn').addEventListener('click', function () {
+    if (installPrompt) {
+        // Web browser supports PWA and there is a captured install prompt, activate the prompt
+        installPrompt.prompt();
+    } else if ('onbeforeinstallprompt' in window) {
+        alert('You need to use the browser install button, such as the button in the address bar on desktop browsers, or the "Add to Home Screen" button on Android devices.');
+    }
+})
+
+// Check for 'url' parameter on Link Cleaner launch
+// This is used for the Web Share Target API, Apple Shortcut, Bookmarklet, OpenSearch, and custom automations
 const parsedUrl = new URL(window.location)
 if (parsedUrl.searchParams.get('url')) {
     // This is where the URL SHOULD BE
-    processLink(parsedUrl.searchParams.get('url'))
+    processLink(parsedUrl.searchParams.get('url'), 'shortcut');
 } else if (parsedUrl.searchParams.get('text')) {
     // Android usually puts URLs here
-    processLink(parsedUrl.searchParams.get('text'))
+    processLink(parsedUrl.searchParams.get('text'), 'shortcut');
 } else if (parsedUrl.searchParams.get('title')) {
     // Android sometimes puts URLs here
-    processLink(parsedUrl.searchParams.get('title'))
+    processLink(parsedUrl.searchParams.get('title'), 'shortcut');
 }

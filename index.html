@@ -6,24 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Link Cleaner</title>
     <meta name="description" content="Link Cleaner is a web app that removes unnecessary junk from links in one click.">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <link rel="apple-touch-icon" sizes="192x192" href="img/maskable_icon_x192.png">
-    <link rel="icon" type="image/png" sizes="24x24" href="img/baseline_link_black_24dp.png">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="192x192" href="/img/maskable_icon_x192.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/img/icon48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/icon32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/icon16.png">
+    <link rel="shortcut icon" href="favicon.ico">
     <!-- Search engine -->
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="LinkCleaner">
     <!-- Theme colors -->
     <meta name="color-scheme" content="dark light">
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFF">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#212529">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#424548">
+    <meta name="theme-color" content="#e9ecef">
     <!-- Open Graph card -->
     <meta property="og:url" content="https://linkcleaner.app" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Link Cleaner" />
-    <meta property="og:description" content="Remove tracking code and other variables from web links with the press of a button!" />
+    <meta property="og:description" content="Link Cleaner is a web app for removing tracking code, search parameters, and other junk from URL links." />
     <meta property="og:image" content="https://linkcleaner.app/img/maskable_icon_x512.png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
@@ -46,9 +49,9 @@
     }
     </script>
     <!-- Bootstrap and custom styles -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
     <link href="/css/custom.css" rel="stylesheet">
     <script src="/js/dark.js"></script>
     <!-- Analytics -->
@@ -58,20 +61,15 @@
 <body>
 
     <!-- Nav bar -->
-    <nav class="navbar fixed-bottom navbar-expand-sm bg-body-secondary border-top shadow">
+    <nav class="navbar bg-body-secondary fixed-top navbar-expand-md">
         <div class="container-fluid">
-            <a class="navbar-brand d-sm-none" href="#">Link Cleaner</a>
+            <a class="navbar-brand active" href="/">Link Cleaner</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <i class="bi bi-link-45deg"></i>
-                            Normal Mode
-                        </a>
-                    </li>
+                <!-- Navigation links -->
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/bulk/">
                             <i class="bi bi-stack"></i>
@@ -85,140 +83,151 @@
                         </a>
                     </li>
                 </ul>
+                <!-- Buttons -->
+                <form class="d-flex flex-column flex-md-row">
+                    <!-- History button -->
+                    <button class="btn btn-primary me-0 me-md-2 mt-2 mt-md-0" type="button" aria-label="History" data-bs-toggle="modal" data-bs-target="#history-modal">
+                        <i class="bi bi-clock-history me-2"></i>
+                        <span class="d-md-none">Link History</span>
+                        <span class="d-none d-md-inline">History</span>
+                    </button>
+                    <!-- Install button -->
+                    <button class="btn btn-primary mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner" data-bs-toggle="modal" data-bs-target="#install-modal">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        <span class="d-md-none">Install Link Cleaner</span>
+                        <span class="d-none d-md-inline">Install</span>
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
 
-    <!-- Main container -->
-    <div class="container">
-        <!-- Main text field -->
-        <div class="mt-2 mb-3 mt-sm-5 mb-sm-5">
-            <!-- Initial text input -->
-            <div id="initial">
-                <div class="input-group">
-                    <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" placeholder="Type or paste a link here">
-                    <button class="btn btn-outline-secondary" type="button" id="link-submit" aria-label="Submit link"><i class="bi-chevron-right"></i></button>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <button class="btn btn-outline-primary w-100 mt-2" type="button" id="link-paste-btn" aria-label="Paste from clipboard">
-                            <i class="bi-clipboard"></i>
-                            Paste from Clipboard
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Completed UI -->
-            <div id="completed" style="display: none;">
-                <div class="input-group">
-                    <input type="text" class="form-control form-control-lg" id="link-output" readonly autocomplete="off">
-                    <button class="btn btn-outline-secondary" type="button" id="link-startover" aria-label="Clean another link"><i class="bi bi-arrow-counterclockwise"></i></button>
-                </div>
-                <!-- Main action buttons -->
-                <div class="row">
-                    <div class="col-12 col-lg-4">
-                        <button type="button" class="btn btn-primary w-100 mt-3" id="link-share-btn" aria-label="Share">
-                            <i class="bi bi-share-fill"></i>&nbsp;
-                            Share
-                        </button>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <button type="button" class="btn btn-primary w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
-                            <i class="bi bi-clipboard me-2"></i>
-                            Copy to Clipboard
-                        </button>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <button type="button" class="btn btn-primary w-100 mt-3" id="link-test-btn">
-                            <i class="bi bi-box-arrow-up-right me-2"></i>
-                            Test link
-                        </button>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <button type="button" class="btn btn-primary w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
-                            <i class="bi bi-qr-code me-2"></i>
-                            Show QR code
-                        </button>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <button type="button" class="btn btn-primary w-100 mt-3" id="email-btn" aria-label="Send in Email">
-                            <i class="bi bi-envelope me-2"></i>
-                            Send in Email
-                        </button>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <button type="button" class="btn btn-primary w-100 mt-3" id="sms-btn" aria-label="Send in Text">
-                            <i class="bi bi-chat-left-dots-fill me-2"></i>
-                            Send in Text
-                        </button>
-                    </div>
-
-                </div>
-                <!-- Social media buttons -->
-                <div class="row">
-                    <div class="h5 mt-4">Social media</div>
-                </div>
-                <div class="row">
-                    <!-- Mastodon -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
-                            <i class="bi bi-mastodon me-2"></i>
-                            Mastodon
-                        </button>
-                    </div>
-                    <!-- Facebook -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="facebook-share-btn">
-                            <i class="bi bi-facebook me-2"></i>
-                            Facebook
-                        </button>
-                    </div>
-                    <!-- LinkedIn -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="linkedin-share-btn">
-                            <i class="bi bi-linkedin me-2"></i>
-                            LinkedIn
-                        </button>
-                    </div>
-                    <!-- Reddit -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="reddit-share-btn">
-                            <i class="bi bi-reddit me-2"></i>
-                            Reddit
-                        </button>
-                    </div>
-                    <!-- Telegram -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="telegram-share-btn">
-                            <i class="bi bi-telegram me-2"></i>
-                            Telegram
-                        </button>
-                    </div>
-                    <!-- Bluesky -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <button type="button" class="btn btn-light w-100 mt-3" id="bluesky-share-btn">
-                            <i class="bi bi-feather"></i>
-                            Bluesky
-                        </button>
-                    </div>
-                </div>
+    <!-- Banner text -->
+    <div id="linkcleaner-header" class="container-fluid bg-body-secondary">
+        <div class="container py-3 py-sm-5">
+            <div class="display-6 text-center">
+                Remove tracking code, search parameters, and other junk from URL links.
             </div>
         </div>
+    </div>
+
+    <!-- URL input container -->
+    <nav id="linkcleaner-url-container" class="bg-body-secondary py-1 py-sm-2 border-bottom shadow-sm" style="position: sticky; top: 56px; z-index: 1000;">
+        <div class="container-md">
+            <div class="input-group bg-body rounded-3">
+                <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" inputmode="url" placeholder="Type or paste a link here...">
+                <button class="btn btn-outline-danger btn-sm" type="button" id="link-clear-btn" aria-label="Clear URL">
+                    <i class="bi-x-lg mx-1"></i>
+                    <span class="d-none d-md-inline">Clear</span>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="link-paste-btn" aria-label="Paste from clipboard">
+                    <i class="bi-clipboard mx-1"></i>
+                    <span class="d-none d-md-inline">Paste</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Share and action buttons container -->
+    <div class="container" id="linkcleaner-main-container">
+        <!-- Share buttons -->
+        <div class="row mt-2" id="linkcleaner-buttons-container">
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-primary w-100 mt-3" id="link-share-btn" aria-label="Share">
+                    <i class="bi bi-share-fill"></i>&nbsp;
+                    Share
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-primary w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
+                    <i class="bi bi-clipboard me-2"></i>
+                    Copy
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-primary w-100 mt-3" id="link-test-btn">
+                    <i class="bi bi-box-arrow-up-right me-2"></i>
+                    Test link
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-primary w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
+                    <i class="bi bi-qr-code me-2"></i>
+                    Show QR code
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-primary w-100 mt-3" id="email-btn" aria-label="Send in Email">
+                    <i class="bi bi-envelope me-2"></i>
+                    Send in Email
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-primary w-100 mt-3" id="sms-btn" aria-label="Send in Text">
+                    <i class="bi bi-chat-left-dots-fill me-2"></i>
+                    Send in Text
+                </button>
+            </div>
+            <!-- Mastodon -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
+                    <i class="bi bi-mastodon me-2"></i>
+                    Mastodon
+                </button>
+            </div>
+            <!-- Facebook -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="facebook-share-btn">
+                    <i class="bi bi-facebook me-2"></i>
+                    Facebook
+                </button>
+            </div>
+            <!-- LinkedIn -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="linkedin-share-btn">
+                    <i class="bi bi-linkedin me-2"></i>
+                    LinkedIn
+                </button>
+            </div>
+            <!-- Reddit -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="reddit-share-btn">
+                    <i class="bi bi-reddit me-2"></i>
+                    Reddit
+                </button>
+            </div>
+            <!-- Telegram -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="telegram-share-btn">
+                    <i class="bi bi-telegram me-2"></i>
+                    Telegram
+                </button>
+            </div>
+            <!-- Bluesky -->
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="bluesky-share-btn">
+                    <i class="bi bi-bluesky me-2"></i>
+                    Bluesky
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main information and donate container -->
+    <div class="container mt-3 mt-md-5 mb-3 mb-lg-5">
+        <!-- Main information -->
         <div class="row">
             <div class="col-12 col-lg-6">
-                <div class="card mt-3">
+                <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">What does this do?</h5>
-                        <p class="card-text">Link Cleaner is a web app that removes unnecessary junk from web links in one click. The result can then be copied to the device clipboard, shared to another app or service, or displayed as a QR code for easy scanning.</p>
-                        <p>If you install Link Cleaner with a supported browser and operating system (e.g. Chrome on Android), it appears in your system share menu. Through the share menu, you can send clean links to apps by first sharing them to Link Cleaner, and then Link Cleaner can reopen the share menu with the clean links.</p>
-                        <p>Link Cleaner also has a <a href="https://www.icloud.com/shortcuts/739e8f515b60435299cac0ec6ec045a7" target="_blank">Shortcut</a> for easy access on iPhones and iPads, and it appears as a search engine suggestion in desktop web browsers. If you want to use Link Cleaner in other workflows, you can open a URL with <code>https://linkcleaner.app/?url=X</code>. The url parameter should be a link that has been <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent" target="_blank">properly encoded</a>.</p>
-                        <p>Link Cleaner is built to be private and secure. Check the <a href="https://github.com/corbindavenport/link-cleaner/blob/main/PRIVACY.md" target="_blank">Privacy Policy</a> for more information.</p>
+                        <h5 class="card-title">Welcome to Link Cleaner</h5>
+                        <p class="card-text">Link Cleaner is a web app that removes tracking code, search parameters, and other data from URL links. It's a great way to shorten links for text chats, sharing in social media posts, or embedding in documents and articles.</p>
+                        <p class="card-text">Link Cleaner is created by <a href="https://corbin.io" target="_blank">Corbin Davenport</a> and <a href="https://github.com/corbindavenport/link-cleaner">open-source software</a>.</p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-lg-6 mb-3">
-                <!-- The Spacebar ad -->
-                <div class="card mt-3">
+                <div class="card mb-3">
                     <div class="card-header">
                         Advertisement
                     </div>
@@ -227,50 +236,228 @@
                         <a href="https://www.spacebar.news/#/portal/signup" target="_blank" class="btn btn-primary btn-sm w-100">Go to The Spacebar</a>
                     </div>
                 </div>
-                <!-- Donate card -->
-                <div class="card donate-card mt-3">
-                    <div class="card-body">
-                        <p class="card-text">Link Cleaner is developed by <a href="https://corbin.io" target="_blank">Corbin Davenport</a>, and all the code is available <a href="https://github.com/corbindavenport/link-cleaner" target="_blank">as open-source</a>. If you want to report a bug or suggest features, please <a href="https://github.com/corbindavenport/link-cleaner/issues/new" target="_blank">create an issue on GitHub</a> or <a href="https://discord.gg/59wfy5cNHw" target="_blank">join the Discord group</a>.</p>
-                        <p class="card-text">If you find Link Cleaner useful, please donate to support continued development. It would mean a lot!</p>
-                        <a href="https://www.patreon.com/corbindavenport" target="_blank">
-                            <button type="button" class="btn btn-success w-100 mb-2">Support via Patreon</button>
-                        </a>
-                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Link%20Cleaner%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">
-                            <button type="button" class="btn btn-success w-100 mb-2">Donate via PayPal</button>
-                        </a>
-                        <a href="https://cash.app/$corbdav" target="_blank">
-                            <button type="button" class="btn btn-success w-100">Donate via Cash App</button>
-                        </a>
+            </div>
+        </div>
+        <!-- Features gallery-->
+        <div class="row mt-1 mt-md-5">
+            <div class="col-12 col-md-6">
+                <h3>Share through everything</h3>
+                <p>Thanks to the Web Share API, Link Cleaner can share cleaned links directly to other applications. If you <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">install Link Cleaner</a> as an application, it can also appear in the share menu in your other applications. This works best on Google Chrome for Android, Microsoft Edge on Windows, and other browsers that fully support the Web Share API.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Mac, iPhone, and iPad integration</h3>
+                <p>The official <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">Apple Shortcut</a> can add Link Cleaner to your iPhone or Mac's share menu. It's a great way to quickly filter links before using or sharing them elsewhere. You can also add Link Cleaner to your home screen or Dock.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Perfect for publishers</h3>
+                <p>Link Cleaner can help you clean up links before using them in articles, documents, podcasts, or or other published content. If you have an Amazon store affilate ID, add it in the <a href="/settings/">settings page</a> and Link Cleaner will apply it to all cleaned Amazon links.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Selective link processing</h3>
+                <p>Link Cleaner removes tracking and junk data from links, while keeping the parameters required for the page to load. For example, YouTube video links will retain the <b>watch?v=</b> video ID, but not the <b>?si=</b> parameter for tracking who shared the link.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Custom workflows and automations</h3>
+                <p>Link Cleaner can be used in scripts or other automation tools, using the <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">custom share URL</a>. There's also an <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">official bookmarklet</a> for easy link cleaning on desktop web browsers.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Easy bulk cleaning</h3>
+                <p>You can use <a href="/bulk/">Bulk Mode</a> to quickly clean many links in one click, using the same settings and per-site overrides as the regular Link Cleaner mode.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Privacy first</h3>
+                <p>Link Cleaner creates cleaned links and QR codes locally in your web browser, without sending the URLs to an external server. Check the <a href="https://github.com/corbindavenport/link-cleaner/blob/main/PRIVACY.md" target="_blank">Privacy Policy</a> for more information.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Open-source software</h3>
+                <p>Link Cleaner is an <a href="https://github.com/corbindavenport/link-cleaner">open-source software project on GitHub</a> under the GPLv3 license. You can check out the code, suggest features or bugs, or create your own version.</p>
+            </div>
+        </div>
+        <!-- Support information -->
+        <div class="row mt-1 mt-md-5">
+            <div class="col-12 display-6 mb-3" id="support">
+                Support Link Cleaner
+            </div>
+            <div class="col-12 mb-3">
+                If you find Link Cleaner useful, please donate to support continued development! Sharing Link Cleaner with other people is also great.
+            </div>
+            <div class="col-12 col-md-4">
+                <a href="https://www.patreon.com/corbindavenport" target="_blank">
+                    <button type="button" class="btn btn-success w-100 mb-2">Support via Patreon</button>
+                </a>
+            </div>
+            <div class="col-12 col-md-4">
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=4SZVSMJKDS35J&amp;lc=US&amp;item_name=Link%20Cleaner%20Donation&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">
+                    <button type="button" class="btn btn-success w-100 mb-2">Donate via PayPal</button>
+                </a>
+            </div>
+            <div class="col-12 col-md-4">
+                <a href="https://cash.app/$corbdav" target="_blank">
+                    <button type="button" class="btn btn-success w-100 mb-2">Donate via Cash App</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install modal -->
+    <!-- Only one of the web app install items is displayed for a given user, the rest are always visible -->
+    <div class="modal fade" id="install-modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="install-modal-label">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="install-modal-label">Install Link Cleaner</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <!-- Install options accordion -->
+                    <div class="accordion accordion-flush" id="install-accordion">
+                        <!-- PWA install -->
+                        <div class="accordion-item" id="accordion-pwa-container" style="display: none;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#install-web-app" aria-expanded="true" aria-controls="install-web-app">
+                                    Install Web App (PWA)
+                                </button>
+                            </h2>
+                            <div id="install-web-app" class="accordion-collapse collapse show" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <p>This will install Link Cleaner on your device as an application.</p>
+                                    <p>
+                                        <button type="button" class="btn btn-primary w-100" id="install-btn">Install Link Cleaner</button>
+                                    </p>
+                                    <p>On Chrome for Android and other supported platforms, this will add Link Cleaner to your system's share menu so it can recieve links.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- iOS app install -->
+                        <div class="accordion-item" id="accordion-apple-app-container" style="display: none;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#install-apple-web-app" aria-expanded="true" aria-controls="install-apple-web-app">
+                                    Web App for iPhone, iPad, and Mac
+                                </button>
+                            </h2>
+                            <div id="install-apple-web-app" class="accordion-collapse collapse show" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <p>In the Safari web browser, select the <i class="bi bi-box-arrow-up"></i> button, then select <strong>Add to Home Screen</strong> or <strong>Add to Dock</strong> to install Link Cleaner.
+                                    <p>On Mac, you need macOS Sonoma 14.0 or higher to install web apps through Safari.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Apple Shortcut -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#install-apple-shortcut" aria-expanded="false" aria-controls="install-apple-shortcut">
+                                    Shortcut for iPhone, iPad, and Mac
+                                </button>
+                            </h2>
+                            <div id="install-apple-shortcut" class="accordion-collapse collapse" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <p>This shortcut adds Link Cleaner to the Share Sheet on iPhone, iPad, and Mac devices.</p>
+                                    <p>
+                                        <a href="https://www.icloud.com/shortcuts/739e8f515b60435299cac0ec6ec045a7" target="_blank" type="button" class="btn btn-primary w-100">Install Apple Shortcut</a>
+                                    </p>
+                                    <p>You can use the Shortcut as a filter while sharing links. Instead of selecting the app or contact directly, select Link Cleaner first, then use the Share button in the Link Cleaner window.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Bookmarklet -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#install-bookmarklet" aria-expanded="false" aria-controls="install-bookmarklet">
+                                    Browser Bookmarklet
+                                </button>
+                            </h2>
+                            <div id="install-bookmarklet" class="accordion-collapse collapse" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <!-- Bookmarklet script in /js/bookmarklet.js -->
+                                    <p>The bookmarklet cleans your current page URL in a Link Cleaner popup window. <strong>Drag the below link to your bookmarks bar to install it.</strong></p>
+                                    <p class="text-center">
+                                        <a href="javascript:(function()%7Bfunction%20openLinkCleaner()%20%7B%0A%20%20%20%20window.open('https%3A%2F%2Flinkcleaner.app%2F%3Furl%3D'%20%2B%20encodeURIComponent(window.location.href)%20%2B%20'%26utm_source%3DBookmarklet'%2C%20'linkWindow'%2C%20'popup%2C%20width%3D400%2C%20height%3D500%2C%20left%3D100%2C%20top%3D100%2C%20noopener%2C%20noreferrer')%3B%0A%7D%0AopenLinkCleaner()%3B%7D)()%3B" type="button" class="btn btn-secondary w-100" title="Link Cleaner">Link Cleaner</a>
+                                    </p>
+                                    <p>If your bookmarks bar is not visible, try using the Ctrl+Shift+B (Windows) or Cmd+Shift+B (Mac) keyboard shortcut.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Custom share URL -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#install-custom-url" aria-expanded="false" aria-controls="install-custom-url">
+                                    Custom Share URL
+                                </button>
+                            </h2>
+                            <div id="install-custom-url" class="accordion-collapse collapse" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <p>You can use Link Cleaner in custom worfklows and automations with the share URL. This is an example using the <code>https://example.com</code> page:</p>
+                                    <p><code>https://linkcleaner.app/?url=https%3A%2F%2Fexample.com</code></p>
+                                    <p>The only required parameter is <code>url</code>. The URL should be encoded with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent" target="_blank">encodeURIComponent()</a> or another similar function, or special characters like <b>?</b> or <b>&</b> could break the URL.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Link history modal -->
+    <div class="modal fade" id="history-modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="history-modal-label">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="history-modal-label">Clean History</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body border-bottom">
+                    These are your most recent cleaned links. Your links are not transmitted or permanently stored.
+                </div>
+                <div class="list-group list-group-flush rounded-3" id="link-history-list">
+                    <button type="button" class="list-group-item list-group-item-action" id="link-history-list-placeholder" disabled>No links yet!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- QR code modal -->
-    <div class="modal" id="qr-modal">
+    <div class="modal fade" id="qr-modal" data-bs-keyboard="true" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="qr-modal-label">QR Code</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="padding: 0">
-                    <div id="qrcode"></div>
+                <div class="modal-body pb-0">
+                    <div id="qrcode" class="mb-2"></div>
+                    <div class="row">
+                        <!-- Save as PNG button -->
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary w-100 mb-3" id="qr-download-btn" aria-label="Save to Downloads">
+                                <i class="bi bi-download me-2"></i>
+                                <span class="d-sm-none">Save</span>
+                                <span class="d-none d-sm-inline">Save to Downloads</span>
+                            </button>
+                        </div>
+                        <!-- Share file button -->
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary w-100 mb-3" id="qr-share-btn" aria-label="Share as PNG Image">
+                                <i class="bi bi-share-fill me-2"></i>
+                                <span class="d-sm-none">Share</span>
+                                <span class="d-none d-sm-inline">Share as Image</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Mastodon share modal -->
-    <div class="modal" tabindex="-1" id="mastodon-modal">
+    <div class="modal fade" id="mastodon-modal" data-bs-keyboard="true" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="mastodon-server-hostname" class="form-label">Mastodon server</label>
                         <input type="text" class="form-control" id="mastodon-server-hostname" placeholder="mastodon.social" autocomplete="off" spellcheck="false">
-                        <div class="form-text">This must be a server running <a href="https://joinmastodon.org/" target="_blank">Mastodon</a>, <a href="https://joinfirefish.org/" target="_blank">Firefish/Calckey</a>, <a href="https://join.misskey.page/en-US/" target="_blank">Misskey</a>, or another compatible social media platform.</div>
+                        <div class="form-text">This must be a server running <a href="https://joinmastodon.org/" target="_blank">Mastodon</a>, <a href="https://join.misskey.page/en-US/" target="_blank">Misskey</a>, or another compatible social media platform.</div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -281,15 +468,6 @@
         </div>
     </div>
 
-    <!-- Clipboard copy toast -->
-    <div class="toast-container p-1 p-sm-3 position-fixed top-0 start-50 translate-middle-x">
-        <div class="toast bg-body-secondary text-center rounded-5" role="alert" aria-live="assertive" aria-atomic="true" id="clipboard-toast">
-            <div class="toast-body">
-                Copied to clipboard!
-            </div>
-        </div>
-    </div>
-    
     <script src="https://cdn.jsdelivr.net/gh/ushelp/EasyQRCodeJS@4.6.0/dist/easy.qrcode.min.js"></script>
     <script src="js/shared.js"></script>
     <script src="js/main.js"></script>
