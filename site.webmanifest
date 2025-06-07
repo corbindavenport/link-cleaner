@@ -1,7 +1,7 @@
 {
     "name": "Link Cleaner",
     "short_name": "Link Cleaner",
-    "description": "Remove tracking code and other variables from web links with the press of a button! Installing Link Cleaner adds it to your device's share menu for links.",
+    "description": "Remove tracking code, search parameters, and other junk from URL links. Installing Link Cleaner adds it to your device's share menu for links.",
     "icons": [
         {
             "src": "img/icon_x192.png",
