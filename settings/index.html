@@ -61,9 +61,9 @@
 <body>
 
     <!-- Nav bar -->
-    <nav class="navbar bg-body-secondary fixed-top navbar-expand-md border-bottom shadow-sm">
+    <nav class="navbar bg-body-secondary fixed-top navbar-expand-sm border-bottom shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Link Cleaner</a>
+            <span class="navbar-brand d-sm-none">Link Cleaner</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -71,13 +71,19 @@
                 <!-- Navigation links -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="bi bi-house-fill"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/bulk/">
                             <i class="bi bi-stack"></i>
                             Bulk Mode
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/settings/">
+                        <a class="nav-link active" aria-current="page" href="#">
                             <i class="bi bi-gear-fill"></i>
                             Settings
                         </a>

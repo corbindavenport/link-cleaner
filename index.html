@@ -61,15 +61,21 @@
 <body>
 
     <!-- Nav bar -->
-    <nav class="navbar bg-body-secondary fixed-top navbar-expand-md">
+    <nav class="navbar bg-body-secondary fixed-top navbar-expand-sm">
         <div class="container-fluid">
-            <a class="navbar-brand active" href="/">Link Cleaner</a>
+            <span class="navbar-brand d-sm-none">Link Cleaner</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Navigation links -->
                 <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <i class="bi bi-house-fill"></i>
+                            Home
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/bulk/">
                             <i class="bi bi-stack"></i>
@@ -84,18 +90,18 @@
                     </li>
                 </ul>
                 <!-- Buttons -->
-                <form class="d-flex flex-column flex-md-row">
+                <form class="d-flex flex-column flex-sm-row">
                     <!-- History button -->
-                    <button class="btn btn-primary me-0 me-md-2 mt-2 mt-md-0" type="button" aria-label="History" data-bs-toggle="modal" data-bs-target="#history-modal">
+                    <button class="btn btn-primary me-0 me-sm-2 mt-2 mt-sm-0" type="button" aria-label="History" data-bs-toggle="modal" data-bs-target="#history-modal">
                         <i class="bi bi-clock-history me-2"></i>
-                        <span class="d-md-none">Link History</span>
-                        <span class="d-none d-md-inline">History</span>
+                        <span class="d-sm-none">Link History</span>
+                        <span class="d-none d-sm-inline">History</span>
                     </button>
                     <!-- Install button -->
-                    <button class="btn btn-primary mt-2 mt-md-0" type="button" aria-label="Install Link Cleaner" data-bs-toggle="modal" data-bs-target="#install-modal">
+                    <button class="btn btn-primary mt-2 mt-sm-0" type="button" aria-label="Install Link Cleaner" data-bs-toggle="modal" data-bs-target="#install-modal">
                         <i class="bi bi-plus-circle me-2"></i>
-                        <span class="d-md-none">Install Link Cleaner</span>
-                        <span class="d-none d-md-inline">Install</span>
+                        <span class="d-sm-none">Install Link Cleaner</span>
+                        <span class="d-none d-sm-inline">Install</span>
                     </button>
                 </form>
             </div>
@@ -170,42 +176,42 @@
             </div>
             <!-- Mastodon -->
             <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-outline-primary w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
+                <button type="button" class="btn btn-info w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
                     <i class="bi bi-mastodon me-2"></i>
                     Mastodon
                 </button>
             </div>
             <!-- Facebook -->
             <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="facebook-share-btn">
+                <button type="button" class="btn btn-info w-100 mt-3" id="facebook-share-btn">
                     <i class="bi bi-facebook me-2"></i>
                     Facebook
                 </button>
             </div>
             <!-- LinkedIn -->
             <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="linkedin-share-btn">
+                <button type="button" class="btn btn-info w-100 mt-3" id="linkedin-share-btn">
                     <i class="bi bi-linkedin me-2"></i>
                     LinkedIn
                 </button>
             </div>
             <!-- Reddit -->
             <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="reddit-share-btn">
+                <button type="button" class="btn btn-info w-100 mt-3" id="reddit-share-btn">
                     <i class="bi bi-reddit me-2"></i>
                     Reddit
                 </button>
             </div>
             <!-- Telegram -->
             <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="telegram-share-btn">
+                <button type="button" class="btn btn-info w-100 mt-3" id="telegram-share-btn">
                     <i class="bi bi-telegram me-2"></i>
                     Telegram
                 </button>
             </div>
             <!-- Bluesky -->
             <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-outline-primary w-100 mt-3" id="bluesky-share-btn">
+                <button type="button" class="btn btn-info w-100 mt-3" id="bluesky-share-btn">
                     <i class="bi bi-bluesky me-2"></i>
                     Bluesky
                 </button>
