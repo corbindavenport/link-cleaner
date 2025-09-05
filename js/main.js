@@ -47,7 +47,12 @@ function processLink(link, startMode = 'user') {
     } else {
         var fixTwitterEnabled = false;
     }
-    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled);
+    if (localStorage.getItem('walmart-shorten-check')) {
+        var shortenWalmartEnabled = JSON.parse(localStorage.getItem('walmart-shorten-check').toLowerCase());
+    } else {
+        var shortenWalmartEnabled = false;
+    }
+    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled);
     // Insert cleaned link and update page layout
     urlInput.value = newLink;
     document.body.dataset.view = 'cleaned';

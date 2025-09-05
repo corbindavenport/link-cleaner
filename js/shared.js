@@ -4,7 +4,7 @@
 document.body.dataset.prideMode = (new Date()).getMonth() === 5;
 
 // Function for cleaning links
-function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id']) {
+function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = false, walmartShortenEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id']) {
     try {
         var oldLink = new URL(link);
     } catch (e) {
@@ -95,14 +95,6 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
             newLink.pathname = '/site/' + productID[1] + '.p';
         }
     }
-    // Shorten Walmart links (#41)
-    if ((oldLink.host === 'www.walmart.com') && oldLink.pathname.includes('/ip/')) {
-        var regex = /\/ip\/.*\/(\d+)/;
-        var productID = oldLink.pathname.match(regex);
-        if (productID) {
-            newLink.pathname = '/ip/' + productID[1];
-        }
-    }
     // Allow Xiaohongshu links to be viewed without an account (#47)
     if ((oldLink.host === 'www.xiaohongshu.com') && oldLink.searchParams.has('xsec_token')) {
         newLink.searchParams.append('xsec_token', oldLink.searchParams.get('xsec_token'));
@@ -117,9 +109,18 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     if ((oldLink.host === 'cts.businesswire.com') && oldLink.searchParams.has('url')) {
         newLink = new URL(oldLink.searchParams.get('url'));
     }
-    // Use FixTwitter if enabled
+    // Shorten Twitter/X links with FixTwitter if enabled
     if (fixTwitterEnabled && ((oldLink.host === 'twitter.com') || (oldLink.host === 'x.com'))) {
         newLink.host = 'fxtwitter.com';
+    }
+    // Shorten Walmart links if enabled (#41)
+    console.log(walmartShortenEnabled)
+    if (walmartShortenEnabled && (oldLink.host === 'www.walmart.com') && oldLink.pathname.includes('/ip/')) {
+        var regex = /\/ip\/.*\/(\d+)/;
+        var productID = oldLink.pathname.match(regex);
+        if (productID) {
+            newLink.pathname = '/ip/' + productID[1];
+        }
     }
     // Add Amazon affiliate code if enabled
     if (oldLink.host.includes('amazon') && amazonTrackingId) {
