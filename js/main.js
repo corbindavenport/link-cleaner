@@ -193,27 +193,6 @@ document.getElementById('qr-download-btn').addEventListener('click', function ()
     }
 })
 
-// Share QR as PNG button
-const supportsFileShare = (navigator.canShare && navigator.canShare({ files: [] }));
-if (supportsFileShare) {
-    document.getElementById('qr-share-btn').addEventListener('click', function () {
-        const qrContainer = document.getElementById('qrcode');
-        const canvas = qrContainer.querySelector('canvas');
-        if (canvas) {
-            canvas.toBlob(function (blob) {
-                const file = new File([blob], 'qrcode.png', { type: 'image/png' });
-                navigator.share({
-                    files: [file],
-                    title: 'QR Code',
-                    text: 'QR code image'
-                }).catch(() => { });
-            }, 'image/png');
-        }
-    })
-} else {
-    document.getElementById('qr-share-btn').disabled = 'true';
-}
-
 // Remove QR code when popup is hidden (so new codes don't show up below new ones)
 qrModal.addEventListener('hidden.bs.modal', function (event) {
     document.getElementById('qrcode').innerHTML = '';
