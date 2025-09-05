@@ -109,6 +109,11 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     if ((oldLink.host === 'cts.businesswire.com') && oldLink.searchParams.has('url')) {
         newLink = new URL(oldLink.searchParams.get('url'));
     }
+    // Fix Webtoon links (#50)
+    if ((oldLink.host === 'www.webtoons.com') && oldLink.searchParams.has('title_no') && oldLink.searchParams.has('episode_no')) {
+        newLink.searchParams.append('title_no', oldLink.searchParams.get('title_no'));
+        newLink.searchParams.append('episode_no', oldLink.searchParams.get('episode_no'));
+    }
     // Shorten Twitter/X links with FixTwitter if enabled
     if (fixTwitterEnabled && ((oldLink.host === 'twitter.com') || (oldLink.host === 'x.com'))) {
         newLink.host = 'fxtwitter.com';
