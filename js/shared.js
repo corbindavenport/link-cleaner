@@ -65,6 +65,9 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     } else if ((oldLink.host === 'www.youtube.com') && oldLink.pathname.includes('playlist') && oldLink.searchParams.has('list')) {
         // Don't remove list ID for YouTube playlist links (#37)
         newLink.searchParams.append('list', oldLink.searchParams.get('list'));
+    } else if ((oldLink.host === 'youtu.be') && oldLink.searchParams.has('t')) {
+        // Don't remove video timestamp for shortened YouTube links (#49)
+        newLink.searchParams.append('t', oldLink.searchParams.get('t'));
     }
     // Don't remove required variables for Facebook links
     if ((oldLink.host === 'www.facebook.com') && oldLink.pathname.includes('story.php')) {
