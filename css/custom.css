@@ -64,3 +64,11 @@ body[data-pride-mode="true"] #linkcleaner-header {
 body[data-pride-mode="true"] .navbar .navbar-brand::after {
     content: ' 🏳️‍🌈';
 }
+
+body[data-techathon] #techathon-banner {
+    display: block !important;
+}
+
+body[data-techathon] #linkcleaner-header {
+    display: none !important;
+}
