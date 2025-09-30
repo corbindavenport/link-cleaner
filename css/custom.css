@@ -2,23 +2,15 @@ body {
     padding-top: 56px;
 }
 
-/* Update UI after a link is cleaned */
-
-#link-clear-btn,
-#linkcleaner-buttons-container {
-    display: none;
+#link-input:empty::before {
+  content: 'Type or paste a link...';
+  color: var(--bs-secondary-color);
+  pointer-events: none;
+  display: block; /* For Firefox */
 }
 
-body[data-view="cleaned"] #linkcleaner-buttons-container {
-    display: flex !important;
-}
-
-@media only screen and (hover: none) {
-
-    body[data-view="cleaned"] #link-clear-btn {
-        display: inline-block !important;
-    }
-
+#linkcleaner-url-container:has(#link-input:empty) #link-clear-btn {
+    display: none !important;
 }
 
 /* QR code share option */
@@ -63,12 +55,4 @@ body[data-pride-mode="true"] #linkcleaner-header {
 
 body[data-pride-mode="true"] .navbar .navbar-brand::after {
     content: ' 🏳️‍🌈';
-}
-
-body[data-techathon] #techathon-banner {
-    display: block !important;
-}
-
-body[data-techathon] #linkcleaner-header {
-    display: none !important;
 }

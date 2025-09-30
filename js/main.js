@@ -9,7 +9,7 @@ const isApplePlatform = ['MacIntel', 'Macintosh', 'iPhone', 'iPod', 'iPad'].incl
 
 // Initialize elements, modals, and toasts
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'));
-const urlInput = document.getElementById('link-input');
+const linkEl = document.getElementById('link-input');
 
 // Save PWA install prompt
 var installPrompt = null;
@@ -54,8 +54,8 @@ function processLink(link, startMode = 'user') {
     }
     var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled);
     // Insert cleaned link and update page layout
-    urlInput.value = newLink;
-    document.body.dataset.view = 'cleaned';
+    linkEl.innerText = newLink;
+    document.getElementById('linkcleaner-buttons-container').classList.remove('d-none');
     // If medium size device or smaller, scroll past the top message
     const container = document.getElementById('linkcleaner-url-container');
     const containerTop = container.getBoundingClientRect().top + window.scrollY;
@@ -70,9 +70,9 @@ function processLink(link, startMode = 'user') {
     // If the user is on a touchscreen, unfocus the input element, so nothing is covering the Copy and share buttons
     // If the user is not on a touchscreen, select the text so the user can immediately do Ctrl+C
     if (window.matchMedia('screen and (hover: none)').matches) {
-        urlInput.blur();
+        linkEl.blur();
     } else {
-        urlInput.select();
+        window.getSelection().selectAllChildren(linkEl);
     }
     // Hide placeholder in link history list before adding new item
     document.getElementById('link-history-list-placeholder').style.display = 'none';
@@ -93,17 +93,18 @@ function processLink(link, startMode = 'user') {
 }
 
 // Process URL after a paste action is detected
-urlInput.addEventListener('paste', function () {
+linkEl.addEventListener('paste', function () {
     // This is wrapped in a timeout or it executes before the value has changed
     setTimeout(function () {
-        processLink(urlInput.value)
+        processLink(linkEl.innerText)
     }, 50)
 })
 
 // Process URL after an Enter key press
-urlInput.addEventListener('keyup', function (event) {
+linkEl.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        processLink(urlInput.value);
+        event.preventDefault();
+        processLink(linkEl.innerText);
     }
 });
 
@@ -124,8 +125,8 @@ try {
 
 // Clear button
 document.getElementById('link-clear-btn').addEventListener('click', function () {
-    urlInput.value = '';
-    urlInput.focus();
+    linkEl.innerText = '';
+    linkEl.focus();
 })
 
 // Copy link button
@@ -133,14 +134,14 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
     var btn = document.getElementById('link-copy-btn')
     if (navigator.clipboard) {
         // Use Clipboard API if available
-        var copyText = urlInput.value
+        var copyText = linkEl.value
         navigator.clipboard.writeText(copyText)
     } else {
         // Fallback to older API
-        var copyText = urlInput
+        var copyText = linkEl
         copyText.select()
         document.execCommand('copy')
-        urlInput.blur()
+        linkEl.blur()
     }
     // Change button design
     btn.classList.remove('btn-primary')
@@ -158,7 +159,7 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
         navigator.share({
-            url: urlInput.value
+            url: linkEl.value
         })
     })
 } else {
@@ -169,7 +170,7 @@ if (navigator.canShare) {
 // This generates the QR code only when the button is pressed
 var qrModal = document.getElementById('qr-modal');
 qrModal.addEventListener('show.bs.modal', function () {
-    var currentLink = urlInput.value;
+    var currentLink = linkEl.value;
     var qrContainer = document.getElementById('qrcode');
     const qrSettings = {
         text: currentLink,
@@ -200,13 +201,13 @@ qrModal.addEventListener('hidden.bs.modal', function (event) {
 
 // Test link button
 document.getElementById('link-test-btn').addEventListener('click', function () {
-    var currentLink = urlInput.value
+    var currentLink = linkEl.value
     openWindow(currentLink);
 })
 
 // Email button
 document.getElementById('email-btn').addEventListener('click', function () {
-    var currentLink = urlInput.value
+    var currentLink = linkEl.value
     var emailSubject = 'Link for you'
     var emailBody = '\n\n\n' + currentLink
     window.open('mailto:?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody), '_blank')
@@ -214,14 +215,14 @@ document.getElementById('email-btn').addEventListener('click', function () {
 
 // SMS button
 document.getElementById('sms-btn').addEventListener('click', function () {
-    var currentLink = urlInput.value
+    var currentLink = linkEl.value
     window.open('sms:?&body=' + encodeURIComponent(currentLink), '_blank')
 })
 
 // Mastodon button
 document.getElementById('mastodon-server-hostname').value = localStorage['mastodon-server'] || ''
 document.getElementById('mastodon-share-btn').addEventListener('click', function () {
-    var currentLink = urlInput.value
+    var currentLink = linkEl.value
     var currentServer = document.getElementById('mastodon-server-hostname').value
     if (currentServer) {
         localStorage['mastodon-server'] = currentServer
@@ -233,31 +234,31 @@ document.getElementById('mastodon-share-btn').addEventListener('click', function
 
 // Facebook button
 document.getElementById('facebook-share-btn').addEventListener('click', function () {
-    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(urlInput.value);
+    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(linkEl.value);
     openWindow(link);
 })
 
 // LinkedIn button
 document.getElementById('linkedin-share-btn').addEventListener('click', function () {
-    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlInput.value);
+    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(linkEl.value);
     openWindow(link);
 })
 
 // Reddit button
 document.getElementById('reddit-share-btn').addEventListener('click', function () {
-    var link = 'https://reddit.com/submit?url=' + encodeURIComponent(urlInput.value);
+    var link = 'https://reddit.com/submit?url=' + encodeURIComponent(linkEl.value);
     openWindow(link);
 })
 
 // Telegram button
 document.getElementById('telegram-share-btn').addEventListener('click', function () {
-    var link = 'https://t.me/share/url?url=' + encodeURIComponent(urlInput.value)
+    var link = 'https://t.me/share/url?url=' + encodeURIComponent(linkEl.value)
     openWindow(link);
 })
 
 // Bluesky button
 document.getElementById('bluesky-share-btn').addEventListener('click', function () {
-    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(urlInput.value)
+    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(linkEl.value)
     openWindow(link);
 })
 

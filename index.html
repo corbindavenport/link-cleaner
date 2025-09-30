@@ -58,10 +58,10 @@
     <script defer data-domain="linkcleaner.app" src="https://plausible.io/js/plausible.js"></script>
 </head>
 
-<body>
+<body class="bg-body-tertiary">
 
     <!-- Nav bar -->
-    <nav class="navbar bg-body-secondary fixed-top navbar-expand-sm">
+    <nav class="navbar bg-body-secondary fixed-top navbar-expand-sm shadow-sm">
         <div class="container-fluid">
             <span class="navbar-brand d-sm-none">Link Cleaner</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,139 +108,112 @@
         </div>
     </nav>
 
-    <!-- Techathon temporary video header -->
-    <div id="techathon-banner" class="d-none bg-dark text-white border-bottom">
-        <div class="container-lg">
-            <div class="row">
-                <!-- Text information and button link -->
-                <div class="col-12 col-sm-7 col-lg-9 d-flex align-items-center text-center">
-                    <div class="w-100 my-2">
-                        <b>Techathon</b> is raising money for Doctors Without Borders/Médecins Sans Frontières!
-                        <a href="https://www.twitch.tv/techathon" target="_blank">
-                            <button class="btn btn-outline-info w-100 mt-2" type="button" aria-label="More info">
-                                <i class="bi bi-arrow-up-right-square me-2"></i>
-                                Watch on Twitch
-                            </button>
-                        </a>
-                    </div>
-                </div>
-                <!-- Twitch embed -->
-                <div class="col-12 col-sm-5 col-lg-3 d-flex align-items-center text-center">
-                    <div class="ratio ratio-16x9 bg-secondary">
-                        <iframe src="https://player.twitch.tv/?channel=techathon&parent=linkcleaner.app&autoplay=true" frameborder="0" allow="picture-in-picture; autoplay" scrolling="no" allowallowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Banner text -->
-    <div id="linkcleaner-header" class="container-fluid bg-body-secondary">
-        <div class="container py-3 py-sm-5">
-            <div class="display-6 text-center">
+    <!-- Main container for URL text field, share buttons, and surrounding text -->
+    <div class="container-md d-flex flex-column" style="min-height: calc(100vh - 146px);">
+        <!-- Main text and promotional links -->
+        <div class="d-flex flex-grow-1">
+            <div class="d-flex align-items-end display-6 text-center py-5">
                 Remove tracking code, search parameters, and other junk from URL links.
             </div>
         </div>
-    </div>
-
-    <!-- URL input container -->
-    <nav id="linkcleaner-url-container" class="bg-body-secondary py-1 py-sm-2 border-bottom shadow-sm" style="position: sticky; top: 56px; z-index: 1000;">
-        <div class="container-md">
-            <div class="input-group bg-body rounded-3">
-                <input type="text" class="form-control form-control-lg" id="link-input" autocomplete="off" inputmode="url" placeholder="Type or paste a link here...">
-                <button class="btn btn-outline-danger btn-sm" type="button" id="link-clear-btn" aria-label="Clear URL">
-                    <i class="bi-x-lg mx-1"></i>
-                    <span class="d-none d-md-inline">Clear</span>
-                </button>
-                <button class="btn btn-outline-secondary btn-sm" type="button" id="link-paste-btn" aria-label="Paste from clipboard">
-                    <i class="bi-clipboard mx-1"></i>
-                    <span class="d-none d-md-inline">Paste</span>
-                </button>
+        <!-- Container for text field and main buttons -->
+        <div id="linkcleaner-url-container" class="d-flex flex-column flex-sm-row bg-body border rounded-2 shadow" style="position: sticky; top: 56px; z-index: 500;">
+            <div id="link-input" class="form-control form-control-lg border-0" contenteditable="plaintext-only" autocomplete="off" inputmode="url"></div>
+            <div class="d-flex flex-row">
+                <button class="btn btn-sm w-100" type="button" id="link-clear-btn" aria-label="Clear button">
+                <i class="bi bi-x-circle me-2"></i>
+                <span class="d-sm-none">Clear</span>
+            </button>
+            <button class="btn btn-sm w-100" type="button" id="link-paste-btn" aria-label="Paste button">
+                <i class="bi-clipboard me-2"></i>
+                <span class="d-sm-none">Paste</span>
+            </button>
             </div>
+            
         </div>
-    </nav>
+        <!-- Buttons container -->
+        <div class="flex-grow-1 pt-3">
+            <div class="row d-none" id="linkcleaner-buttons-container">
 
-    <!-- Share and action buttons container -->
-    <div class="container" id="linkcleaner-main-container">
-        <!-- Share buttons -->
-        <div class="row mt-2" id="linkcleaner-buttons-container">
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-primary w-100 mt-3" id="link-share-btn" aria-label="Share">
-                    <i class="bi bi-share-fill"></i>&nbsp;
-                    Share
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-primary w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
-                    <i class="bi bi-clipboard me-2"></i>
-                    Copy
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-primary w-100 mt-3" id="link-test-btn">
-                    <i class="bi bi-box-arrow-up-right me-2"></i>
-                    Test link
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-primary w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
-                    <i class="bi bi-qr-code me-2"></i>
-                    Show QR code
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-primary w-100 mt-3" id="email-btn" aria-label="Send in Email">
-                    <i class="bi bi-envelope me-2"></i>
-                    Send in Email
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-primary w-100 mt-3" id="sms-btn" aria-label="Send in Text">
-                    <i class="bi bi-chat-left-dots-fill me-2"></i>
-                    Send in Text
-                </button>
-            </div>
-            <!-- Mastodon -->
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-info w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
-                    <i class="bi bi-mastodon me-2"></i>
-                    Mastodon
-                </button>
-            </div>
-            <!-- Facebook -->
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-info w-100 mt-3" id="facebook-share-btn">
-                    <i class="bi bi-facebook me-2"></i>
-                    Facebook
-                </button>
-            </div>
-            <!-- LinkedIn -->
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-info w-100 mt-3" id="linkedin-share-btn">
-                    <i class="bi bi-linkedin me-2"></i>
-                    LinkedIn
-                </button>
-            </div>
-            <!-- Reddit -->
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-info w-100 mt-3" id="reddit-share-btn">
-                    <i class="bi bi-reddit me-2"></i>
-                    Reddit
-                </button>
-            </div>
-            <!-- Telegram -->
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-info w-100 mt-3" id="telegram-share-btn">
-                    <i class="bi bi-telegram me-2"></i>
-                    Telegram
-                </button>
-            </div>
-            <!-- Bluesky -->
-            <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                <button type="button" class="btn btn-info w-100 mt-3" id="bluesky-share-btn">
-                    <i class="bi bi-bluesky me-2"></i>
-                    Bluesky
-                </button>
+
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-primary w-100 mt-3" id="link-share-btn" aria-label="Share">
+                        <i class="bi bi-share-fill"></i>&nbsp;
+                        Share
+                    </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-primary w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
+                        <i class="bi bi-clipboard me-2"></i>
+                        Copy
+                    </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-primary w-100 mt-3" id="link-test-btn">
+                        <i class="bi bi-box-arrow-up-right me-2"></i>
+                        Test link
+                    </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-primary w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
+                        <i class="bi bi-qr-code me-2"></i>
+                        Show QR code
+                    </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-primary w-100 mt-3" id="email-btn" aria-label="Send in Email">
+                        <i class="bi bi-envelope me-2"></i>
+                        Send in Email
+                    </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-primary w-100 mt-3" id="sms-btn" aria-label="Send in Text">
+                        <i class="bi bi-chat-left-dots-fill me-2"></i>
+                        Send in Text
+                    </button>
+                </div>
+                <!-- Mastodon -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-info w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
+                        <i class="bi bi-mastodon me-2"></i>
+                        Mastodon
+                    </button>
+                </div>
+                <!-- Facebook -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-info w-100 mt-3" id="facebook-share-btn">
+                        <i class="bi bi-facebook me-2"></i>
+                        Facebook
+                    </button>
+                </div>
+                <!-- LinkedIn -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-info w-100 mt-3" id="linkedin-share-btn">
+                        <i class="bi bi-linkedin me-2"></i>
+                        LinkedIn
+                    </button>
+                </div>
+                <!-- Reddit -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-info w-100 mt-3" id="reddit-share-btn">
+                        <i class="bi bi-reddit me-2"></i>
+                        Reddit
+                    </button>
+                </div>
+                <!-- Telegram -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-info w-100 mt-3" id="telegram-share-btn">
+                        <i class="bi bi-telegram me-2"></i>
+                        Telegram
+                    </button>
+                </div>
+                <!-- Bluesky -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <button type="button" class="btn btn-info w-100 mt-3" id="bluesky-share-btn">
+                        <i class="bi bi-bluesky me-2"></i>
+                        Bluesky
+                    </button>
+                </div>
             </div>
         </div>
     </div>
