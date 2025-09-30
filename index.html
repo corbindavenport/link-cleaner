@@ -119,17 +119,18 @@
         <!-- Container for text field and main buttons -->
         <div id="linkcleaner-url-container" class="d-flex flex-column flex-sm-row bg-body border rounded-2 shadow" style="position: sticky; top: 56px; z-index: 500;">
             <div id="link-input" class="form-control form-control-lg border-0" contenteditable="plaintext-only" autocomplete="off" inputmode="url"></div>
-            <div class="d-flex flex-row">
-                <button class="btn btn-sm w-100" type="button" id="link-clear-btn" aria-label="Clear button">
+            <!-- Clear button, hidden by default -->
+            <div class="d-flex flex-row mb-1 mb-sm-0">
+                <button class="btn btn-sm border-0 w-100 d-none" type="button" id="link-clear-btn" aria-label="Clear button">
                 <i class="bi bi-x-circle me-2"></i>
                 <span class="d-sm-none">Clear</span>
             </button>
-            <button class="btn btn-sm w-100" type="button" id="link-paste-btn" aria-label="Paste button">
+            <!-- Paste button -->
+            <button class="btn btn-sm border-0 w-100" type="button" id="link-paste-btn" aria-label="Paste button">
                 <i class="bi-clipboard me-2"></i>
                 <span class="d-sm-none">Paste</span>
             </button>
             </div>
-            
         </div>
         <!-- Buttons container -->
         <div class="flex-grow-1 pt-3">
@@ -138,7 +139,7 @@
 
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <button type="button" class="btn btn-primary w-100 mt-3" id="link-share-btn" aria-label="Share">
-                        <i class="bi bi-share-fill"></i>&nbsp;
+                        <i class="bi bi-share-fill"></i>
                         Share
                     </button>
                 </div>

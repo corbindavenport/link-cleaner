@@ -9,9 +9,21 @@ body {
   display: block; /* For Firefox */
 }
 
-#linkcleaner-url-container:has(#link-input:empty) #link-clear-btn {
-    display: none !important;
+/* Clear button behavior on touchscreen devices */
+
+@media only screen and (hover: none) {
+
+    /* Show the clear button when the text field is not empty */
+    #linkcleaner-url-container:has(#link-input) #link-clear-btn {
+        display: inline-block !important;
+    }
+
+    /* Hide the clear button when the text field is empty */
+    #linkcleaner-url-container:has(#link-input:empty) #link-clear-btn {
+        display: none !important;
+    }
 }
+
 
 /* QR code share option */
 #qrcode {
