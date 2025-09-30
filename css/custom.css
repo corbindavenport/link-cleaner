@@ -2,11 +2,39 @@ body {
     padding-top: 56px;
 }
 
+#linkcleaner-main-container {
+    min-height: 80vh;
+    min-height: calc(100vh - 146px);
+    min-height: calc(100vh - env(safe-area-inset-bottom) - 146px);
+}
+
+#link-input {
+    max-height: 6.5rem;
+    overflow: hidden;
+}
+
 #link-input:empty::before {
-  content: 'Type or paste a link...';
-  color: var(--bs-secondary-color);
-  pointer-events: none;
-  display: block; /* For Firefox */
+    content: 'Type or paste a link...';
+    color: var(--bs-secondary-color);
+    pointer-events: none;
+    /* For Firefox */
+    display: block;
+}
+
+#link-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#linkcleaner-url-container {
+    position: sticky;
+    top: 56px;
+    z-index: 500;
+}
+
+#linkcleaner-url-container:has(#link-input:focus) {
+    border-color: #86b7fe !important;
+    transition: border-color .15s ease-in-out;
 }
 
 /* Clear button behavior on touchscreen devices */
@@ -23,7 +51,6 @@ body {
         display: none !important;
     }
 }
-
 
 /* QR code share option */
 #qrcode {

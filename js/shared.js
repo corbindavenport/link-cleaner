@@ -122,7 +122,6 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         newLink.host = 'fxtwitter.com';
     }
     // Shorten Walmart links if enabled (#41)
-    console.log(walmartShortenEnabled)
     if (walmartShortenEnabled && (oldLink.host === 'www.walmart.com') && oldLink.pathname.includes('/ip/')) {
         var regex = /\/ip\/.*\/(\d+)/;
         var productID = oldLink.pathname.match(regex);

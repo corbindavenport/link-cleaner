@@ -59,7 +59,8 @@ function processLink(link, startMode = 'user') {
     // If medium size device or smaller, scroll past the top message
     const container = document.getElementById('linkcleaner-url-container');
     const containerTop = container.getBoundingClientRect().top + window.scrollY;
-    const desiredScrollTop = containerTop - 50;
+    const desiredScrollTop = containerTop - 68;
+    console.log(containerTop, desiredScrollTop)
     if (window.matchMedia('(max-width: 767.98px)').matches && (startMode === 'user')) {
         // Smooth scroll if the user entered the URL
         window.scrollTo({ top: desiredScrollTop, behavior: 'smooth' })
@@ -134,14 +135,13 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
     var btn = document.getElementById('link-copy-btn')
     if (navigator.clipboard) {
         // Use Clipboard API if available
-        var copyText = linkEl.value
+        var copyText = linkEl.innerText.trim()
         navigator.clipboard.writeText(copyText)
     } else {
         // Fallback to older API
-        var copyText = linkEl
-        copyText.select()
-        document.execCommand('copy')
-        linkEl.blur()
+        window.getSelection().selectAllChildren(linkEl);
+        document.execCommand('copy');
+        linkEl.blur();
     }
     // Change button design
     btn.classList.remove('btn-primary')
@@ -159,7 +159,7 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
 if (navigator.canShare) {
     document.getElementById('link-share-btn').addEventListener('click', function () {
         navigator.share({
-            url: linkEl.value
+            url: linkEl.innerText.trim()
         })
     })
 } else {
@@ -170,12 +170,12 @@ if (navigator.canShare) {
 // This generates the QR code only when the button is pressed
 var qrModal = document.getElementById('qr-modal');
 qrModal.addEventListener('show.bs.modal', function () {
-    var currentLink = linkEl.value;
+    var currentLink = linkEl.innerText.trim();
     var qrContainer = document.getElementById('qrcode');
     const qrSettings = {
         text: currentLink,
-        width: 425,
-        height: 425,
+        width: 500,
+        height: 500,
         quietZone: 25,
         tooltip: true
     }
@@ -201,64 +201,69 @@ qrModal.addEventListener('hidden.bs.modal', function (event) {
 
 // Test link button
 document.getElementById('link-test-btn').addEventListener('click', function () {
-    var currentLink = linkEl.value
+    var currentLink = linkEl.innerText.trim();
     openWindow(currentLink);
 })
 
 // Email button
 document.getElementById('email-btn').addEventListener('click', function () {
-    var currentLink = linkEl.value
-    var emailSubject = 'Link for you'
-    var emailBody = '\n\n\n' + currentLink
-    window.open('mailto:?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody), '_blank')
+    var currentLink = linkEl.innerText.trim();
+    var emailSubject = 'Link for you';
+    var emailBody = '\n\n\n' + currentLink;
+    window.open('mailto:?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody), '_blank');
 })
 
 // SMS button
 document.getElementById('sms-btn').addEventListener('click', function () {
-    var currentLink = linkEl.value
-    window.open('sms:?&body=' + encodeURIComponent(currentLink), '_blank')
+    var currentLink = linkEl.innerText.trim();
+    window.open('sms:?&body=' + encodeURIComponent(currentLink), '_blank');
 })
 
 // Mastodon button
-document.getElementById('mastodon-server-hostname').value = localStorage['mastodon-server'] || ''
+document.getElementById('mastodon-server-hostname').value = (localStorage['mastodon-server'] || '');
 document.getElementById('mastodon-share-btn').addEventListener('click', function () {
-    var currentLink = linkEl.value
-    var currentServer = document.getElementById('mastodon-server-hostname').value
+    var currentLink = linkEl.innerText.trim();
+    var currentServer = document.getElementById('mastodon-server-hostname').value;
     if (currentServer) {
-        localStorage['mastodon-server'] = currentServer
-        var link = 'https://' + currentServer + '/share?text=' + encodeURIComponent(currentLink)
+        localStorage['mastodon-server'] = currentServer;
+        var link = 'https://' + currentServer + '/share?text=' + encodeURIComponent(currentLink);
         openWindow(link);
-        mastodonModal.hide()
+        mastodonModal.hide();
     }
 })
 
 // Facebook button
 document.getElementById('facebook-share-btn').addEventListener('click', function () {
-    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(linkEl.value);
+    var currentLink = linkEl.innerText.trim();
+    var link = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(currentLink);
     openWindow(link);
 })
 
 // LinkedIn button
 document.getElementById('linkedin-share-btn').addEventListener('click', function () {
-    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(linkEl.value);
+    var currentLink = linkEl.innerText.trim();
+    var link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(currentLink);
     openWindow(link);
 })
 
 // Reddit button
 document.getElementById('reddit-share-btn').addEventListener('click', function () {
-    var link = 'https://reddit.com/submit?url=' + encodeURIComponent(linkEl.value);
+    var currentLink = linkEl.innerText.trim();
+    var link = 'https://reddit.com/submit?url=' + encodeURIComponent(currentLink);
     openWindow(link);
 })
 
 // Telegram button
 document.getElementById('telegram-share-btn').addEventListener('click', function () {
-    var link = 'https://t.me/share/url?url=' + encodeURIComponent(linkEl.value)
+    var currentLink = linkEl.innerText.trim();
+    var link = 'https://t.me/share/url?url=' + encodeURIComponent(currentLink);
     openWindow(link);
 })
 
 // Bluesky button
 document.getElementById('bluesky-share-btn').addEventListener('click', function () {
-    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(linkEl.value)
+    var currentLink = linkEl.innerText.trim();
+    var link = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(currentLink);
     openWindow(link);
 })
 

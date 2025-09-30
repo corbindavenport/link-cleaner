@@ -20,7 +20,7 @@
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="LinkCleaner">
     <!-- Theme colors -->
     <meta name="color-scheme" content="dark light">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#424548">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
     <meta name="theme-color" content="#e9ecef">
     <!-- Open Graph card -->
     <meta property="og:url" content="https://linkcleaner.app" />
@@ -61,7 +61,7 @@
 <body class="bg-body-tertiary">
 
     <!-- Nav bar -->
-    <nav class="navbar bg-body-secondary fixed-top navbar-expand-sm shadow-sm">
+    <nav class="navbar bg-body-secondary fixed-top navbar-expand-sm border-bottom">
         <div class="container-fluid">
             <span class="navbar-brand d-sm-none">Link Cleaner</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,16 +109,18 @@
     </nav>
 
     <!-- Main container for URL text field, share buttons, and surrounding text -->
-    <div class="container-md d-flex flex-column" style="min-height: calc(100vh - 146px);">
-        <!-- Main text and promotional links -->
+    <div id="linkcleaner-main-container" class="container-md d-flex flex-column">
+        <!-- Main header -->
         <div class="d-flex flex-grow-1">
-            <div class="d-flex align-items-end display-6 text-center py-5">
-                Remove tracking code, search parameters, and other junk from URL links.
+            <div class="d-flex align-items-end w-100">
+                <div class="display-6 text-center py-5 w-100">
+                    Remove tracking code, search parameters, and other junk from URL links.
+                </div>
             </div>
         </div>
         <!-- Container for text field and main buttons -->
-        <div id="linkcleaner-url-container" class="d-flex flex-column flex-sm-row bg-body border rounded-2 shadow" style="position: sticky; top: 56px; z-index: 500;">
-            <div id="link-input" class="form-control form-control-lg border-0" contenteditable="plaintext-only" autocomplete="off" inputmode="url"></div>
+        <div id="linkcleaner-url-container" class="d-flex flex-column flex-sm-row bg-body border rounded-2 shadow-sm">
+            <div id="link-input" class="form-control form-control-lg border-0" contenteditable="plaintext-only" autocomplete="off" spellcheck="false" inputmode="url"></div>
             <!-- Clear button, hidden by default -->
             <div class="d-flex flex-row mb-1 mb-sm-0">
                 <button class="btn btn-sm border-0 w-100 d-none" type="button" id="link-clear-btn" aria-label="Clear button">
@@ -133,10 +135,9 @@
             </div>
         </div>
         <!-- Buttons container -->
-        <div class="flex-grow-1 pt-3">
+        <div class="flex-grow-1">
+            <!-- Buttons -->
             <div class="row d-none" id="linkcleaner-buttons-container">
-
-
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <button type="button" class="btn btn-primary w-100 mt-3" id="link-share-btn" aria-label="Share">
                         <i class="bi bi-share-fill"></i>
@@ -216,6 +217,10 @@
                     </button>
                 </div>
             </div>
+            <!-- Spacebar info -->
+             <div class="p-1 mt-5 text-center" role="alert">
+                Check out <a href="https://www.spacebar.news/#/portal/signup" target="_blank" class="alert-link">Spacebar</a>, a technology blog and newsletter by the developer of Link Cleaner, Corbin Davenport.
+</div>
         </div>
     </div>
 
@@ -223,23 +228,12 @@
     <div class="container mt-3 mt-md-5 mb-3 mb-lg-5">
         <!-- Main information -->
         <div class="row">
-            <div class="col-12 col-lg-6">
+            <div class="col-12">
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">About Link Cleaner</h5>
                         <p class="card-text">Link Cleaner is a web app that removes tracking code, search parameters, and other data from URL links. It's a great way to shorten links for text chats, sharing in social media posts, or embedding in documents and articles.</p>
                         <p class="card-text">Link Cleaner is created by <a href="https://corbin.io" target="_blank">Corbin Davenport</a> and <a href="https://github.com/corbindavenport/link-cleaner">open-source software</a>.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6 mb-3">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        Recommended
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Check out <b>Spacebar</b>, a technology blog and newsletter by the developer of Link Cleaner, Corbin Davenport.</p>
-                        <a href="https://www.spacebar.news/#/portal/signup" target="_blank" class="btn btn-primary btn-sm w-100">Go to Spacebar</a>
                     </div>
                 </div>
             </div>
@@ -430,9 +424,9 @@
                     <h5 class="modal-title" id="qr-modal-label">QR Code</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body pb-0">
-                    <div id="qrcode" class="mb-2"></div>
-                    <button type="button" class="btn btn-primary w-100 mb-3" id="qr-download-btn" aria-label="Save to Downloads">
+                <div id="qrcode" class="mb-2"></div>
+                <div class="modal-body pt-0">
+                    <button type="button" class="btn btn-primary w-100" id="qr-download-btn" aria-label="Save to Downloads">
                         <i class="bi bi-download me-2"></i>
                         Save Image
                     </button>
