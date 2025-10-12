@@ -47,7 +47,8 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         newLink.searchParams.append('ID', oldLink.searchParams.get('ID'));
     }
     // YouTube links
-    if ((oldLink.host === 'www.youtube.com') && oldLink.searchParams.has('v')) {
+    // This matches known domains like https://youtube.com, https://m.youtube.com, and https://www.youtube.com
+    if (oldLink.host.endsWith('youtube.com') && oldLink.searchParams.has('v')) {
         // Shorten link if setting is enabled
         if (oldLink.searchParams.has('v') && youtubeShortenEnabled) {
             // Use to find the video ID: https://regex101.com/r/0Plpyd/1
@@ -62,7 +63,7 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         if (oldLink.searchParams.has('t')) {
             newLink.searchParams.append('t', oldLink.searchParams.get('t'));
         }
-    } else if ((oldLink.host === 'www.youtube.com') && oldLink.pathname.includes('playlist') && oldLink.searchParams.has('list')) {
+    } else if (oldLink.host.endsWith('youtube.com') && oldLink.pathname.includes('playlist') && oldLink.searchParams.has('list')) {
         // Don't remove list ID for YouTube playlist links (#37)
         newLink.searchParams.append('list', oldLink.searchParams.get('list'));
     } else if ((oldLink.host === 'youtu.be') && oldLink.searchParams.has('t')) {
