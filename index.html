@@ -111,7 +111,7 @@
     <!-- Main container for URL text field, share buttons, and surrounding text -->
     <div id="linkcleaner-main-container" class="container-md d-flex flex-column">
         <!-- Main header -->
-        <div class="d-flex flex-grow-1">
+        <div class="d-flex flex-fill">
             <div class="d-flex align-items-end w-100">
                 <div class="display-6 text-center py-5 w-100">
                     Remove tracking code, search parameters, and other junk from URL links.
@@ -124,40 +124,40 @@
             <!-- Clear button, hidden by default -->
             <div class="d-flex flex-row mb-1 mb-sm-0">
                 <button class="btn btn-sm border-0 w-100 d-none" type="button" id="link-clear-btn" aria-label="Clear button">
-                <i class="bi bi-x-circle me-2"></i>
-                <span class="d-sm-none">Clear</span>
-            </button>
-            <!-- Paste button -->
-            <button class="btn btn-sm border-0 w-100" type="button" id="link-paste-btn" aria-label="Paste button">
-                <i class="bi-clipboard me-2"></i>
-                <span class="d-sm-none">Paste</span>
-            </button>
+                    <i class="bi bi-x-circle me-2"></i>
+                    <span class="d-sm-none">Clear</span>
+                </button>
+                <!-- Paste button -->
+                <button class="btn btn-sm border-0 w-100" type="button" id="link-paste-btn" aria-label="Paste button">
+                    <i class="bi-clipboard me-2"></i>
+                    <span class="d-sm-none">Paste</span>
+                </button>
             </div>
         </div>
         <!-- Buttons container -->
-        <div class="flex-grow-1">
+        <div class="flex-fill">
             <!-- Buttons -->
             <div class="row d-none" id="linkcleaner-buttons-container">
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-primary w-100 mt-3" id="link-share-btn" aria-label="Share">
+                    <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-share-btn" aria-label="Share">
                         <i class="bi bi-share-fill"></i>
                         Share
                     </button>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-primary w-100 mt-3" id="link-copy-btn" aria-label="Copy to Clipboard">
+                    <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-copy-btn" aria-label="Copy to Clipboard">
                         <i class="bi bi-clipboard me-2"></i>
                         Copy
                     </button>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-primary w-100 mt-3" id="link-test-btn">
+                    <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-test-btn">
                         <i class="bi bi-box-arrow-up-right me-2"></i>
                         Test link
                     </button>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-primary w-100 mt-3" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
+                    <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
                         <i class="bi bi-qr-code me-2"></i>
                         Show QR code
                     </button>
@@ -169,65 +169,70 @@
                     </button>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-primary w-100 mt-3" id="sms-btn" aria-label="Send in Text">
+                    <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="sms-btn" aria-label="Send in Text">
                         <i class="bi bi-chat-left-dots-fill me-2"></i>
                         Send in Text
                     </button>
                 </div>
                 <!-- Mastodon -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-info w-100 mt-3" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
+                    <button type="button" class="btn btn-info w-100 mt-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#mastodon-modal">
                         <i class="bi bi-mastodon me-2"></i>
                         Mastodon
                     </button>
                 </div>
                 <!-- Facebook -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-info w-100 mt-3" id="facebook-share-btn">
+                    <button type="button" class="btn btn-info w-100 mt-3 shadow-sm" id="facebook-share-btn">
                         <i class="bi bi-facebook me-2"></i>
                         Facebook
                     </button>
                 </div>
                 <!-- LinkedIn -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-info w-100 mt-3" id="linkedin-share-btn">
+                    <button type="button" class="btn btn-info w-100 mt-3 shadow-sm" id="linkedin-share-btn">
                         <i class="bi bi-linkedin me-2"></i>
                         LinkedIn
                     </button>
                 </div>
                 <!-- Reddit -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-info w-100 mt-3" id="reddit-share-btn">
+                    <button type="button" class="btn btn-info w-100 mt-3 shadow-sm" id="reddit-share-btn">
                         <i class="bi bi-reddit me-2"></i>
                         Reddit
                     </button>
                 </div>
                 <!-- Telegram -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-info w-100 mt-3" id="telegram-share-btn">
+                    <button type="button" class="btn btn-info w-100 mt-3 shadow-sm" id="telegram-share-btn">
                         <i class="bi bi-telegram me-2"></i>
                         Telegram
                     </button>
                 </div>
                 <!-- Bluesky -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
-                    <button type="button" class="btn btn-info w-100 mt-3" id="bluesky-share-btn">
+                    <button type="button" class="btn btn-info w-100 mt-3 shadow-sm" id="bluesky-share-btn">
                         <i class="bi bi-bluesky me-2"></i>
                         Bluesky
                     </button>
                 </div>
             </div>
             <!-- Spacebar info -->
-             <div class="p-1 mt-5 text-center" role="alert">
+            <div class="p-1 mt-5 mb-2 text-center">
                 Check out <a href="https://www.spacebar.news/#/portal/signup" target="_blank" class="alert-link">Spacebar</a>, a technology blog and newsletter by the developer of Link Cleaner, Corbin Davenport.
-</div>
+            </div>
         </div>
     </div>
 
     <!-- Main information and donate container -->
-    <div class="container mt-3 mt-md-5 mb-3 mb-lg-5">
-        <!-- Main information -->
+    <div class="container">
         <div class="row">
+            <div id="linkcleaner-scroll-message" class="col-12 text-center text-muted fw-bold">
+                <i class="bi bi-chevron-double-down px-2"></i> More information <i class="bi bi-chevron-double-down px-2"></i>
+            </div>
+        </div>
+        <!-- Main information -->
+        <div class="row mt-2">
             <div class="col-12">
                 <div class="card mb-3">
                     <div class="card-body">

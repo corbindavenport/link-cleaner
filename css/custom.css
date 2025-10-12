@@ -4,8 +4,12 @@ body {
 
 #linkcleaner-main-container {
     min-height: 80vh;
-    min-height: calc(100vh - 146px);
-    min-height: calc(100vh - env(safe-area-inset-bottom) - 146px);
+    min-height: calc(100vh - 56px - 40px);
+    min-height: calc(100vh - env(safe-area-inset-bottom) - 56px - 40px);
+}
+
+#linkcleaner-scroll-message {
+    height: 40px;
 }
 
 #link-input {
