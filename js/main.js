@@ -59,7 +59,7 @@ function processLink(link, startMode = 'user') {
     // If medium size device or smaller, scroll past the top message
     const container = document.getElementById('linkcleaner-url-container');
     const containerTop = container.getBoundingClientRect().top + window.scrollY;
-    const desiredScrollTop = containerTop - 68;
+    const desiredScrollTop = containerTop - 66;
     console.log(containerTop, desiredScrollTop)
     if (window.matchMedia('(max-width: 767.98px)').matches && (startMode === 'user')) {
         // Smooth scroll if the user entered the URL

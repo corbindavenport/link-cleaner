@@ -1,15 +1,16 @@
 body {
     padding-top: 56px;
+    /* Fix for screens with bottom insets */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 #linkcleaner-main-container {
+    /* Fallback property for browsers that don't support calc() */
     min-height: 80vh;
-    min-height: calc(100vh - 56px - 40px);
-    min-height: calc(100vh - env(safe-area-inset-bottom) - 56px - 40px);
-}
-
-#linkcleaner-scroll-message {
-    height: 40px;
+    /* Subtracting 56px for the top navbar, and another 70px to show a peek of the info box */
+    min-height: calc(100vh - 56px - 90px);
+    /* Same rules, but also subtract the inset area for browsers that recognize that */
+    min-height: calc(100vh - env(safe-area-inset-bottom) - 56px - 90px);
 }
 
 #link-input {
@@ -32,7 +33,8 @@ body {
 
 #linkcleaner-url-container {
     position: sticky;
-    top: 56px;
+    /* 10px below 56px height navbar */
+    top: 66px;
     z-index: 500;
 }
 

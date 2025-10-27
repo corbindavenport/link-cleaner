@@ -226,80 +226,67 @@
 
     <!-- Main information and donate container -->
     <div class="container">
-        <div class="row">
-            <div id="linkcleaner-scroll-message" class="col-12 text-center text-muted fw-bold">
-                <i class="bi bi-chevron-double-down px-2"></i> More information <i class="bi bi-chevron-double-down px-2"></i>
-            </div>
-        </div>
-        <!-- Main information -->
-        <div class="row mt-2">
-            <div class="col-12">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">About Link Cleaner</h5>
-                        <p class="card-text">Link Cleaner is a web app that removes tracking code, search parameters, and other data from URL links. It's a great way to shorten links for text chats, sharing in social media posts, or embedding in documents and articles.</p>
-                        <p class="card-text">Link Cleaner is created by <a href="https://corbin.io" target="_blank">Corbin Davenport</a> and <a href="https://github.com/corbindavenport/link-cleaner">open-source software</a>.</p>
+        <!-- Features card -->
+        <div class="card mb-4 mt-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title">Share through everything</h5>
+                        <p>Thanks to the Web Share API, Link Cleaner can share cleaned links directly to other applications. If you <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">install Link Cleaner</a> as an application, it can also appear in the share menu in your other applications. This works best on Google Chrome for Android, Microsoft Edge on Windows, and other browsers that fully support the Web Share API.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title">Mac, iPhone, and iPad integration</h5>
+                        <p>The official <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">Apple Shortcut</a> can add Link Cleaner to your iPhone or Mac's share menu. It's a great way to quickly filter links before using or sharing them elsewhere. You can also add Link Cleaner to your home screen or Dock.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title">Perfect for publishers</h5>
+                        <p>Link Cleaner can help you clean up links before using them in articles, documents, podcasts, or other published content. If you have an Amazon store affilate ID, add it in the <a href="/settings/">settings page</a> and Link Cleaner will apply it to all cleaned Amazon links.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title">Selective link processing</h5>
+                        <p>Link Cleaner removes tracking and junk data from links, while keeping the parameters required for the page to load. For example, YouTube video links will retain the <b>watch?v=</b> video ID, but not the <b>?si=</b> parameter for tracking who shared the link.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title">Custom workflows and automations</h5>
+                        <p>Link Cleaner can be used in scripts or other automation tools, using the <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">custom share URL</a>. There's also an <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">official bookmarklet</a> for easy link cleaning on desktop web browsers.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title">Easy bulk cleaning</h5>
+                        <p>You can use <a href="/bulk/">Bulk Mode</a> to quickly clean many links in one click, using the same settings and per-site overrides as the regular Link Cleaner mode.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title">Privacy first</h5>
+                        <p>Link Cleaner creates cleaned links and QR codes locally in your web browser, without sending the URLs to an external server. Check the <a href="https://github.com/corbindavenport/link-cleaner/blob/main/PRIVACY.md" target="_blank">Privacy Policy</a> for more information.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title">Open-source software</h5>
+                        <p>Link Cleaner is an <a href="https://github.com/corbindavenport/link-cleaner">open-source software project on GitHub</a> under the GPLv3 license. You can check out the code, suggest features or bugs, or create your own version.</p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Features gallery-->
-        <div class="row mt-1 mt-md-5">
-            <div class="col-12 col-md-6">
-                <h3>Share through everything</h3>
-                <p>Thanks to the Web Share API, Link Cleaner can share cleaned links directly to other applications. If you <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">install Link Cleaner</a> as an application, it can also appear in the share menu in your other applications. This works best on Google Chrome for Android, Microsoft Edge on Windows, and other browsers that fully support the Web Share API.</p>
-            </div>
-            <div class="col-12 col-md-6">
-                <h3>Mac, iPhone, and iPad integration</h3>
-                <p>The official <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">Apple Shortcut</a> can add Link Cleaner to your iPhone or Mac's share menu. It's a great way to quickly filter links before using or sharing them elsewhere. You can also add Link Cleaner to your home screen or Dock.</p>
-            </div>
-            <div class="col-12 col-md-6">
-                <h3>Perfect for publishers</h3>
-                <p>Link Cleaner can help you clean up links before using them in articles, documents, podcasts, or other published content. If you have an Amazon store affilate ID, add it in the <a href="/settings/">settings page</a> and Link Cleaner will apply it to all cleaned Amazon links.</p>
-            </div>
-            <div class="col-12 col-md-6">
-                <h3>Selective link processing</h3>
-                <p>Link Cleaner removes tracking and junk data from links, while keeping the parameters required for the page to load. For example, YouTube video links will retain the <b>watch?v=</b> video ID, but not the <b>?si=</b> parameter for tracking who shared the link.</p>
-            </div>
-            <div class="col-12 col-md-6">
-                <h3>Custom workflows and automations</h3>
-                <p>Link Cleaner can be used in scripts or other automation tools, using the <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">custom share URL</a>. There's also an <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal">official bookmarklet</a> for easy link cleaning on desktop web browsers.</p>
-            </div>
-            <div class="col-12 col-md-6">
-                <h3>Easy bulk cleaning</h3>
-                <p>You can use <a href="/bulk/">Bulk Mode</a> to quickly clean many links in one click, using the same settings and per-site overrides as the regular Link Cleaner mode.</p>
-            </div>
-            <div class="col-12 col-md-6">
-                <h3>Privacy first</h3>
-                <p>Link Cleaner creates cleaned links and QR codes locally in your web browser, without sending the URLs to an external server. Check the <a href="https://github.com/corbindavenport/link-cleaner/blob/main/PRIVACY.md" target="_blank">Privacy Policy</a> for more information.</p>
-            </div>
-            <div class="col-12 col-md-6">
-                <h3>Open-source software</h3>
-                <p>Link Cleaner is an <a href="https://github.com/corbindavenport/link-cleaner">open-source software project on GitHub</a> under the GPLv3 license. You can check out the code, suggest features or bugs, or create your own version.</p>
-            </div>
-        </div>
-        <!-- Support information -->
-        <div class="row mt-1 mt-md-5">
-            <div class="col-12 display-6 mb-3" id="support">
-                Support Link Cleaner
-            </div>
-            <div class="col-12 mb-3">
-                If you find Link Cleaner useful, please donate to support continued development! Sharing Link Cleaner with other people is also great.
-            </div>
-            <div class="col-12 col-md-4">
-                <a href="https://www.patreon.com/corbindavenport" target="_blank">
-                    <button type="button" class="btn btn-success w-100 mb-2">Support via Patreon</button>
-                </a>
-            </div>
-            <div class="col-12 col-md-4">
-                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=4SZVSMJKDS35J&amp;lc=US&amp;item_name=Link%20Cleaner%20Donation&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">
-                    <button type="button" class="btn btn-success w-100 mb-2">Donate via PayPal</button>
-                </a>
-            </div>
-            <div class="col-12 col-md-4">
-                <a href="https://cash.app/$corbdav" target="_blank">
-                    <button type="button" class="btn btn-success w-100 mb-2">Donate via Cash App</button>
-                </a>
+        <!-- Support card -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Support Link Cleaner</h5>
+                <p>If you find Link Cleaner useful, please donate to support continued development! Sharing Link Cleaner with other people is also great.</p>
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <a href="https://www.patreon.com/corbindavenport" target="_blank">
+                            <button type="button" class="btn btn-success w-100 mb-2">Support via Patreon</button>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=4SZVSMJKDS35J&amp;lc=US&amp;item_name=Link%20Cleaner%20Donation&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">
+                            <button type="button" class="btn btn-success w-100 mb-2">Donate via PayPal</button>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a href="https://cash.app/$corbdav" target="_blank">
+                            <button type="button" class="btn btn-success w-100 mb-2">Donate via Cash App</button>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
