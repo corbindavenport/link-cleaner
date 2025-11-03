@@ -138,36 +138,49 @@
         <div class="flex-fill">
             <!-- Buttons -->
             <div class="row d-none" id="linkcleaner-buttons-container">
+                <!-- Web Share API share -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-share-btn" aria-label="Share">
                         <i class="bi bi-share-fill"></i>
                         Share
                     </button>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                <!-- Primary clipboard copy -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2" id="link-copy-btn-container">
                     <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-copy-btn" aria-label="Copy to Clipboard">
                         <i class="bi bi-clipboard me-2"></i>
                         Copy
                     </button>
                 </div>
+                <!-- Clipboard copy and close window -->
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2 d-none" id="link-copy-close-btn-container">
+                    <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-copy-close-btn" aria-label="Copy and Close">
+                        <i class="bi bi-clipboard me-2"></i>
+                        Copy & Close
+                    </button>
+                </div>
+                <!-- Test link -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-test-btn">
                         <i class="bi bi-box-arrow-up-right me-2"></i>
                         Test link
                     </button>
                 </div>
+                <!-- QR code -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="link-qr-btn" data-bs-toggle="modal" data-bs-target="#qr-modal" aria-label="Open QR code">
                         <i class="bi bi-qr-code me-2"></i>
                         Show QR code
                     </button>
                 </div>
+                <!-- Send email -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <button type="button" class="btn btn-primary w-100 mt-3" id="email-btn" aria-label="Send in Email">
                         <i class="bi bi-envelope me-2"></i>
                         Send in Email
                     </button>
                 </div>
+                <!-- Send SMS text -->
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <button type="button" class="btn btn-primary w-100 mt-3 shadow-sm" id="sms-btn" aria-label="Send in Text">
                         <i class="bi bi-chat-left-dots-fill me-2"></i>

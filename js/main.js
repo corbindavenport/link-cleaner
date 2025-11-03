@@ -11,6 +11,8 @@ const isApplePlatform = ['MacIntel', 'Macintosh', 'iPhone', 'iPod', 'iPad'].incl
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'));
 const linkEl = document.getElementById('link-input');
 
+console.log('Referrer:', document.referrer);
+
 // Save PWA install prompt
 var installPrompt = null;
 window.addEventListener('beforeinstallprompt', function (e) {
@@ -33,6 +35,20 @@ function openWindow(url) {
     window.open(url, '_blank', windowOptions);
 }
 
+// Function for copying link to clipboard with fallback API
+function copyText(textEl) {
+    if (navigator.clipboard) {
+        // Use Clipboard API if available
+        var copyText = textEl.innerText.trim();
+        navigator.clipboard.writeText(copyText);
+    } else {
+        // Fallback to older API
+        window.getSelection().selectAllChildren(textEl);
+        document.execCommand('copy');
+        textEl.blur();
+    }
+}
+
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
     plausible('Clean Link');
@@ -53,6 +69,11 @@ function processLink(link, startMode = 'user') {
         var shortenWalmartEnabled = false;
     }
     var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled);
+    // If opened through a shortcut, replace the Copy button with Copy and Close
+    if (startMode === 'shortcut') {
+        document.getElementById('link-copy-close-btn-container').classList.remove('d-none');
+        document.getElementById('link-copy-btn-container').classList.add('d-none');
+    }
     // Insert cleaned link and update page layout
     linkEl.innerText = newLink;
     document.getElementById('linkcleaner-buttons-container').classList.remove('d-none');
@@ -130,19 +151,10 @@ document.getElementById('link-clear-btn').addEventListener('click', function () 
     linkEl.focus();
 })
 
-// Copy link button
+// Main copy link button
 document.getElementById('link-copy-btn').addEventListener('click', function () {
     var btn = document.getElementById('link-copy-btn')
-    if (navigator.clipboard) {
-        // Use Clipboard API if available
-        var copyText = linkEl.innerText.trim()
-        navigator.clipboard.writeText(copyText)
-    } else {
-        // Fallback to older API
-        window.getSelection().selectAllChildren(linkEl);
-        document.execCommand('copy');
-        linkEl.blur();
-    }
+    copyText(linkEl);
     // Change button design
     btn.classList.remove('btn-primary')
     btn.classList.add('btn-success')
@@ -153,6 +165,12 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
         btn.classList.add('btn-primary')
         btn.innerHTML = '<i class="bi bi-clipboard me-2"></i> Copy'
     }, 2000)
+})
+
+// Copy and close button
+document.getElementById('link-copy-close-btn').addEventListener('click', function() {
+    copyText(linkEl);
+    window.close();
 })
 
 // Share button
