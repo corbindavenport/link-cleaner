@@ -11,6 +11,7 @@ const isApplePlatform = ['MacIntel', 'Macintosh', 'iPhone', 'iPod', 'iPad'].incl
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'));
 const linkEl = document.getElementById('link-input');
 
+// Print referrer for debugging purposes
 console.log('Referrer:', document.referrer);
 
 // Save PWA install prompt
@@ -69,8 +70,9 @@ function processLink(link, startMode = 'user') {
         var shortenWalmartEnabled = false;
     }
     var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled);
-    // If opened through a shortcut, replace the Copy button with Copy and Close
-    if (startMode === 'shortcut') {
+    // If opened through the official bookmarklet, replace the Copy button with Copy and Close
+    // There's no better way to detect if window.close() works before running it :(
+    if (startMode === 'shortcut' && window.location.href.includes('utm_source=Bookmarklet')) {
         document.getElementById('link-copy-close-btn-container').classList.remove('d-none');
         document.getElementById('link-copy-btn-container').classList.add('d-none');
     }
@@ -81,7 +83,6 @@ function processLink(link, startMode = 'user') {
     const container = document.getElementById('linkcleaner-url-container');
     const containerTop = container.getBoundingClientRect().top + window.scrollY;
     const desiredScrollTop = containerTop - 66;
-    console.log(containerTop, desiredScrollTop)
     if (window.matchMedia('(max-width: 767.98px)').matches && (startMode === 'user')) {
         // Smooth scroll if the user entered the URL
         window.scrollTo({ top: desiredScrollTop, behavior: 'smooth' })
