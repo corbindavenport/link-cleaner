@@ -1,7 +1,15 @@
 body {
     padding-top: 56px;
-    /* Fix for screens with bottom insets */
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    /* Fixes for screens with insets */
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Fixes for screens with insets */
+body,
+.navbar {
+    padding-right: env(safe-area-inset-right);
+    padding-left: env(safe-area-inset-left);
 }
 
 #linkcleaner-main-container {
@@ -10,12 +18,13 @@ body {
     /* Subtracting 56px for the top navbar, and another 70px to show a peek of the info box */
     min-height: calc(100vh - 56px - 90px);
     /* Same rules, but also subtract the inset area for browsers that recognize that */
-    min-height: calc(100vh - env(safe-area-inset-bottom) - 56px - 90px);
+    min-height: calc(100vh - env(safe-area-inset-bottom, 0px) - 56px - 90px);
 }
 
 #link-input {
     max-height: 6.5rem;
     overflow: hidden;
+    line-break: anywhere;
 }
 
 #link-input:empty::before {
@@ -43,19 +52,14 @@ body {
     transition: border-color .15s ease-in-out;
 }
 
-/* Clear button behavior on touchscreen devices */
+/* Show the clear button when the text field is not empty */
+#linkcleaner-url-container:has(#link-input) #link-clear-btn {
+    display: inline-block !important;
+}
 
-@media only screen and (hover: none) {
-
-    /* Show the clear button when the text field is not empty */
-    #linkcleaner-url-container:has(#link-input) #link-clear-btn {
-        display: inline-block !important;
-    }
-
-    /* Hide the clear button when the text field is empty */
-    #linkcleaner-url-container:has(#link-input:empty) #link-clear-btn {
-        display: none !important;
-    }
+/* Hide the clear button when the text field is empty */
+#linkcleaner-url-container:has(#link-input:empty) #link-clear-btn {
+    display: none !important;
 }
 
 /* QR code share option */
