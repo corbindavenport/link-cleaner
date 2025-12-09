@@ -14,10 +14,10 @@ function addLog() {
     if (!storageLog[now.getUTCFullYear()]) {
         storageLog[now.getUTCFullYear()] = {};
     }
-    if (!storageLog[now.getUTCFullYear()][now.getUTCMonth()]) {
-        storageLog[now.getUTCFullYear()][now.getUTCMonth()] = 1;
+    if (!storageLog[now.getUTCFullYear()][now.getUTCMonth() + 1]) {
+        storageLog[now.getUTCFullYear()][now.getUTCMonth() + 1] = 1;
     } else {
-        storageLog[now.getUTCFullYear()][now.getUTCMonth()]++;
+        storageLog[now.getUTCFullYear()][now.getUTCMonth() + 1]++;
     }
     localStorage.setItem('clean-db', JSON.stringify(storageLog));
 }
@@ -161,6 +161,8 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
     if (oldLink.host.includes('amazon') && amazonTrackingId) {
         newLink.searchParams.append('tag', amazonTrackingId);
     }
+    // Log link
+    addLog();
     // Switch to output
     console.log('New link:', newLink);
     return newLink.toString();
