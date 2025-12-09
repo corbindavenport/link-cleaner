@@ -110,3 +110,15 @@ body[data-pride-mode="true"] .navbar .navbar-brand {
 body[data-pride-mode="true"] .navbar button {
     box-shadow: 0px 0px 5px #000 !important;
 }
+
+/* 
+    Holiday mode
+    GIF credit: https://giphy.com/stickers/transparent-TK2yjDM28r0OVFnfri
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+    body[data-snow-mode="true"] .navbar {
+        background-image: url('/img/snow.gif') !important;
+        background-repeat: repeat-x !important;
+    }
+}

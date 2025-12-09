@@ -2,6 +2,8 @@
 
 // Pride Month mode
 document.body.dataset.prideMode = (new Date()).getMonth() === 5;
+// Holiday mode
+document.body.dataset.snowMode = (new Date()).getMonth() === 11;
 
 // Import link clean database from localStorage
 const storageLog = JSON.parse(localStorage.getItem('clean-db') || "{}");
