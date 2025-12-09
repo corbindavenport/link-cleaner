@@ -3,7 +3,34 @@
 // Pride Month mode
 document.body.dataset.prideMode = (new Date()).getMonth() === 5;
 
-// Function for cleaning links
+// Import link clean database from localStorage
+const storageLog = JSON.parse(localStorage.getItem('clean-db') || "{}");
+
+/**
+ * Records cleaned link in the 'clean-db' localStorage key, organized by year and month. This will be used for a year-end 'Wrapped' feature.
+ */
+function addLog() {
+    const now = new Date();
+    if (!storageLog[now.getUTCFullYear()]) {
+        storageLog[now.getUTCFullYear()] = {};
+    }
+    if (!storageLog[now.getUTCFullYear()][now.getUTCMonth()]) {
+        storageLog[now.getUTCFullYear()][now.getUTCMonth()] = 1;
+    } else {
+        storageLog[now.getUTCFullYear()][now.getUTCMonth()]++;
+    }
+    localStorage.setItem('clean-db', JSON.stringify(storageLog));
+}
+
+/**
+ * Cleans a link.
+ * @param {String} link - The URL for the link to clean.
+ * @param {Boolean | null} youtubeShortenEnabled - Shorten YouTube links if set to true.
+ * @param {Boolean | null} fixTwitterEnabled - Fix Twitter/X links if set to true.
+ * @param {Boolean | null} walmartShortenEnabled - Shorten Walmart links if set to true.
+ * @param {String | null} amazonTrackingId - Amazon affiliate code added to Amazon links.
+ * @returns The cleaned URL.
+ */
 function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = false, walmartShortenEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id']) {
     try {
         var oldLink = new URL(link);

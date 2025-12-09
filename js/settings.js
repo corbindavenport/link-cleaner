@@ -15,7 +15,7 @@ document.querySelectorAll('.settings-container input[type="text"]').forEach(func
 // Load settings from localStorage
 Object.entries(localStorage).forEach(function (key) {
     // Ignore link history and android app
-    if (key[0] === 'history' || key[0] === 'android-app' || key[0] === 'mastodon-server') {
+    if (key[0] === 'history' || key[0] === 'android-app' || key[0] === 'mastodon-server' ||  key[0] === 'clean-db') {
         return true
     }
     // Amazon ID settings
