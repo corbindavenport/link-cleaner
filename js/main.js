@@ -37,11 +37,11 @@ function openWindow(url) {
 }
 
 // Function for copying link to clipboard with fallback API
-function copyText(textEl) {
+async function copyText(textEl) {
     if (navigator.clipboard) {
         // Use Clipboard API if available
         var copyText = textEl.innerText.trim();
-        navigator.clipboard.writeText(copyText);
+        await navigator.clipboard.writeText(copyText);
     } else {
         // Fallback to older API
         window.getSelection().selectAllChildren(textEl);
@@ -153,9 +153,9 @@ document.getElementById('link-clear-btn').addEventListener('click', function () 
 })
 
 // Main copy link button
-document.getElementById('link-copy-btn').addEventListener('click', function () {
+document.getElementById('link-copy-btn').addEventListener('click', async function () {
     var btn = document.getElementById('link-copy-btn')
-    copyText(linkEl);
+    await copyText(linkEl);
     // Change button design
     btn.classList.remove('btn-primary')
     btn.classList.add('btn-success')
@@ -169,8 +169,8 @@ document.getElementById('link-copy-btn').addEventListener('click', function () {
 })
 
 // Copy and close button
-document.getElementById('link-copy-close-btn').addEventListener('click', function() {
-    copyText(linkEl);
+document.getElementById('link-copy-close-btn').addEventListener('click', async function() {
+    await copyText(linkEl);
     window.close();
 })
 
