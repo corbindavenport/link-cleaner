@@ -169,9 +169,12 @@ document.getElementById('link-copy-btn').addEventListener('click', async functio
 })
 
 // Copy and close button
-document.getElementById('link-copy-close-btn').addEventListener('click', async function() {
+document.getElementById('link-copy-close-btn').addEventListener('click', async function () {
     await copyText(linkEl);
-    window.close();
+    // Delay window close by 100 ms or the copy operation might not complete
+    setTimeout(function() {
+        window.close();
+    }, '100');
 })
 
 // Share button
