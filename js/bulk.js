@@ -1,9 +1,5 @@
-// Plausible Analytics
-window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
-
 // Process URL after clicking 'Clean Links' button
 document.getElementById('link-clean-btn').addEventListener('click', function () {
-    plausible('Bulk Clean Link')
     // Read settings
     if (localStorage.getItem('youtube-shorten-check')) {
         var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());

@@ -4,7 +4,7 @@ Link Cleaner is committed to respecting your privacy and being transparent about
 
 ## Information collected by Link Cleaner
 
-Link Cleaner uses the privacy-friendly Plausible Analytics, which is subject to the [Plausible Analytics Privacy Policy](https://plausible.io/privacy). The data includes many times the app is open, how long it is used, the current region, and when a link is cleaned. The data is anonymized by Plausible Analytics. For example, your IP address is not visible to the developers of Link Cleaner.
+Link Cleaner uses the privacy-friendly Plausible Analytics, which is subject to the [Plausible Analytics Privacy Policy](https://plausible.io/privacy). The data includes many times the app is open, how long it is used, browser and platform information, and the current region. The data is anonymized by Plausible Analytics. For example, your IP address is not visible to the developers of Link Cleaner.
 
 Link Cleaner does not automatically collect or transmit any web links. The link cleaning function runs in your web browser, without sending the URLs to an external server, and the QR code feature also runs locally using [EasyQRCodeJS](https://github.com/ushelp/EasyQRCodeJS). If you click one of the share buttons, the URL is provided to the selected service.
 

@@ -1,6 +1,3 @@
-// Plausible Analytics
-window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
-
 // Delete link history storage if it exists, link history feature has been removed
 localStorage.removeItem('history');
 
@@ -52,7 +49,6 @@ async function copyText(textEl) {
 
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
-    plausible('Clean Link');
     // Read settings
     if (localStorage.getItem('youtube-shorten-check')) {
         var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
