@@ -63,12 +63,9 @@ body,
 }
 
 /* QR code share option */
-#qrcode {
-    text-align: center;
-}
-
 #qrcode canvas {
     max-width: 100%;
+    max-height: 65vh;
 }
 
 /* Bulk mode text boxes */
