@@ -1,26 +1,9 @@
 // Process URL after clicking 'Clean Links' button
 document.getElementById('link-clean-btn').addEventListener('click', function () {
     // Read settings
-    if (localStorage.getItem('youtube-shorten-check')) {
-        var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
-    } else {
-        var youtubeShortenEnabled = false;
-    }
-    if (localStorage.getItem('vxTwitter-check')) {
-        var fixTwitterEnabled = JSON.parse(localStorage.getItem('vxTwitter-check').toLowerCase());
-    } else {
-        var fixTwitterEnabled = false;
-    }
-    if (localStorage.getItem('walmart-shorten-check')) {
-        var shortenWalmartEnabled = JSON.parse(localStorage.getItem('walmart-shorten-check').toLowerCase());
-    } else {
-        var shortenWalmartEnabled = false;
-    }
-    if (localStorage.getItem('fixBluesky-check')) {
-        var fixBlueskyEnabled = JSON.parse(localStorage.getItem('fixBluesky-check').toLowerCase());
-    } else {
-        var fixBlueskyEnabled = false;
-    }
+    var settings = Object.fromEntries(
+        Object.entries(localStorage).map(([key, value]) => [key, JSON.parse(value)])
+    );
     // Split comma-separated or newline-seperated input into array and trim whitespace
     var oldLinks = document.getElementById('link-bulk-input').value.split(/\n|\,/)
     // Filter out blank lines
@@ -28,11 +11,11 @@ document.getElementById('link-clean-btn').addEventListener('click', function () 
     // Clean links
     var newLinks = []
     oldLinks.forEach((link) => {
-        var processedLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled, fixBlueskyEnabled)
+        var processedLink = cleanLink(link, settings)
         newLinks.push(processedLink)
     })
     // Output result
-    var result = newLinks.toString().replaceAll(',','\n')
+    var result = newLinks.toString().replaceAll(',', '\n')
     document.getElementById('link-copy-btn').removeAttribute('disabled')
     document.getElementById('link-bulk-output').value = result
 })

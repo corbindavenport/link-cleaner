@@ -49,28 +49,10 @@ async function copyText(textEl) {
 
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
-    // Read settings
-    if (localStorage.getItem('youtube-shorten-check')) {
-        var youtubeShortenEnabled = JSON.parse(localStorage.getItem('youtube-shorten-check').toLowerCase());
-    } else {
-        var youtubeShortenEnabled = false;
-    }
-    if (localStorage.getItem('vxTwitter-check')) {
-        var fixTwitterEnabled = JSON.parse(localStorage.getItem('vxTwitter-check').toLowerCase());
-    } else {
-        var fixTwitterEnabled = false;
-    }
-    if (localStorage.getItem('walmart-shorten-check')) {
-        var shortenWalmartEnabled = JSON.parse(localStorage.getItem('walmart-shorten-check').toLowerCase());
-    } else {
-        var shortenWalmartEnabled = false;
-    }
-    if (localStorage.getItem('fixBluesky-check')) {
-        var fixBlueskyEnabled = JSON.parse(localStorage.getItem('fixBluesky-check').toLowerCase());
-    } else {
-        var fixBlueskyEnabled = false;
-    }
-    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled, fixBlueskyEnabled);
+    var settings = Object.fromEntries(
+        Object.entries(localStorage).map(([key, value]) => [key, JSON.parse(value)])
+    );
+    var newLink = cleanLink(link, settings);
     // If opened through the official bookmarklet, replace the Copy button with Copy and Close
     // There's no better way to detect if window.close() works before running it :(
     if (startMode === 'shortcut' && window.location.href.includes('utm_source=Bookmarklet')) {
@@ -173,7 +155,7 @@ document.getElementById('link-copy-btn').addEventListener('click', async functio
 document.getElementById('link-copy-close-btn').addEventListener('click', async function () {
     await copyText(linkEl);
     // Delay window close by 100 ms or the copy operation might not complete
-    setTimeout(function() {
+    setTimeout(function () {
         window.close();
     }, '100');
 })
