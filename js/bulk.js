@@ -16,6 +16,11 @@ document.getElementById('link-clean-btn').addEventListener('click', function () 
     } else {
         var shortenWalmartEnabled = false;
     }
+    if (localStorage.getItem('fixBluesky-check')) {
+        var fixBlueskyEnabled = JSON.parse(localStorage.getItem('fixBluesky-check').toLowerCase());
+    } else {
+        var fixBlueskyEnabled = false;
+    }
     // Split comma-separated or newline-seperated input into array and trim whitespace
     var oldLinks = document.getElementById('link-bulk-input').value.split(/\n|\,/)
     // Filter out blank lines
@@ -23,7 +28,7 @@ document.getElementById('link-clean-btn').addEventListener('click', function () 
     // Clean links
     var newLinks = []
     oldLinks.forEach((link) => {
-        var processedLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled)
+        var processedLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled, fixBlueskyEnabled)
         newLinks.push(processedLink)
     })
     // Output result

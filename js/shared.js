@@ -31,9 +31,10 @@ function addLog() {
  * @param {Boolean | null} fixTwitterEnabled - Fix Twitter/X links if set to true.
  * @param {Boolean | null} walmartShortenEnabled - Shorten Walmart links if set to true.
  * @param {String | null} amazonTrackingId - Amazon affiliate code added to Amazon links.
+ * @param {Boolean | null} fixBlueskyEnabled - Fix Bluesky links if set to true.
  * @returns The cleaned URL.
  */
-function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = false, walmartShortenEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id']) {
+function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = false, walmartShortenEnabled = false, amazonTrackingId = localStorage['amazon-tracking-id'], fixBlueskyEnabled = false) {
     try {
         var oldLink = new URL(link);
     } catch (e) {
@@ -147,9 +148,13 @@ function cleanLink(link, youtubeShortenEnabled = false, fixTwitterEnabled = fals
         newLink.searchParams.append('title_no', oldLink.searchParams.get('title_no'));
         newLink.searchParams.append('episode_no', oldLink.searchParams.get('episode_no'));
     }
-    // Shorten Twitter/X links with FixTwitter if enabled
+    // Replace Twitter/X links with FxEmbed if enabled
     if (fixTwitterEnabled && ((oldLink.host === 'twitter.com') || (oldLink.host === 'x.com'))) {
         newLink.host = 'fxtwitter.com';
+    }
+    // Replace Bluesky links with FxEmbed if enabled
+    if (fixBlueskyEnabled && ((oldLink.host === 'bsky.app') && (oldLink.pathname.includes('/post/')))) {
+        newLink.host = 'fxbsky.app';
     }
     // Shorten Walmart links if enabled (#41)
     if (walmartShortenEnabled && (oldLink.host === 'www.walmart.com') && oldLink.pathname.includes('/ip/')) {

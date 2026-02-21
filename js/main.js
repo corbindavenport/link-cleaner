@@ -65,7 +65,12 @@ function processLink(link, startMode = 'user') {
     } else {
         var shortenWalmartEnabled = false;
     }
-    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled);
+    if (localStorage.getItem('fixBluesky-check')) {
+        var fixBlueskyEnabled = JSON.parse(localStorage.getItem('fixBluesky-check').toLowerCase());
+    } else {
+        var fixBlueskyEnabled = false;
+    }
+    var newLink = cleanLink(link, youtubeShortenEnabled, fixTwitterEnabled, shortenWalmartEnabled, fixBlueskyEnabled);
     // If opened through the official bookmarklet, replace the Copy button with Copy and Close
     // There's no better way to detect if window.close() works before running it :(
     if (startMode === 'shortcut' && window.location.href.includes('utm_source=Bookmarklet')) {

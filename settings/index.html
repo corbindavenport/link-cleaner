@@ -95,14 +95,25 @@
 
     <!-- Main container -->
     <div class="container mt-4 settings-container">
-        <!-- FixTwitter -->
+        <!-- FxBluesky -->
+        <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" value="" id="fixBluesky-check">
+            <label class="form-check-label fw-bold" for="fixBluesky-check">
+                Replace Bluesky links with FxBluesky
+                <span class="badge rounded-pill text-bg-primary mx-1">New</span>
+            </label>
+            <div class="text-body-secondary mt-2">
+                Links created by <a href="https://github.com/FxEmbed/FxEmbed" target="_blank">FxBluesky</a> display rich previews in Discord, Slack, Telegram, and other apps, even when Bluesky's own link previews fail.
+            </div>
+        </div>
+        <!-- FxTwitter -->
         <div class="form-check mb-4">
             <input class="form-check-input" type="checkbox" value="" id="vxTwitter-check">
             <label class="form-check-label fw-bold" for="vxTwitter-check">
-                Replace X/Twitter links with FixTweet
+                Replace TwitterX links with FxTwitter
             </label>
             <div class="text-body-secondary mt-2">
-                Links created by <a href="https://github.com/FixTweet/FixTweet" target="_blank">FixTweet</a> display rich previews in Discord, Slack, Telegram, and other apps. When you open the link, you are redirected to the original post URL.
+                Links created by <a href="https://github.com/FxEmbed/FxEmbed" target="_blank">FxEmbed</a> display rich previews in Discord, Slack, Telegram, and other apps.
             </div>
         </div>
         <!-- Shorten YouTube -->
@@ -115,6 +126,14 @@
                 Converts YouTube video links to the <code>youtu.be/wAUK9hVgmNI</code> format.
             </div>
         </div>
+        <!-- Custom Amazon tracking -->
+        <div class="form-check mb-4">
+            <label for="amazon-tracking-id" class="form-label fw-bold">Amazon tracking ID</label>
+            <input type="text" class="form-control" id="amazon-tracking-id">
+            <div class="text-body-secondary mt-2">
+                This adds an <a href="https://affiliate-program.amazon.com/help/node/topic/GK5TZZ4AWML2QSLA" target="_blank" rel="nofollow">Amazon affiliate tracking ID</a> to the end of any cleaned Amazon store links.
+            </div>
+        </div>
         <!-- Shorten Walmart -->
         <div class="form-check mb-4">
             <input class="form-check-input" type="checkbox" value="" id="walmart-shorten-check">
@@ -123,14 +142,6 @@
             </label>
             <div class="text-body-secondary mt-2">
                 Converts Walmart product links to the <code>walmart.com/ip/13376108763</code> format.
-            </div>
-        </div>
-        <!-- Custom Amazon tracking -->
-        <div class="form-check mb-4">
-            <label for="amazon-tracking-id" class="form-label fw-bold">Amazon tracking ID</label>
-            <input type="text" class="form-control" id="amazon-tracking-id">
-            <div class="text-body-secondary mt-2">
-                This adds an <a href="https://affiliate-program.amazon.com/help/node/topic/GK5TZZ4AWML2QSLA" target="_blank" rel="nofollow">Amazon affiliate tracking ID</a> to the end of any cleaned Amazon store links.
             </div>
         </div>
 
