@@ -2,7 +2,13 @@
 document.getElementById('link-clean-btn').addEventListener('click', function () {
     // Read settings
     var settings = Object.fromEntries(
-        Object.entries(localStorage).map(([key, value]) => [key, JSON.parse(value)])
+        Object.entries(localStorage).map(([key, value]) => {
+            try {
+                return [key, JSON.parse(value)];
+            } catch (e) {
+                return [key, value];
+            }
+        })
     );
     // Split comma-separated or newline-seperated input into array and trim whitespace
     var oldLinks = document.getElementById('link-bulk-input').value.split(/\n|\,/)

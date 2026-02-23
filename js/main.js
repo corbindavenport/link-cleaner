@@ -50,7 +50,13 @@ async function copyText(textEl) {
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
     var settings = Object.fromEntries(
-        Object.entries(localStorage).map(([key, value]) => [key, JSON.parse(value)])
+        Object.entries(localStorage).map(([key, value]) => {
+            try {
+                return [key, JSON.parse(value)];
+            } catch (e) {
+                return [key, value];
+            }
+        })
     );
     var newLink = cleanLink(link, settings);
     // If opened through the official bookmarklet, replace the Copy button with Copy and Close
