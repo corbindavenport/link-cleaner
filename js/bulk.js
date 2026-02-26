@@ -1,15 +1,16 @@
+// Initialize settings
+const globalSettings = Object.fromEntries(
+    Object.entries(localStorage).map(([key, value]) => {
+        try {
+            return [key, JSON.parse(value)];
+        } catch (e) {
+            return [key, value];
+        }
+    })
+);
+
 // Process URL after clicking 'Clean Links' button
 document.getElementById('link-clean-btn').addEventListener('click', function () {
-    // Read settings
-    var settings = Object.fromEntries(
-        Object.entries(localStorage).map(([key, value]) => {
-            try {
-                return [key, JSON.parse(value)];
-            } catch (e) {
-                return [key, value];
-            }
-        })
-    );
     // Split comma-separated or newline-seperated input into array and trim whitespace
     var oldLinks = document.getElementById('link-bulk-input').value.split(/\n|\,/)
     // Filter out blank lines
@@ -17,7 +18,7 @@ document.getElementById('link-clean-btn').addEventListener('click', function () 
     // Clean links
     var newLinks = []
     oldLinks.forEach((link) => {
-        var processedLink = cleanLink(link, settings)
+        var processedLink = cleanLink(link, globalSettings)
         newLinks.push(processedLink)
     })
     // Output result

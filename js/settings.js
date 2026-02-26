@@ -15,7 +15,7 @@ document.querySelectorAll('.settings-container input[type="text"]').forEach(func
 // Load settings from localStorage
 Object.entries(localStorage).forEach(function (key) {
     // Ignore link history and android app
-    if (key[0] === 'history' || key[0] === 'android-app' || key[0] === 'mastodon-server' ||  key[0] === 'clean-db') {
+    if (key[0] === 'history' || key[0] === 'android-app' || key[0] === 'mastodon-server' || key[0] === 'clean-db') {
         return true
     }
     // Amazon ID settings
@@ -30,3 +30,22 @@ Object.entries(localStorage).forEach(function (key) {
         document.getElementById(key[0]).checked = JSON.parse(key[1])
     }
 })
+
+// Load statistics
+if (localStorage.getItem('clean-db')) {
+    var html = '';
+    const statsObj = JSON.parse(localStorage.getItem('clean-db'));
+    // Fetch each year
+    Object.entries(statsObj).forEach(function (year) {
+        // Fetch each month
+        Object.entries(year[1]).forEach(function (month) {
+            const monthDate = new Date(year[0], parseInt(month[0]) - 1);
+            const monthText = monthDate.toLocaleString('en-US', {
+                month: 'long',
+                year: 'numeric'
+            });
+            html += `${monthText}: ${month[1]}<br />`;
+        })
+    })
+    document.getElementById('statistics-container').innerHTML = html;
+}

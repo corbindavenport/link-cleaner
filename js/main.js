@@ -8,6 +8,17 @@ const isApplePlatform = ['MacIntel', 'Macintosh', 'iPhone', 'iPod', 'iPad'].incl
 const mastodonModal = new bootstrap.Modal(document.getElementById('mastodon-modal'));
 const linkEl = document.getElementById('link-input');
 
+// Initialize settings
+const globalSettings = Object.fromEntries(
+    Object.entries(localStorage).map(([key, value]) => {
+        try {
+            return [key, JSON.parse(value)];
+        } catch (e) {
+            return [key, value];
+        }
+    })
+);
+
 // Print referrer for debugging purposes
 console.log('Referrer:', document.referrer);
 
@@ -49,16 +60,7 @@ async function copyText(textEl) {
 
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
-    var settings = Object.fromEntries(
-        Object.entries(localStorage).map(([key, value]) => {
-            try {
-                return [key, JSON.parse(value)];
-            } catch (e) {
-                return [key, value];
-            }
-        })
-    );
-    var newLink = cleanLink(link, settings);
+    var newLink = cleanLink(link, globalSettings);
     // If opened through the official bookmarklet, replace the Copy button with Copy and Close
     // There's no better way to detect if window.close() works before running it :(
     if (startMode === 'shortcut' && window.location.href.includes('utm_source=Bookmarklet')) {

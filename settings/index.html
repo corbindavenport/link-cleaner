@@ -61,7 +61,7 @@
 <body class="bg-body-tertiary">
 
     <!-- Nav bar -->
-    <nav class="navbar bg-body-secondary fixed-top navbar-expand-sm border-bottom">
+    <nav class="navbar bg-body-secondary fixed-top navbar-expand-sm border-bottom shadow-sm">
         <div class="container-fluid">
             <span class="navbar-brand d-sm-none">Link Cleaner</span>
             <button class="navbar-toggler bg-body-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,9 +96,9 @@
     <!-- Main container -->
     <div class="container mt-4 settings-container">
         <!-- FxBluesky -->
-        <div class="form-check mb-4">
+        <div class="form-check form-switch mb-4">
             <input class="form-check-input" type="checkbox" value="" id="fixBlueskyEnabled">
-            <label class="form-check-label fw-bold" for="fixBlueskyEnabled">
+            <label class="form-check-label fw-bold" for="fixBlueskyEnabled" switch>
                 Replace Bluesky links with FxBluesky
                 <span class="badge rounded-pill text-bg-primary mx-1">New</span>
             </label>
@@ -107,9 +107,9 @@
             </div>
         </div>
         <!-- FxTwitter -->
-        <div class="form-check mb-4">
+        <div class="form-check form-switch mb-4">
             <input class="form-check-input" type="checkbox" value="" id="vxTwitter-check">
-            <label class="form-check-label fw-bold" for="vxTwitter-check">
+            <label class="form-check-label fw-bold" for="vxTwitter-check" switch>
                 Replace TwitterX links with FxTwitter
             </label>
             <div class="text-body-secondary mt-2">
@@ -117,32 +117,37 @@
             </div>
         </div>
         <!-- Shorten YouTube -->
-        <div class="form-check mb-4">
+        <div class="form-check form-switch mb-4">
             <input class="form-check-input" type="checkbox" value="" id="youtube-shorten-check">
-            <label class="form-check-label fw-bold" for="youtube-shorten-check">
+            <label class="form-check-label fw-bold" for="youtube-shorten-check" switch>
                 Shorten YouTube links
             </label>
             <div class="text-body-secondary mt-2">
                 Converts YouTube video links to the <code>youtu.be/wAUK9hVgmNI</code> format.
             </div>
         </div>
+        <!-- Shorten Walmart -->
+        <div class="form-check form-switch mb-4">
+            <input class="form-check-input" type="checkbox" value="" id="walmart-shorten-check">
+            <label class="form-check-label fw-bold" for="walmart-shorten-check" switch>
+                Shorten Walmart links
+            </label>
+            <div class="text-body-secondary mt-2">
+                Converts Walmart product links to the <code>walmart.com/ip/13376108763</code> format.
+            </div>
+        </div>
         <!-- Custom Amazon tracking -->
-        <div class="form-check mb-4">
+        <div class="mb-4">
             <label for="amazon-tracking-id" class="form-label fw-bold">Amazon tracking ID</label>
             <input type="text" class="form-control" id="amazon-tracking-id">
             <div class="text-body-secondary mt-2">
                 This adds an <a href="https://affiliate-program.amazon.com/help/node/topic/GK5TZZ4AWML2QSLA" target="_blank" rel="nofollow">Amazon affiliate tracking ID</a> to the end of any cleaned Amazon store links.
             </div>
         </div>
-        <!-- Shorten Walmart -->
-        <div class="form-check mb-4">
-            <input class="form-check-input" type="checkbox" value="" id="walmart-shorten-check">
-            <label class="form-check-label fw-bold" for="walmart-shorten-check">
-                Shorten Walmart links
-            </label>
-            <div class="text-body-secondary mt-2">
-                Converts Walmart product links to the <code>walmart.com/ip/13376108763</code> format.
-            </div>
+        <div class="mb-4">
+           <b>Link Cleaner statistics</b>
+           <p class="text-body-secondary">This is how many links you have cleaned. Link Cleaner only stores the count, not any data about the links, and the data is stored in your web browser's local storage.</p>
+           <p id="statistics-container"></p>
         </div>
 
     </div>
