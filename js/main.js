@@ -1,6 +1,3 @@
-// Delete link history storage if it exists, link history feature has been removed
-localStorage.removeItem('history');
-
 // Detect various platforms
 const isApplePlatform = ['MacIntel', 'Macintosh', 'iPhone', 'iPod', 'iPad'].includes(navigator.platform);
 

@@ -2,27 +2,15 @@
 
 // Pride Month mode
 document.body.dataset.prideMode = (new Date()).getMonth() === 5;
+
 // Holiday mode
 document.body.dataset.snowMode = (new Date()).getMonth() === 11;
 
-// Import link clean database from localStorage
-const storageLog = JSON.parse(localStorage.getItem('clean-db') || "{}");
+// Delete link history storage if it exists, link history feature has been removed
+localStorage.removeItem('history');
 
-/**
- * Records cleaned link in the 'clean-db' localStorage key, organized by year and month. This will be used for a year-end 'Wrapped' feature.
- */
-function addLog() {
-    const now = new Date();
-    if (!storageLog[now.getUTCFullYear()]) {
-        storageLog[now.getUTCFullYear()] = {};
-    }
-    if (!storageLog[now.getUTCFullYear()][now.getUTCMonth() + 1]) {
-        storageLog[now.getUTCFullYear()][now.getUTCMonth() + 1] = 1;
-    } else {
-        storageLog[now.getUTCFullYear()][now.getUTCMonth() + 1]++;
-    }
-    localStorage.setItem('clean-db', JSON.stringify(storageLog));
-}
+// Delete link statistics if it exists, feature was never fully rolled out
+localStorage.removeItem('clean-db');
 
 /**
  * Cleans a link.
@@ -78,7 +66,6 @@ function cleanLink(link, settingsStorage) {
     if (oldLink.host.endsWith('youtube.com') && oldLink.searchParams.has('v')) {
         // Shorten link if setting is enabled
         if (oldLink.searchParams.has('v') && settingsStorage['youtube-shorten-check']) {
-            console.log('we shroten')
             // Use to find the video ID: https://regex101.com/r/0Plpyd/1
             var regex = /^.*(youtu\.be\/|embed\/|shorts\/|\?v=|\&v=)(?<videoID>[^#\&\?]*).*/;
             var videoId = regex.exec(oldLink.href)['groups']['videoID'];
@@ -166,8 +153,6 @@ function cleanLink(link, settingsStorage) {
     if (oldLink.host.includes('amazon') && settingsStorage['amazon-tracking-id']) {
         newLink.searchParams.append('tag', settingsStorage['amazon-tracking-id']);
     }
-    // Log link
-    addLog();
     // Switch to output
     console.log('New link:', newLink);
     return newLink.toString();
