@@ -1,4 +1,4 @@
-// Code that is shared across normal Link Cleaner and bulk mode
+// Code that is shared across all Link Cleaner pages
 
 // Pride Month mode
 document.body.dataset.prideMode = (new Date()).getMonth() === 5;
@@ -6,10 +6,8 @@ document.body.dataset.prideMode = (new Date()).getMonth() === 5;
 // Holiday mode
 document.body.dataset.snowMode = (new Date()).getMonth() === 11;
 
-// Delete link history storage if it exists, link history feature has been removed
+// Delete any data for removed features
 localStorage.removeItem('history');
-
-// Delete link statistics if it exists, feature was never fully rolled out
 localStorage.removeItem('clean-db');
 
 /**
