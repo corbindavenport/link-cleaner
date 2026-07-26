@@ -59,11 +59,21 @@ function cleanLink(link, settingsStorage) {
     if ((oldLink.host === 'www.macys.com') && oldLink.searchParams.has('ID')) {
         newLink.searchParams.append('ID', oldLink.searchParams.get('ID'));
     }
-    // YouTube links
-    // This matches known domains like https://youtube.com, https://m.youtube.com, and https://www.youtube.com
-    if (oldLink.host.endsWith('youtube.com') && oldLink.searchParams.has('v')) {
-        // Shorten link if setting is enabled
-        if (oldLink.searchParams.has('v') && settingsStorage['youtube-shorten-check']) {
+    // Convert YouTube Music links to YouTube links, if enabled
+    if (oldLink.host === "music.youtube.com" && settingsStorage["youtube-music-check"]) {
+        newLink.host = "youtube.com"
+    }
+    // Clean YouTube links
+    const youtubeDomains = [
+        "www.youtube.com",
+        "youtube.com",
+        "m.youtube.com",
+        "music.youtube.com"
+    ];
+    if (youtubeDomains.includes(oldLink.host) && oldLink.searchParams.has('v')) {
+        // Shorten YouTube link if the setting is enabled
+        // YouTube Music links are excluded, unless they were already converted to regular YouTube links
+        if (oldLink.searchParams.has('v') && (newLink.host != "music.youtube.com") && settingsStorage['youtube-shorten-check']) {
             // Use to find the video ID: https://regex101.com/r/0Plpyd/1
             var regex = /^.*(youtu\.be\/|embed\/|shorts\/|\?v=|\&v=)(?<videoID>[^#\&\?]*).*/;
             var videoId = regex.exec(oldLink.href)['groups']['videoID'];
@@ -76,7 +86,7 @@ function cleanLink(link, settingsStorage) {
         if (oldLink.searchParams.has('t')) {
             newLink.searchParams.append('t', oldLink.searchParams.get('t'));
         }
-    } else if (oldLink.host.endsWith('youtube.com') && oldLink.pathname.includes('playlist') && oldLink.searchParams.has('list')) {
+    } else if (youtubeDomains.includes(oldLink.host) && oldLink.pathname.includes('playlist') && oldLink.searchParams.has('list')) {
         // Don't remove list ID for YouTube playlist links (#37)
         newLink.searchParams.append('list', oldLink.searchParams.get('list'));
     } else if ((oldLink.host === 'youtu.be') && oldLink.searchParams.has('t')) {
