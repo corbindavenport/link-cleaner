@@ -94,12 +94,12 @@
     </nav>
 
     <!-- Main container -->
-    <div class="container settings-container mt-3">
-        <!-- Main settings -->
+    <div class="container settings-container mt-3 mb-3">
+        <!-- Social media and Walmart -->
         <div class="card">
             <div class="card-body">
                 <!-- FxBluesky -->
-                <div class="form-check form-switch mb-4">
+                <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" value="" id="fixBlueskyEnabled" switch>
                     <label class="form-check-label fw-bold" for="fixBlueskyEnabled">
                         Replace Bluesky links with FxBluesky
@@ -109,34 +109,13 @@
                     </div>
                 </div>
                 <!-- FxTwitter -->
-                <div class="form-check form-switch mb-4">
+                <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" value="" id="vxTwitter-check" switch>
                     <label class="form-check-label fw-bold" for="vxTwitter-check">
                         Replace TwitterX links with FxTwitter
                     </label>
                     <div class="text-body-secondary mt-2">
                         Links created by <a href="https://github.com/FxEmbed/FxEmbed" target="_blank">FxEmbed</a> display rich previews in Discord, Slack, Telegram, and other apps.
-                    </div>
-                </div>
-                <!-- Shorten YouTube -->
-                <div class="form-check form-switch mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="youtube-shorten-check" switch>
-                    <label class="form-check-label fw-bold" for="youtube-shorten-check">
-                        Shorten YouTube links
-                    </label>
-                    <div class="text-body-secondary mt-2">
-                        Converts YouTube video links to the <code>youtu.be/wAUK9hVgmNI</code> format.
-                    </div>
-                </div>
-                <!-- Convert YouTube Music -->
-                <div class="form-check form-switch mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="youtube-music-check" switch>
-                    <label class="form-check-label fw-bold" for="youtube-music-check">
-                        Replace YouTube Music links
-                        <span class="badge rounded-pill text-bg-primary mx-sm-1">New</span>
-                    </label>
-                    <div class="text-body-secondary mt-2">
-                        Converts <code>music.youtube.com</code> links to regular <code>youtube.com</code> links. If YouTube link shortening is also enabled, individual tracks and podcast episodes will become <code>youtu.be</code> links.
                     </div>
                 </div>
                 <!-- Shorten Walmart -->
@@ -151,7 +130,43 @@
                 </div>
             </div>
         </div>
-        <!-- Affiliate settings -->
+        <!-- YouTube settngs -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <!-- Shorten YouTube -->
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="youtube-shorten-check" switch>
+                    <label class="form-check-label fw-bold" for="youtube-shorten-check">
+                        Shorten YouTube video links
+                    </label>
+                    <div class="text-body-secondary mt-2">
+                        Converts YouTube video links to the <code>youtu.be/wAUK9hVgmNI</code> format.
+                    </div>
+                </div>
+                <!-- Convert YouTube Shorts -->
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="youtube-shorts-check" switch>
+                    <label class="form-check-label fw-bold" for="youtube-shorts-check">
+                        Replace YouTube Shorts links
+                    </label>
+                    <div class="text-body-secondary mt-2">
+                        Changes YouTube Shorts links to regular video links, so the vertical video interface is not used. The links will also be shortened, if shortening YouTube video links is enabled.
+                    </div>
+                </div>
+                <!-- Convert YouTube Music -->
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="youtube-music-check" switch>
+                    <label class="form-check-label fw-bold" for="youtube-music-check">
+                        Replace YouTube Music links
+                        <span class="badge rounded-pill text-bg-primary mx-sm-1">New</span>
+                    </label>
+                    <div class="text-body-secondary mt-2">
+                        Converts <code>music.youtube.com</code> links to <code>youtube.com</code> links. If YouTube video link shortening is also enabled, individual tracks and podcast episodes will become <code>youtu.be</code> links.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Amazon settings -->
         <div class="card mt-3">
             <div class="card-body">
                 <!-- Custom Amazon tracking -->

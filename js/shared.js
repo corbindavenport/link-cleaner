@@ -71,9 +71,9 @@ function cleanLink(link, settingsStorage) {
         "music.youtube.com"
     ];
     if (youtubeDomains.includes(oldLink.host) && oldLink.searchParams.has('v')) {
-        // Shorten YouTube link if the setting is enabled
-        // YouTube Music links are excluded, unless they were already converted to regular YouTube links
+        // YouTube video/episode links
         if (oldLink.searchParams.has('v') && (newLink.host != "music.youtube.com") && settingsStorage['youtube-shorten-check']) {
+            // Shorten YouTube links if the setting is enabled
             // Use to find the video ID: https://regex101.com/r/0Plpyd/1
             var regex = /^.*(youtu\.be\/|embed\/|shorts\/|\?v=|\&v=)(?<videoID>[^#\&\?]*).*/;
             var videoId = regex.exec(oldLink.href)['groups']['videoID'];
@@ -92,7 +92,13 @@ function cleanLink(link, settingsStorage) {
     } else if ((oldLink.host === 'youtu.be') && oldLink.searchParams.has('t')) {
         // Don't remove video timestamp for shortened YouTube links (#49)
         newLink.searchParams.append('t', oldLink.searchParams.get('t'));
+    } else if (youtubeDomains.includes(oldLink.host) && oldLink.pathname.startsWith("/shorts/") && settingsStorage["youtube-shorts-check"]) {
+        // Convert YouTube Shorts links to regular video links, if the setting is enabled
+        var videoId = oldLink.pathname.split("/shorts/")[1];
+        newLink = new URL("https://youtube.com/watch?v=" + videoId);
     }
+    // Shorten YouTube links, if the setting is enabled
+    
     // Don't remove required variables for Facebook links
     if ((oldLink.host === 'www.facebook.com') && oldLink.pathname.includes('story.php')) {
         newLink.searchParams.append('story_fbid', oldLink.searchParams.get('story_fbid'));
