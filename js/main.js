@@ -57,7 +57,14 @@ async function copyText(textEl) {
 
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
-    var newLink = cleanLink(link, globalSettings);
+    var newLink = linkCleaner.clean(link, {
+        convertYouTubeShorts: globalSettings["youtube-shorts-check"],
+        convertYouTubeMusic: globalSettings["youtube-music-check"],
+        shortenYouTube: globalSettings["youtube-shorten-check"],
+        fixTwitter: globalSettings["vxTwitter-check"],
+        fixBluesky: globalSettings["fixBlueskyEnabled"],
+        amazonId: globalSettings["amazon-tracking-id"]
+    });
     // If opened through the official bookmarklet, replace the Copy button with Copy and Close
     // There's no better way to detect if window.close() works before running it :(
     if (startMode === 'shortcut' && window.location.href.includes('utm_source=Bookmarklet')) {

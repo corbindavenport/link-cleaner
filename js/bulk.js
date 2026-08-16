@@ -12,19 +12,26 @@ const globalSettings = Object.fromEntries(
 // Process URL after clicking 'Clean Links' button
 document.getElementById('link-clean-btn').addEventListener('click', function () {
     // Split comma-separated or newline-seperated input into array and trim whitespace
-    var oldLinks = document.getElementById('link-bulk-input').value.split(/\n|\,/)
+    var oldLinks = document.getElementById('link-bulk-input').value.split(/\n|\,/);
     // Filter out blank lines
-    oldLinks = oldLinks.filter(link => link.length > 0)
+    oldLinks = oldLinks.filter(link => link.length > 0);
     // Clean links
-    var newLinks = []
-    oldLinks.forEach((link) => {
-        var processedLink = cleanLink(link, globalSettings)
-        newLinks.push(processedLink)
+    var newLinks = [];
+    oldLinks.forEach(function (link) {
+        var processedLink = linkCleaner.clean(link, {
+            convertYouTubeShorts: globalSettings["youtube-shorts-check"],
+            convertYouTubeMusic: globalSettings["youtube-music-check"],
+            shortenYouTube: globalSettings["youtube-shorten-check"],
+            fixTwitter: globalSettings["vxTwitter-check"],
+            fixBluesky: globalSettings["fixBlueskyEnabled"],
+            amazonId: globalSettings["amazon-tracking-id"]
+        });
+        newLinks.push(processedLink.toString());
     })
     // Output result
-    var result = newLinks.toString().replaceAll(',', '\n')
-    document.getElementById('link-copy-btn').removeAttribute('disabled')
-    document.getElementById('link-bulk-output').value = result
+    var result = newLinks.toString().replaceAll(',', '\n');
+    document.getElementById('link-copy-btn').removeAttribute('disabled');
+    document.getElementById('link-bulk-output').value = result;
 })
 
 // Copy link button
