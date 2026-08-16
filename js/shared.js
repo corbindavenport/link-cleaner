@@ -9,3 +9,4 @@ document.body.dataset.snowMode = (new Date()).getMonth() === 11;
 // Delete any data for removed features
 localStorage.removeItem('history');
 localStorage.removeItem('clean-db');
+localStorage.removeItem('walmart-shorten-check');
