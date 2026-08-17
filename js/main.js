@@ -284,12 +284,14 @@ document.getElementById('bluesky-share-btn').addEventListener('click', function 
     openWindow(link);
 })
 
-// PWA install button and accordion
+// Show the PWA option in the install modal if supported, or the Safari install method 
 if ('onbeforeinstallprompt' in window) {
     document.getElementById('accordion-pwa-container').style.display = 'block';
 } else if (isApplePlatform) {
     document.getElementById('accordion-apple-app-container').style.display = 'block';
 }
+
+// Install button for the PWA
 document.getElementById('install-btn').addEventListener('click', function () {
     if (installPrompt) {
         // Web browser supports PWA and there is a captured install prompt, activate the prompt
@@ -298,6 +300,11 @@ document.getElementById('install-btn').addEventListener('click', function () {
         alert('You need to use the browser install button, such as the button in the address bar on desktop browsers, or the "Add to Home Screen" button on Android devices.');
     }
 })
+
+// CLI install option in accordion
+if (['MacIntel', 'Macintosh', 'Linux', 'Win32', 'Windows'].includes(navigator.platform)) {
+    document.getElementById('accordion-cli-container').style.display = 'block';
+}
 
 // Check for 'url' parameter on Link Cleaner launch
 // This is used for the Web Share Target API, Apple Shortcut, Bookmarklet, OpenSearch, and custom automations

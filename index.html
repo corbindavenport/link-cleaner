@@ -232,7 +232,7 @@
             </div>
             <!-- Socials promotion -->
             <div class="p-1 mt-5 mb-2 text-center">
-                Follow the creator of Link Cleaner on <a href="https://bsky.app/profile/corbin.io" target="_blank" class="alert-link">Bluesky</a> or <a href="https://toot.community/@corbin" target="_blank" class="alert-link">Mastodon</a>!
+                <b>New!</b> Install the <a href="#" data-bs-toggle="modal" data-bs-target="#install-modal" class="alert-link">CLI Application</a> to clean and un-shorten links on Windows, Mac, and Linux.
             </div>
         </div>
     </div>
@@ -307,7 +307,7 @@
     <!-- Install modal -->
     <!-- Only one of the web app install items is displayed for a given user, the rest are always visible -->
     <div class="modal fade" id="install-modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="install-modal-label">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="install-modal-label">Install Link Cleaner</h5>
@@ -320,7 +320,7 @@
                         <div class="accordion-item" id="accordion-pwa-container" style="display: none;">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#install-web-app" aria-expanded="true" aria-controls="install-web-app">
-                                    Install Web App (PWA)
+                                    Web App (PWA)
                                 </button>
                             </h2>
                             <div id="install-web-app" class="accordion-collapse collapse show" data-bs-parent="#install-accordion">
@@ -344,6 +344,24 @@
                                 <div class="accordion-body">
                                     <p>In the Safari web browser, select the <i class="bi bi-box-arrow-up" aria-label="Share icon"></i> button, then select <strong>Add to Home Screen</strong> or <strong>Add to Dock</strong> to install Link Cleaner.
                                     <p>On Mac, you need macOS Sonoma 14.0 or higher to install web apps through Safari.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CLI install -->
+                        <div class="accordion-item" id="accordion-cli-container" style="display: none;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#install-cli" aria-expanded="false" aria-controls="install-cli">
+                                    CLI Application
+                                    <span class="badge rounded-pill text-bg-primary mx-sm-1">New</span>
+                                </button>
+                            </h2>
+                            <div id="install-cli" class="accordion-collapse collapse" data-bs-parent="#install-accordion">
+                                <div class="accordion-body">
+                                    <p>The command-line application can clean links in a terminal, bash script, or other automation. It's included in the <b>link-cleaner-js</b> NPM package.</p>
+                                    <p>
+                                        <a href="https://github.com/corbindavenport/link-cleaner-js#how-to-install-the-cli" target="_blank" type="button" class="btn btn-primary w-100">See installation instructions</a>
+                                    </p>
+                                    <p>The CLI app can also un-shorten links before cleaning them, with the <code>-u</code> option, which isn't possible in the Link Cleaner web app.</p>
                                 </div>
                             </div>
                         </div>
@@ -391,8 +409,8 @@
                             </h2>
                             <div id="install-custom-url" class="accordion-collapse collapse" data-bs-parent="#install-accordion">
                                 <div class="accordion-body">
-                                    <p>You can use Link Cleaner in custom worfklows and automations with the share URL. This is an example using the <code>https://example.com</code> page:</p>
-                                    <p><code>https://linkcleaner.app/?url=https%3A%2F%2Fexample.com</code></p>
+                                    <p>You can open Link Cleaner with a pre-filled URL, which can be helpful for automations:</p>
+                                    <p class="bg-body-secondary p-2 rounded"><code>https://linkcleaner.app/?url=https%3A%2F%2Fexample.com</code></p>
                                     <p>The only required parameter is <code>url</code>. The URL should be encoded with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent" target="_blank">encodeURIComponent()</a> or another similar function, or special characters like <b>?</b> or <b>&</b> could break the URL.</p>
                                 </div>
                             </div>
@@ -405,7 +423,7 @@
 
     <!-- Link history modal -->
     <div class="modal fade" id="history-modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="history-modal-label">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="history-modal-label">Clean History</h5>
