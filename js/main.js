@@ -57,7 +57,7 @@ async function copyText(textEl) {
 
 // Function for cleaning link
 function processLink(link, startMode = 'user') {
-    var newLink = linkCleaner.clean(link, {
+    var linkObj = linkCleaner.clean(link, {
         convertYouTubeShorts: globalSettings["youtube-shorts-check"],
         convertYouTubeMusic: globalSettings["youtube-music-check"],
         shortenYouTube: globalSettings["youtube-shorten-check"],
@@ -65,6 +65,11 @@ function processLink(link, startMode = 'user') {
         fixBluesky: globalSettings["fixBlueskyEnabled"],
         amazonId: globalSettings["amazon-tracking-id"]
     });
+    if (globalSettings["decode-check"]) {
+        var linkStr = decodeURI(linkObj.href).replace(" ", "%20");
+    } else {
+        linkStr = linkObj.href;
+    }
     // If opened through the official bookmarklet, replace the Copy button with Copy and Close
     // There's no better way to detect if window.close() works before running it :(
     if (startMode === 'shortcut' && window.location.href.includes('utm_source=Bookmarklet')) {
@@ -72,7 +77,7 @@ function processLink(link, startMode = 'user') {
         document.getElementById('link-copy-btn-container').classList.add('d-none');
     }
     // Insert cleaned link and update page layout
-    linkEl.innerText = newLink;
+    linkEl.innerText = linkStr;
     document.getElementById('linkcleaner-buttons-container').classList.remove('d-none');
     // If medium size device or smaller, scroll past the top message
     const container = document.getElementById('linkcleaner-url-container');
@@ -97,14 +102,14 @@ function processLink(link, startMode = 'user') {
     // Create new item in link history list
     var listEl = document.createElement('a');
     listEl.classList.add('list-group-item', 'list-group-item-action', 'text-break');
-    listEl.setAttribute('href', newLink);
+    listEl.setAttribute('href', linkStr);
     listEl.setAttribute('rel', 'noreferrer');
     listEl.setAttribute('target', '_blank');
-    listEl.innerText = newLink;
+    listEl.innerText = linkStr;
     // Create domain badge for link history item
     var badgeEl = document.createElement('span');
     badgeEl.classList.add('badge', 'text-bg-primary', 'rounded-pill', 'me-2');
-    badgeEl.innerText = new URL(newLink).hostname.replaceAll('www.', '');
+    badgeEl.innerText = linkObj.hostname.replaceAll('www.', '');
     listEl.prepend(badgeEl);
     // Add link history item to list
     document.getElementById('link-history-list').appendChild(listEl);
@@ -196,7 +201,7 @@ qrModal.addEventListener('show.bs.modal', function () {
         quietZone: 25,
         tooltip: true
     }
-    new QRCode(document.getElementById('qrcode'), qrSettings);
+    new QRCode(qrContainer, qrSettings);
 })
 
 // Save QR as PNG button

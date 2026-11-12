@@ -138,7 +138,6 @@
                     <input class="form-check-input" type="checkbox" value="" id="youtube-shorts-check" switch>
                     <label class="form-check-label fw-bold" for="youtube-shorts-check">
                         Replace YouTube Shorts links
-                        <span class="badge rounded-pill text-bg-primary mx-sm-1">New</span>
                     </label>
                     <div class="text-body-secondary mt-2">
                         Changes YouTube Shorts links to regular video links, so the vertical video interface is not used.
@@ -149,7 +148,6 @@
                     <input class="form-check-input" type="checkbox" value="" id="youtube-music-check" switch>
                     <label class="form-check-label fw-bold" for="youtube-music-check">
                         Replace YouTube Music links
-                        <span class="badge rounded-pill text-bg-primary mx-sm-1">New</span>
                     </label>
                     <div class="text-body-secondary mt-2">
                         Converts <code>music.youtube.com</code> links to <code>youtube.com</code> links.
@@ -165,6 +163,21 @@
                 <input type="text" class="form-control" id="amazon-tracking-id">
                 <div class="text-body-secondary mt-2">
                     This adds an <a href="https://affiliate-program.amazon.com/help/node/topic/GK5TZZ4AWML2QSLA" target="_blank" rel="nofollow">Amazon affiliate tracking ID</a> to the end of any cleaned Amazon store links.
+                </div>
+            </div>
+        </div>
+        <!-- Misc settings -->
+         <div class="card mt-3">
+            <div class="card-body">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" value="" id="decode-check" switch>
+                    <label class="form-check-label fw-bold" for="decode-check">
+                        Decode URL after cleaning
+                        <span class="badge rounded-pill text-bg-primary mx-sm-1">New</span>
+                    </label>
+                    <div class="text-body-secondary mt-2">
+                        Improves readability of non-Latin characters. For example, <code>https://fr.wikipedia.org/wiki/Wikip%C3%A9dia</code> becomes <code>https://fr.wikipedia.org/wiki/Wikipédia</code>.
+                    </div>
                 </div>
             </div>
         </div>
